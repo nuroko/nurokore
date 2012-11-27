@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.nuroko</groupId>
 		<artifactId>nuroko-pom</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<url>https://github.com/nuroko/${project.artifactId}.git</url>
@@ -35,4 +35,12 @@
 			<url>http://clojars.org/repo</url>
 		</repository>
 	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
