@@ -15,8 +15,8 @@ import mikera.vectorz.AVector;
 public interface IEncoder<T> {
 	/**
 	 * Encodes an object into the given destination vector
-	 * @param object
-	 * @param dest
+	 * @param object The object to encode
+	 * @param dest The destination vector
 	 */
 	public void encode(T object, AVector dest, int offset);
 	

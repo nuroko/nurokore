@@ -16,8 +16,8 @@ public interface IDecoder<T> {
 	/**
 	 * Decodes an object from the given vector
 	 * 
-	 * @param v
-	 * @return
+	 * @param v The vector containing the coded double values
+	 * @return The object represented by the coded valeus
 	 */
 	public T decode(AVector v, int offset);
 	
