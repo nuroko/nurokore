@@ -11,12 +11,8 @@ import mikera.vectorz.AVector;
  * 
  * @author Mike
  */
-public interface IThinker extends IModule {
+public interface IThinker extends IInputOutput {
 	public void think(AVector input, AVector output);
-	
-	public int getInputLength();
-	
-	public int getOutputLength();
 	
 	@Override
 	public IThinker clone();
