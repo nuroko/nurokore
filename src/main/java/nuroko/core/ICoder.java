@@ -3,7 +3,7 @@ package nuroko.core;
 /**
  * Interface for an object that handles both encoding and decoding of values
  * 
- * Coders must be stateless and/or immutable, as it is expected that they we be re-used
+ * Coders must be stateless and/or immutable, as it is expected that they will be re-used
  * by concurrent code.
  * 
  * @author Mike
