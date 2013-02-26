@@ -9,6 +9,13 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.BitVector;
 import nuroko.core.NurokoException;
 
+/**
+ * Coder for a categorical choice variable, with a small fixed set of values.
+ * 
+ * @author Mike
+ *
+ * @param <T>
+ */
 public class ChoiceCoder<T> extends AbstractCoder<T> {
 	final int length;
 	final Object[] choiceArray;

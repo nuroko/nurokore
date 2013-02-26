@@ -7,6 +7,12 @@ import nuroko.core.ICoder;
 
 import mikera.vectorz.AVector;
 
+/**
+ * Coder for a fixed-length list of a specific item type
+ * 
+ * @author Mike
+ * @param <T>
+ */
 public class FixedListCoder<T> extends AbstractCoder<List<T>> {
 	private final int listLength;
 	private final ICoder<T> itemCoder;
