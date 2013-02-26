@@ -5,8 +5,6 @@ package nuroko.core;
  * 
  * @author Mike
  */
-public interface IInputOutput extends IModule {
-	public int getInputLength();
-	
-	public int getOutputLength();
+public interface IInputOutput extends IOutput, IInput {
+	// no specific implementation
 }
