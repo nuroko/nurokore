@@ -1,7 +1,7 @@
 package nuroko.core;
 
 /**
- * Interface for a module that has fixed-size inut and output
+ * Interface for a module that has fixed-size input and output
  * 
  * @author Mike
  */
