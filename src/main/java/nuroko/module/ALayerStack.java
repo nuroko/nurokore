@@ -4,7 +4,7 @@ import mikera.vectorz.AVector;
 import nuroko.core.*;
 
 /**
- * Abstract base class representing a stack of layer components
+ * Abstract base class representing a stack of WeightLayer components
  * 
  * @author Mike
  */
@@ -12,7 +12,7 @@ public abstract class ALayerStack implements  IThinker, IParameterised {
 	
 	public abstract int getLayerCount();
 	
-	public abstract ALayer getLayer(int i);
+	public abstract WeightLayer getLayer(int i);
 	
 	public abstract AVector getData(int i);
 	
