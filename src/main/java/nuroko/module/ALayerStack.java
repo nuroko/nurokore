@@ -1,5 +1,8 @@
 package nuroko.module;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mikera.vectorz.AVector;
 import nuroko.core.*;
 
@@ -22,6 +25,15 @@ public abstract class ALayerStack implements  IThinker, IParameterised {
 	
 	public AVector getInput() {
 		return getData(0);
+	}
+	
+	public List<AWeightLayer> getLayers() {
+		int lc=getLayerCount();
+		ArrayList<AWeightLayer> al=new ArrayList<AWeightLayer>();
+		for (int i=0; i<lc; i++) {
+			al.add(getLayer(i));
+		}
+		return al;
 	}
 
 	

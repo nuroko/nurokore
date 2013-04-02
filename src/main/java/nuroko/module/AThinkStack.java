@@ -20,7 +20,7 @@ public abstract class AThinkStack implements  IThinker, IParameterised {
 	}
 
 	
-	public abstract ALayerStack clone();
+	public abstract AThinkStack clone();
 	
 	@Override
 	public int getParameterLength() {
