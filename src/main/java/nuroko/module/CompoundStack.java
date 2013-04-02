@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import nuroko.core.IModule;
 import nuroko.core.IParameterised;
 
 import mikera.vectorz.AVector;
@@ -17,15 +16,14 @@ public abstract class CompoundStack<T extends IParameterised> extends ALayerStac
 	private final AVector parameters;
 	private final AVector gradient;
 	
-	@SuppressWarnings("unchecked")
-	public List<IModule> getComponents() {
-		return (List<IModule>) components;
+	public List<T> getComponents() {
+		return components;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public CompoundStack(Collection<? extends T> comps) {
+	public CompoundStack(Collection<T> comps) {
 		Object tmp=comps;
-		this.components.addAll((Collection<? extends T>) tmp);
+		this.components.addAll((Collection<T>) tmp);
 		componentCount=this.components.size();
 		
 		AVector params=Vectorz.newVector(0);

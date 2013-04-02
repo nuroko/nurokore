@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
-
+import nuroko.module.FullWeightLayer;
 import org.junit.Test;
 
 public class TestNetworkStack {
