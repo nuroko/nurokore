@@ -1,0 +1,83 @@
+package nuroko.module;
+
+import static org.junit.Assert.assertEquals;
+import mikera.vectorz.AVector;
+import mikera.vectorz.Vector;
+import mikera.vectorz.Vectorz;
+import mikera.vectorz.Op;
+
+import org.junit.Test;
+
+public class TestNeuralStack {
+	
+	@Test 
+	public void genericTests() {
+		AWeightLayer wl=new FullWeightLayer(2,2);
+		NeuralNet ns=new NeuralNet(wl);
+
+		GenericModuleTests.test(wl);
+		GenericModuleTests.test(ns);
+		
+		Vectorz.fillGaussian(ns.getParameters());
+
+		GenericModuleTests.test(wl);
+		GenericModuleTests.test(ns);
+	}
+	
+	@Test 
+	public void testMininal() {
+		Op op=Op.LOGISTIC;
+		
+		AWeightLayer wl=new FullWeightLayer(2,2);
+		NeuralNet ns=new NeuralNet(wl);
+		
+		assertEquals(6,wl.getParameterLength());
+		assertEquals(6,ns.getParameterLength());
+		assertEquals(6,ns.getGradient().length());
+		
+		assertEquals(1,ns.getLayerCount());
+		assertEquals(wl,ns.getLayer(0));
+		
+		AVector input=Vectorz.newVector(2);
+		AVector output=Vectorz.newVector(2);
+
+		// should think to 0.5 for default logistic output
+		Vectorz.fillGaussian(input);
+		Vectorz.fillGaussian(output);
+		ns.think(input, output);
+		assertEquals(Vector.of(0.5,0.5),output);
+
+		// setup a simple situation
+		AVector p=ns.getParameters();
+		p.set(1,0.5);
+		p.set(2,1.0);
+		ns.think(input, output);
+		assertEquals(op.apply(input.get(0)),output.get(0),0.00001); // identity
+		assertEquals(op.apply(0.5),output.get(1),0.00001); // constant
+		
+		// calculate a gradient
+		AVector target=Vectorz.newVector(2);
+		target.fill(1.0);
+
+		// do training
+		double v=input.get(0);
+		ns.train(input, target);
+		
+		// output gradient signal
+		AVector og=ns.getOutputSignal();
+		assertEquals(1.0-op.apply(v),og.get(0),0.00001);
+		assertEquals(1.0-op.apply(0.5),og.get(1),0.00001);
+		
+		// check gradient values
+		AVector g=ns.getGradient();
+		assertEquals(1.0-op.apply(0.5),g.get(1),0.000001);
+		assertEquals(1.0-op.apply(v),g.get(0),0.000001);
+		assertEquals(v*(1.0-op.apply(v)),g.get(2),0.000001);
+		
+		// input gradient signal
+		AVector ig=ns.getInputSignal();
+		assertEquals(input.length(),ig.length());
+		assertEquals(1.0-op.apply(v),ig.get(0),0.000001);
+		assertEquals(0.0,ig.get(1),0.000001);
+	}
+}
