@@ -1,6 +1,7 @@
 package nuroko.module;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import nuroko.core.IModule;
@@ -21,8 +22,8 @@ public abstract class CompoundStack<T extends IParameterised> extends ALayerStac
 		return (List<IModule>) components;
 	}
 	
-	public CompoundStack(List<T> comps) {
-		this.components.addAll(comps);
+	public CompoundStack(Collection<? extends T> comps) {
+		this.components.addAll( comps);
 		componentCount=this.components.size();
 		
 		AVector params=Vectorz.newVector(0);
