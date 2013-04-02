@@ -12,7 +12,7 @@ public abstract class ALayerStack implements  IThinker, IParameterised {
 	
 	public abstract int getLayerCount();
 	
-	public abstract WeightLayer getLayer(int i);
+	public abstract AWeightLayer getLayer(int i);
 	
 	public abstract AVector getData(int i);
 	

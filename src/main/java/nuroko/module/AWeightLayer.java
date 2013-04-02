@@ -8,14 +8,14 @@ import mikera.indexz.Index;
 import mikera.matrixx.AMatrix;
 import mikera.vectorz.AVector;
 
-public abstract class WeightLayer extends ALayer {
+public abstract class AWeightLayer extends ALayer {
 	protected static final double INITIAL_WEIGHT_SCALE = 0.5;
 	protected static final double BIAS_INITIAL_SCALE = 0.01;
 
 	protected final int inputLength;
 	protected final int outputLength;
 
-	public WeightLayer(int inputLength, int outputLength) {
+	public AWeightLayer(int inputLength, int outputLength) {
 		this.inputLength=inputLength;
 		this.outputLength=outputLength;
 	}
@@ -35,7 +35,7 @@ public abstract class WeightLayer extends ALayer {
 		return outputLength;
 	}
 	
-	public abstract WeightLayer getInverse();
+	public abstract AWeightLayer getInverse();
 	
 	public abstract int getLinkCount(int outputIndex);
 	
@@ -48,7 +48,7 @@ public abstract class WeightLayer extends ALayer {
 	public abstract AVector getSourceWeights(int outputIndex);
 	
 	@Override
-	public abstract WeightLayer clone();
+	public abstract AWeightLayer clone();
 
 	public abstract void trainGradient(AVector input, 
 			AVector outputGradient, AVector inputGradient, double factor);
