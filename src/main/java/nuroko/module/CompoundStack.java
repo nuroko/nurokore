@@ -22,8 +22,10 @@ public abstract class CompoundStack<T extends IParameterised> extends ALayerStac
 		return (List<IModule>) components;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public CompoundStack(Collection<? extends T> comps) {
-		this.components.addAll( comps);
+		Object tmp=comps;
+		this.components.addAll((Collection<? extends T>) tmp);
 		componentCount=this.components.size();
 		
 		AVector params=Vectorz.newVector(0);
