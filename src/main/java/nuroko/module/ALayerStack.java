@@ -3,7 +3,12 @@ package nuroko.module;
 import mikera.vectorz.AVector;
 import nuroko.core.*;
 
-public abstract class AThinkStack implements  IThinker, IParameterised {
+/**
+ * Abstract base class representing a stack of layer components
+ * 
+ * @author Mike
+ */
+public abstract class ALayerStack implements  IThinker, IParameterised {
 	
 	public abstract int getLayerCount();
 	
@@ -20,7 +25,7 @@ public abstract class AThinkStack implements  IThinker, IParameterised {
 	}
 
 	
-	public abstract AThinkStack clone();
+	public abstract ALayerStack clone();
 	
 	@Override
 	public int getParameterLength() {
