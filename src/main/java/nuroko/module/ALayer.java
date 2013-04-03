@@ -7,8 +7,6 @@ import nuroko.core.IThinker;
 /**
  * Layers represent layers of computation from input to output nodes
  * 
- * Layers have no internal state, but do maintain parameters and gradient
- * 
  * @author Mike
  *
  */
