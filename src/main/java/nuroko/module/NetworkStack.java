@@ -113,4 +113,9 @@ public class NetworkStack extends CompoundStack<ALayerStack> implements ITrainab
 			inputGradient.add(grad[0]);
 		}
 	}
+
+	@Override
+	public AVector getInputGradient() {
+		return grad[0];
+	}
 }

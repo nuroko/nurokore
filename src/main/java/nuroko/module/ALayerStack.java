@@ -11,7 +11,7 @@ import nuroko.core.*;
  * 
  * @author Mike
  */
-public abstract class ALayerStack implements  IThinker, IParameterised {
+public abstract class ALayerStack implements IInputState, IThinker, IParameterised {
 	
 	public abstract int getLayerCount();
 	

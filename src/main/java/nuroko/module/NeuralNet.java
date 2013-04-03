@@ -59,7 +59,6 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 			g=g.join(layers[i].getGradient());
 		}
 		gradient=g;
-		
 	}
 	
 	@Override 
@@ -202,5 +201,10 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	@Override
 	public int getLayerCount() {
 		return layerCount;
+	}
+
+	@Override
+	public AVector getInputGradient() {
+		return grad[0];
 	}
 }

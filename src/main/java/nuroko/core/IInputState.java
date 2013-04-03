@@ -2,7 +2,7 @@ package nuroko.core;
 
 import mikera.vectorz.AVector;
 
-public interface IInputState extends IState {
+public interface IInputState  {
 
 	public AVector getInput();
 	
