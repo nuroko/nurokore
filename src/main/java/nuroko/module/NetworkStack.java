@@ -9,7 +9,7 @@ import nuroko.core.ITrainable;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 
-public class NetworkStack extends CompoundStack<ALayerStack> implements ITrainable {
+public class NetworkStack extends CompoundLayerStack<ALayerStack> implements ITrainable {
 	
 	private final Vector[] data;
 	private final Vector[] grad;

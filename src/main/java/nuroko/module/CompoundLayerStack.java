@@ -9,7 +9,7 @@ import nuroko.core.IParameterised;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
 
-public abstract class CompoundStack<T extends IParameterised> extends ALayerStack {
+public abstract class CompoundLayerStack<T extends IParameterised> extends ALayerStack {
 
 	protected final ArrayList<T> components=new ArrayList<T>();
 	protected final int componentCount;
@@ -21,7 +21,7 @@ public abstract class CompoundStack<T extends IParameterised> extends ALayerStac
 	}
 	
 	@SuppressWarnings("unchecked")
-	public CompoundStack(Collection<T> comps) {
+	public CompoundLayerStack(Collection<T> comps) {
 		Object tmp=comps;
 		this.components.addAll((Collection<T>) tmp);
 		componentCount=this.components.size();
@@ -66,6 +66,6 @@ public abstract class CompoundStack<T extends IParameterised> extends ALayerStac
 	public abstract AVector getData(int i);
 
 	@Override
-	public abstract CompoundStack<T> clone();
+	public abstract CompoundLayerStack<T> clone();
 	
 }
