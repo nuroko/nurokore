@@ -27,6 +27,11 @@ public abstract class ALayerStack implements IInputState, IThinker, IParameteris
 		return getData(0);
 	}
 	
+	@Override 
+	public void setInput(AVector input) {
+		getInput().set(input);
+	}
+	
 	public List<AWeightLayer> getLayers() {
 		int lc=getLayerCount();
 		ArrayList<AWeightLayer> al=new ArrayList<AWeightLayer>();

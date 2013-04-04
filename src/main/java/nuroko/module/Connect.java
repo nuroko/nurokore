@@ -30,17 +30,17 @@ public class Connect extends ACompoundComponent {
 
 
 	@Override
-	public void think(AVector output) {
+	public void thinkInternal(AVector output) {
 		for (int i=0; i<(componentCount-1); i++) {
-			components.get(i).think(components.get(i+1).getInput());
+			components.get(i).thinkInternal(components.get(i+1).getInput());
 		}
-		components.get(componentCount-1).think(output);
+		components.get(componentCount-1).thinkInternal(output);
 	}
 	
 	@Override
 	public void think(AVector input, AVector output) {
 		components.get(0).setInput(input);
-		think(output);
+		thinkInternal(output);
 	}
 
 	@Override

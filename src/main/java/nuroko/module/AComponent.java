@@ -9,7 +9,12 @@ public abstract class AComponent implements IComponent {
 	@Override
 	public void think(AVector input, AVector output) {
 		setInput(input);
-		think(output);
+		thinkInternal(output);
+	}
+	
+	@Override 
+	public void setInput(AVector input) {
+		getInput().set(input);
 	}
 	
 	@Override

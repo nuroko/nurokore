@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import mikera.util.Arrays;
 import mikera.util.Rand;
 import mikera.vectorz.Op;
+import mikera.vectorz.ops.IdentityOp;
+import mikera.vectorz.ops.LinearOp;
 
 import org.junit.Test;
 
@@ -18,6 +20,7 @@ public class TestOps {
 		
 		Op[] os=new Op[1];
 		os[0]=Op.LINEAR;
+		assertNotNull(os[0]);
 		os[0].applyTo(fs);
 		assertEquals(1,fs[0],0.001f);
 	}
@@ -50,6 +53,7 @@ public class TestOps {
 	
 	@Test public void testAllOps() {
 		testOp(Op.LOGISTIC);
+		testOp(IdentityOp.INSTANCE);
 		testOp(Op.LINEAR);
 		testOp(Op.STOCHASTIC_BINARY);
 		testOp(Op.STOCHASTIC_LOGISTIC);

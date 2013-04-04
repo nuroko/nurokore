@@ -19,7 +19,7 @@ public class OpComponent extends AInputStateComponent {
 	}
 
 	@Override
-	public void think(AVector output) {
+	public void thinkInternal(AVector output) {
 		output.set(getInput());
 		op.applyTo(output);
 	}
