@@ -6,7 +6,6 @@ import mikera.util.Arrays;
 import mikera.util.Rand;
 import mikera.vectorz.Op;
 import mikera.vectorz.ops.IdentityOp;
-import mikera.vectorz.ops.LinearOp;
 
 import org.junit.Test;
 

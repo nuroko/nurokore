@@ -2,7 +2,6 @@ package nuroko.module;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
-import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 import nuroko.core.IParameterised;
 import nuroko.core.IThinker;
