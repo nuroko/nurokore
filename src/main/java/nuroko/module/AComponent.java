@@ -22,6 +22,10 @@ public abstract class AComponent implements IComponent {
 		return getParameters().length();
 	}
 	
+	public IComponent getComponent(int i) {
+		return (IComponent) getComponents().get(i);
+	}
+	
 	@Override
 	public int getInputLength() {
 		return getInput().length();

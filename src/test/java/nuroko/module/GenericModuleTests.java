@@ -3,6 +3,7 @@ package nuroko.module;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
 import nuroko.core.IInputState;
+import nuroko.core.IModule;
 import nuroko.core.IParameterised;
 import nuroko.core.IThinker;
 import static org.junit.Assert.*;
@@ -102,6 +103,13 @@ public class GenericModuleTests {
 		assertEquals(input.length(),o.getInputGradient().length());
 	}
 	
+
+	private static void testModule(IModule o) {
+		for (IModule m:o.getComponents()) {
+			test(m);
+		}	
+	}
+	
 	public static void test(Object o) {
 		if (o instanceof IParameterised) {
 			testParameterized((IParameterised)o);
@@ -112,6 +120,11 @@ public class GenericModuleTests {
 		if (o instanceof IThinker) {
 			testThinker((IThinker)o);
 		}
+		
+		if (o instanceof IModule) {
+			testModule((IModule)o);
+		}
 	}
+
 
 }

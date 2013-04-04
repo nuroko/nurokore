@@ -37,6 +37,10 @@ public abstract class ACompoundComponent extends AComponent {
 		return parameters.length();
 	}
 	
+	public IComponent getComponent(int i) {
+		return components.get(i);
+	}
+	
 	public List<IComponent> getComponents() {
 		return components;
 	}
