@@ -5,6 +5,7 @@ import java.util.List;
 
 import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
+import nuroko.core.IInputState;
 
 public class Connect extends ACompoundComponent {
 
@@ -61,6 +62,11 @@ public class Connect extends ACompoundComponent {
 	@Override
 	public void setInput(AVector input) {
 		components.get(0).setInput(input);
+	}
+
+	@Override
+	public IInputState getInputState() {
+		return components.get(0).getInputState();
 	}
 
 

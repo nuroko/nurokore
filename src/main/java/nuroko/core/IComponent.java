@@ -1,5 +1,6 @@
 package nuroko.core;
 
+import nuroko.core.IInputState;
 import mikera.vectorz.AVector;
 
 public interface IComponent extends IInputState, IThinker, IParameterised {
@@ -9,4 +10,6 @@ public interface IComponent extends IInputState, IThinker, IParameterised {
 	public void setInput(AVector input);
 	
 	public void think(AVector output);
+
+	public IInputState getInputState();
 }
