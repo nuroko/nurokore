@@ -2,6 +2,8 @@ package nuroko.module;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
+import nuroko.core.IComponent;
+import nuroko.core.IInputState;
 import nuroko.core.IParameterised;
 import nuroko.core.IThinker;
 import static org.junit.Assert.*;
@@ -30,6 +32,8 @@ public class GenericModuleTests {
 	
 	private static void testCloneNotLinked(IParameterised p) {
 		// Test that a clone does not share any elements of the parameter or gardient vectors
+		if(p.getParameterLength()==0) return;
+		
 		p=p.clone();
 		
 		AVector param=p.getParameters();
@@ -92,12 +96,23 @@ public class GenericModuleTests {
 		testOverwriteOutput(p);
 	}
 	
+
+	private static void testInput(IInputState o) {
+		AVector input=o.getInput();
+		assertEquals(o.getInputLength(),input.length());
+		assertEquals(input.length(),o.getInputGradient().length());
+	}
+	
 	public static void test(Object o) {
 		if (o instanceof IParameterised) {
 			testParameterized((IParameterised)o);
+		}
+		if (o instanceof IInputState) {
+			testInput((IInputState)o);
 		}
 		if (o instanceof IThinker) {
 			testThinker((IThinker)o);
 		}
 	}
+
 }

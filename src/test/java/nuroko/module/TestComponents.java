@@ -8,7 +8,6 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
-import mikera.vectorz.ops.IdentityOp;
 import mikera.vectorz.ops.LinearOp;
 import nuroko.core.IComponent;
 
@@ -34,5 +33,8 @@ public class TestComponents {
 		assertEquals(7,output.get(1),0.0001);
 		assertEquals(11,output.get(2),0.0001);
 		
+		assertEquals(input,c.getInput());
+		
+		GenericModuleTests.test(c);
 	}
 }
