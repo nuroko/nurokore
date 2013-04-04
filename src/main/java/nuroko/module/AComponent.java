@@ -2,6 +2,7 @@ package nuroko.module;
 
 import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
+import nuroko.core.IInputState;
 
 public abstract class AComponent implements IComponent {
 
@@ -24,6 +25,11 @@ public abstract class AComponent implements IComponent {
 	
 	public IComponent getComponent(int i) {
 		return (IComponent) getComponents().get(i);
+	}
+	
+	@Override 
+	public IInputState getInputState() {
+		return this;
 	}
 	
 	@Override

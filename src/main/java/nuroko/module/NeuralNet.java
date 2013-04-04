@@ -125,8 +125,7 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	}
 
 	@Override
-	public void think(AVector input, AVector output) {
-		data[0].set(input);
+	public void thinkInternal(AVector output) {
 		for (int i=0; i<layerCount; i++) {
 			layers[i].think(data[i], data[i+1]);
 			getLayerOp(i).applyTo(data[i+1].getArray());

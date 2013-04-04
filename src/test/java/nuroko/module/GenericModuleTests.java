@@ -2,6 +2,7 @@ package nuroko.module;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
+import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 import nuroko.core.IModule;
 import nuroko.core.IParameterised;
@@ -110,6 +111,10 @@ public class GenericModuleTests {
 		}	
 	}
 	
+	private static void testComponent(IComponent o) {
+		assertTrue(o.getInputState().getInput()==o.getInput());
+	}
+	
 	public static void test(Object o) {
 		if (o instanceof IParameterised) {
 			testParameterized((IParameterised)o);
@@ -123,6 +128,9 @@ public class GenericModuleTests {
 		
 		if (o instanceof IModule) {
 			testModule((IModule)o);
+		}
+		if (o instanceof IComponent) {
+			testComponent((IComponent)o);
 		}
 	}
 
