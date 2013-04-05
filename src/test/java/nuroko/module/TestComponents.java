@@ -9,6 +9,7 @@ import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.ops.LinearOp;
+import nuroko.core.Components;
 import nuroko.core.IComponent;
 
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class TestComponents {
 		Op op1=Op.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
 		
-		Connect c=new Connect(Arrays.asList(new IComponent[] {
+		Connect c=Components.connect(Arrays.asList(new IComponent[] {
 			new OpComponent(LEN,op1),
 			new OpComponent(LEN,op2),
 			new OpComponent(LEN,op2)}));
