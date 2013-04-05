@@ -4,9 +4,9 @@ import java.util.List;
 
 import nuroko.module.Connect;
 
-public class Components {
+public final class Components {
 
-	public IComponent connect(List<? extends IComponent> components) {
+	public static IComponent connect(List<? extends IComponent> components) {
 		return new Connect(components);
 	}
 }
