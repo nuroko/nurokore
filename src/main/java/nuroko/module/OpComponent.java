@@ -23,6 +23,17 @@ public class OpComponent extends AInputStateComponent {
 		output.set(getInput());
 		op.applyTo(output);
 	}
+	
+	@Override 
+	public void trainGradient(AVector gradient, double factor) {
+		AVector ig=getInputGradient();
+		AVector input=getInput();
+		int len=ig.length();
+		for (int i=0; i<len; i++) {
+			double x=input.get(i);
+			input.addAt(i, gradient.get(i)*op.derivative(x));
+		}
+	}
 
 	@Override
 	public List<? extends IModule> getComponents() {
@@ -54,4 +65,5 @@ public class OpComponent extends AInputStateComponent {
 	public int getInputLength() {
 		return length;
 	}
+
 }

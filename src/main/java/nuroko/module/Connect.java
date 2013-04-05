@@ -69,5 +69,13 @@ public class Connect extends ACompoundComponent {
 		return components.get(0).getInputState();
 	}
 
-
+	@Override
+	public void trainGradient(AVector gradient, double factor) {
+		int n=this.componentCount;
+		for (int i=n-1; i>=0; i--) {
+			IComponent comp=getComponent(i);
+			comp.trainGradient(gradient, 1.0);
+			gradient=comp.getInputGradient();
+		}
+	}
 }

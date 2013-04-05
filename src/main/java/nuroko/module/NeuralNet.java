@@ -105,6 +105,12 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 			inputGradient.add(grad[0]);
 		}
 	}
+	
+	@Override
+	public void trainGradient(AVector gradient, double factor) {
+		grad[layerCount].set(gradient);
+		backpropGradient(factor,false);
+	}
 
 
 	private void backpropGradient(double factor,boolean skipTopDerivative) {
@@ -206,4 +212,6 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	public AVector getInputGradient() {
 		return grad[0];
 	}
+
+
 }

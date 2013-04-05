@@ -6,12 +6,12 @@ import nuroko.core.IInputState;
 
 public abstract class AComponent implements IComponent {
 
-
 	@Override
 	public void think(AVector input, AVector output) {
 		setInput(input);
 		thinkInternal(output);
 	}
+	
 	
 	@Override 
 	public void setInput(AVector input) {
