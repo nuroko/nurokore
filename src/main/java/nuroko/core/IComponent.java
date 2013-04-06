@@ -8,8 +8,15 @@ public interface IComponent extends ITrainable, IGradientTrainable, IInputState,
 
 	public IInputState getInputState();
 	
+	/**
+	 * Thinks within the scope of the component. Updates component's output.
+	 */
 	public void thinkInternal();
 	
+	/**
+	 * Thinks within the scope of the component. Update's component's output.
+	 * May be different from regular thinking.
+	 */
 	public void thinkInternalTraining();
 
 	public void trainGradientInternal(double factor);
