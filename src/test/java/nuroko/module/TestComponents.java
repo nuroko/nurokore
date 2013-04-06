@@ -51,7 +51,8 @@ public class TestComponents {
 		
 		AVector input=Vector.of(0,1,0,1,0,1);
 		AVector output=j.think(input);
-
+		assertEquals(Vector.of(0,1),output.subVector(0, 2));
+		assertEquals(Vector.of(0.5),output.subVector(2,1));
 		
 		GenericModuleTests.test(j);
 
