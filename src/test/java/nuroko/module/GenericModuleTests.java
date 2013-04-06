@@ -170,9 +170,12 @@ public class GenericModuleTests {
 		assertTrue(grad.isZeroVector());
 		
 		p.train(input,target);
+		AVector tg=grad.clone();
 		
-		
-		
+		if (!p.isStochastic()) {
+			p.train(input, output); // shouldn't accumulate any gradient
+			assertEquals(tg,grad);
+		}		
 	}
 	
 	private static void testComponent(IComponent o) {
