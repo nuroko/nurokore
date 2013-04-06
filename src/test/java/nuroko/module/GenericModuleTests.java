@@ -92,6 +92,8 @@ public class GenericModuleTests {
 		}
 	}
 	
+
+	
 	private static void testThinker(IThinker p) {
 		p=p.clone();
 		testOverwriteOutput(p);
@@ -111,7 +113,22 @@ public class GenericModuleTests {
 		}	
 	}
 	
+	private static void testGeneralThinking(IComponent p) {
+		// test that output vector is completely overwritten by any IThinker
+		p=p.clone();
+		AVector input=Vectorz.createUniformRandomVector(p.getInputLength());
+		AVector output=Vectorz.createUniformRandomVector(p.getOutputLength());
+		
+		p.think(input, output);
+		for (int i=0; i<output.length(); i++) {
+			assertTrue(output.get(i)!=Double.NaN);
+		}
+		
+		assertEquals(output,p.getOutput());
+	}
+	
 	private static void testComponent(IComponent o) {
+		testGeneralThinking(o);
 		assertTrue(o.getInputState().getInput()==o.getInput());
 	}
 	

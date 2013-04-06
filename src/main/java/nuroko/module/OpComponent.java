@@ -8,7 +8,7 @@ import mikera.vectorz.Op;
 import mikera.vectorz.impl.Vector0;
 import nuroko.core.IModule;
 
-public class OpComponent extends AInputStateComponent {
+public class OpComponent extends AStateComponent {
 	private final int length;
 	private final Op op;
 
@@ -28,11 +28,11 @@ public class OpComponent extends AInputStateComponent {
 	@Override 
 	public void trainGradient(AVector gradient, double factor) {
 		AVector ig=getInputGradient();
-		AVector input=getInput();
+		AVector output=getOutput();		
 		int len=ig.length();
 		for (int i=0; i<len; i++) {
-			double x=input.get(i);
-			input.addAt(i, gradient.get(i)*op.derivative(x));
+			double y=output.get(i);
+			ig.addAt(i, gradient.get(i)*op.derivativeForOutput(y));
 		}
 	}
 

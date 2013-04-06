@@ -68,8 +68,6 @@ public class Connect extends ACompoundComponent {
 		}
 	}
 
-
-
 	@Override
 	public AVector getOutput() {
 		return getComponent(componentCount-1).getOutput();

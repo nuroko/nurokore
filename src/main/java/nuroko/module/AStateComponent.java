@@ -10,14 +10,14 @@ import mikera.vectorz.Vectorz;
  * @author Mike
  *
  */
-public abstract class AInputStateComponent extends AComponent {
+abstract class AStateComponent extends AComponent {
 
 	private final AVector input;
 	private final AVector inputGradient;
 	private final AVector output;
 	private final AVector outputGradient;
 	
-	public AInputStateComponent (int inputLength, int outputLength) {
+	public AStateComponent (int inputLength, int outputLength) {
 		input=Vectorz.newVector(inputLength);
 		inputGradient=Vectorz.newVector(inputLength);
 		output=Vectorz.newVector(outputLength);
