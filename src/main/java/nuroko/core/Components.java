@@ -60,7 +60,9 @@ public final class Components {
 	}
 	
 	public static ALayerStack asLayerStack(IComponent comp) {
-		// TODO
-		return null;
+		if (comp instanceof ALayerStack) {
+			return (ALayerStack)comp;
+		}
+		throw new IllegalArgumentException("Can't convert to ALayerStack: " +comp);
 	}
 }
