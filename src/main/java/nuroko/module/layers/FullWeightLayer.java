@@ -1,9 +1,10 @@
-package nuroko.module;
+package nuroko.module.layers;
 
 import java.util.Collections;
 import java.util.List;
 
 import nuroko.core.IModule;
+import nuroko.module.AWeightLayer;
 
 import mikera.indexz.Index;
 import mikera.indexz.Indexz;

@@ -6,9 +6,9 @@ import java.util.List;
 import mikera.vectorz.Op;
 import nuroko.module.AWeightLayer;
 import nuroko.module.Connect;
-import nuroko.module.FullWeightLayer;
 import nuroko.module.NeuralNet;
-import nuroko.module.SparseWeightLayer;
+import nuroko.module.layers.FullWeightLayer;
+import nuroko.module.layers.SparseWeightLayer;
 
 public final class Components {
 

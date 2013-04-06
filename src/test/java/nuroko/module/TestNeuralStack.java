@@ -5,6 +5,7 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
+import nuroko.module.layers.FullWeightLayer;
 
 import org.junit.Test;
 
