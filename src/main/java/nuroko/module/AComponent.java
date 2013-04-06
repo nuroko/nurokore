@@ -9,13 +9,21 @@ public abstract class AComponent implements IComponent {
 	@Override
 	public void think(AVector input, AVector output) {
 		setInput(input);
-		thinkInternal(output);
+		thinkInternal();
+		if (output!=null) {
+			output.set(getOutput());
+		}
 	}
 	
 	
 	@Override 
-	public void setInput(AVector input) {
-		getInput().set(input);
+	public void setInput(AVector inputValues) {
+		getInput().set(inputValues);
+	}
+	
+	@Override
+	public void setOutput(AVector outputValues) {
+		getOutput().set(outputValues);
 	}
 	
 	@Override
@@ -35,6 +43,11 @@ public abstract class AComponent implements IComponent {
 	@Override
 	public int getInputLength() {
 		return getInput().length();
+	}
+	
+	@Override
+	public int getOutputLength() {
+		return getOutput().length();
 	}
 	
 	public abstract AComponent clone();

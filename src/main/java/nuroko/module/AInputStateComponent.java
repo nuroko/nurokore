@@ -14,10 +14,14 @@ public abstract class AInputStateComponent extends AComponent {
 
 	private final AVector input;
 	private final AVector inputGradient;
+	private final AVector output;
+	private final AVector outputGradient;
 	
-	public AInputStateComponent (int inputLength) {
+	public AInputStateComponent (int inputLength, int outputLength) {
 		input=Vectorz.newVector(inputLength);
 		inputGradient=Vectorz.newVector(inputLength);
+		output=Vectorz.newVector(outputLength);
+		outputGradient=Vectorz.newVector(outputLength);
 	}
 	
 	@Override 
@@ -28,6 +32,16 @@ public abstract class AInputStateComponent extends AComponent {
 	@Override 
 	public AVector getInput() {
 		return input;
+	}
+	
+	@Override
+	public AVector getOutput() {
+		return output;
+	}
+
+	@Override
+	public AVector getOutputGradient() {
+		return outputGradient;
 	}
 	
 	@Override

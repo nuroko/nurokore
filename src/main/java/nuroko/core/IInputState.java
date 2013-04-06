@@ -4,7 +4,7 @@ import mikera.vectorz.AVector;
 
 public interface IInputState extends IInput {
 
-	public void setInput(AVector input);
+	public void setInput(AVector inputValues);
 	
 	public AVector getInput();
 	

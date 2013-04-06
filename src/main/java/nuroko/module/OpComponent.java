@@ -13,13 +13,14 @@ public class OpComponent extends AInputStateComponent {
 	private final Op op;
 
 	public OpComponent(int inputLength, Op op) {
-		super(inputLength);
+		super(inputLength,inputLength);
 		this.length=inputLength;
 		this.op=op;
 	}
 
 	@Override
-	public void thinkInternal(AVector output) {
+	public void thinkInternal() {
+		AVector output=getOutput();
 		output.set(getInput());
 		op.applyTo(output);
 	}
@@ -65,5 +66,7 @@ public class OpComponent extends AInputStateComponent {
 	public int getInputLength() {
 		return length;
 	}
+
+
 
 }

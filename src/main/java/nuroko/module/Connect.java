@@ -30,22 +30,13 @@ public class Connect extends ACompoundComponent {
 
 
 	@Override
-	public void thinkInternal(AVector output) {
-		for (int i=0; i<(componentCount-1); i++) {
-			components.get(i).thinkInternal(components.get(i+1).getInput());
+	public void thinkInternal() {
+		for (int i=0; i<componentCount; i++) {
+			getComponent(i).thinkInternal();
+			if (i<(componentCount-1)) {
+				getComponent(i+1).setInput(getComponent(i).getOutput());
+			}
 		}
-		components.get(componentCount-1).thinkInternal(output);
-	}
-	
-	@Override
-	public void think(AVector input, AVector output) {
-		components.get(0).setInput(input);
-		thinkInternal(output);
-	}
-
-	@Override
-	public int getOutputLength() {
-		return components.get(componentCount-1).getOutputLength();
 	}
 
 	@Override
@@ -75,5 +66,17 @@ public class Connect extends ACompoundComponent {
 			comp.trainGradient(gradient, 1.0);
 			gradient=comp.getInputGradient();
 		}
+	}
+
+
+
+	@Override
+	public AVector getOutput() {
+		return getComponent(componentCount-1).getOutput();
+	}
+
+	@Override
+	public AVector getOutputGradient() {
+		return getComponent(componentCount-1).getOutputGradient();
 	}
 }

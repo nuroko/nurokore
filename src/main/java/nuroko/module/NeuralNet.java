@@ -130,12 +130,11 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	}
 
 	@Override
-	public void thinkInternal(AVector output) {
+	public void thinkInternal() {
 		for (int i=0; i<layerCount; i++) {
 			layers[i].think(data[i], data[i+1]);
 			getLayerOp(i).applyTo(data[i+1].getArray());
 		}
-		if (output!=null) output.set(data[layerCount]);
 	}
 	
 	@Override
@@ -210,6 +209,11 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	@Override
 	public AVector getInputGradient() {
 		return grad[0];
+	}
+
+	@Override
+	public AVector getOutputGradient() {
+		return grad[layerCount];
 	}
 
 

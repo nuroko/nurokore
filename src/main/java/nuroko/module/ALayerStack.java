@@ -18,17 +18,14 @@ public abstract class ALayerStack extends AComponent {
 	
 	public abstract AVector getData(int i);
 	
+	@Override
 	public AVector getOutput() {
 		return getData(getLayerCount());
 	}
 	
+	@Override
 	public AVector getInput() {
 		return getData(0);
-	}
-	
-	@Override 
-	public void setInput(AVector input) {
-		getInput().set(input);
 	}
 	
 	public List<AWeightLayer> getLayers() {

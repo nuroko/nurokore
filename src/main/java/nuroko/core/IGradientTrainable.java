@@ -2,7 +2,7 @@ package nuroko.core;
 
 import mikera.vectorz.AVector;
 
-public interface IGradientTrainable extends IInputState {
+public interface IGradientTrainable  {
 
 	/**
 	 * Trains with a output gradient, incrementing inputGradient and 
