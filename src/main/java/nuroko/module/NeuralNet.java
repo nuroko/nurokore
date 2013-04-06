@@ -175,14 +175,6 @@ public class NeuralNet extends ALayerStack {
 		return Arrays.asList(layers);
 	}
 	
-	public AVector getInputSignal() {
-		return grad[0];
-	}
-
-	public AVector getOutputSignal() {
-		return grad[layerCount];
-	}
-
 	public AVector getOutput() {
 		return data[layerCount];
 	}
