@@ -74,7 +74,10 @@ public class Operator extends AStateComponent {
 		return length;
 	}
 
-
+	@Override 
+	public boolean isStochastic() {
+		return op.isStochastic();
+	}
 
 
 

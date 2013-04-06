@@ -11,4 +11,6 @@ public interface IComponent extends IThinker, IParameterised, IGradientTrainable
 	public void thinkInternal();
 
 	public void trainGradientInternal(double factor);
+
+	public boolean isStochastic();
 }

@@ -58,5 +58,10 @@ public abstract class AComponent implements IComponent {
 		return getOutput().length();
 	}
 	
+	@Override 
+	public boolean isStochastic() {
+		return false;
+	}
+	
 	public abstract AComponent clone();
 }
