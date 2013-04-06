@@ -44,9 +44,14 @@ public class TestComponents {
 		Operator op2=Components.operator(Op.LOGISTIC, 2);
 		NeuralNet nn1=Components.neuralLayer(2, 1, Op.SOFTPLUS);
 		
+		
 		IComponent j=Components.join(new IComponent[] {op1,op2,nn1});
 		assertEquals(5,j.getOutputLength());
 		assertEquals(6,j.getInputLength());
+		
+		AVector input=Vector.of(0,1,0,1,0,1);
+		AVector output=j.think(input);
+
 		
 		GenericModuleTests.test(j);
 

@@ -1,6 +1,7 @@
 package nuroko.module;
 
 import mikera.vectorz.AVector;
+import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 
@@ -13,6 +14,13 @@ public abstract class AComponent implements IComponent {
 		if (output!=null) {
 			output.set(getOutput());
 		}
+	}
+	
+	@Override
+	public AVector think(AVector input) {
+		Vector output=Vector.createLength(getOutputLength());
+		think(input,output);
+		return output;
 	}
 	
 	

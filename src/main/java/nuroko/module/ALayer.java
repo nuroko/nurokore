@@ -1,6 +1,7 @@
 package nuroko.module;
 
 import mikera.vectorz.AVector;
+import mikera.vectorz.Vector;
 import nuroko.core.IParameterised;
 import nuroko.core.IThinker;
 
@@ -20,6 +21,13 @@ public abstract class ALayer implements IThinker, IParameterised {
 	
 	@Override
 	public abstract void think(AVector input, AVector output);
+	
+	@Override
+	public AVector think(AVector input) {
+		Vector output=Vector.createLength(getOutputLength());
+		think(input,output);
+		return output;
+	}
 
 	public abstract ALayer clone();
 }
