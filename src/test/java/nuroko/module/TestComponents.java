@@ -21,10 +21,10 @@ public class TestComponents {
 		Op op1=Op.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
 		
-		Stack c=Components.connect(Arrays.asList(new IComponent[] {
+		Stack c=Components.connect(new IComponent[] {
 			new Operator(op1,LEN),
 			new Operator(op2,LEN),
-			new Operator(op2,LEN)}));
+			new Operator(op2,LEN)});
 		
 		AVector input=Vector.of(0,1,2);
 		AVector output=Vectorz.newVector(LEN);
@@ -37,5 +37,18 @@ public class TestComponents {
 		assertEquals(input,c.getInput());
 		
 		GenericModuleTests.test(c);
+	}
+	
+	@Test public void testJoin() {
+		Operator op1=Components.operator(Op.LINEAR, 2);
+		Operator op2=Components.operator(Op.LOGISTIC, 2);
+		NeuralNet nn1=Components.neuralLayer(2, 1, Op.SOFTPLUS);
+		
+		IComponent j=Components.join(new IComponent[] {op1,op2,nn1});
+		assertEquals(5,j.getOutputLength());
+		assertEquals(6,j.getInputLength());
+		
+		GenericModuleTests.test(j);
+
 	}
 }

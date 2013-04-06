@@ -1,5 +1,6 @@
 package nuroko.module;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mikera.vectorz.AVector;
@@ -87,7 +88,10 @@ public class Join extends ACompoundComponent {
 
 	@Override
 	public Join clone() {
-		return new Join(components);
+		ArrayList<IComponent> al=new ArrayList<IComponent>();
+		for (IComponent c: components) {
+			al.add(c.clone());
+		}
+		return new Join(al);
 	}
-
 }
