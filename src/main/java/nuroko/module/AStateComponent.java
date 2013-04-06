@@ -2,6 +2,7 @@ package nuroko.module;
 
 import nuroko.core.IInputState;
 import mikera.vectorz.AVector;
+import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 
 /**
@@ -12,16 +13,16 @@ import mikera.vectorz.Vectorz;
  */
 abstract class AStateComponent extends AComponent {
 
-	private final AVector input;
-	private final AVector inputGradient;
-	private final AVector output;
-	private final AVector outputGradient;
+	private final Vector input;
+	private final Vector inputGradient;
+	private final Vector output;
+	private final Vector outputGradient;
 	
 	public AStateComponent (int inputLength, int outputLength) {
-		input=Vectorz.newVector(inputLength);
-		inputGradient=Vectorz.newVector(inputLength);
-		output=Vectorz.newVector(outputLength);
-		outputGradient=Vectorz.newVector(outputLength);
+		input=Vector.createLength(inputLength);
+		inputGradient=Vector.createLength(inputLength);
+		output=Vector.createLength(outputLength);
+		outputGradient=Vector.createLength(outputLength);
 	}
 	
 	@Override 
@@ -30,17 +31,17 @@ abstract class AStateComponent extends AComponent {
 	}
 	
 	@Override 
-	public AVector getInput() {
+	public Vector getInput() {
 		return input;
 	}
 	
 	@Override
-	public AVector getOutput() {
+	public Vector getOutput() {
 		return output;
 	}
 
 	@Override
-	public AVector getOutputGradient() {
+	public Vector getOutputGradient() {
 		return outputGradient;
 	}
 	
@@ -52,7 +53,7 @@ abstract class AStateComponent extends AComponent {
 	}
 	
 	@Override 
-	public AVector getInputGradient() {
+	public Vector getInputGradient() {
 		return inputGradient;
 	}
 }
