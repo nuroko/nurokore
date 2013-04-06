@@ -20,7 +20,7 @@ public class TestComponents {
 		Op op1=Op.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
 		
-		Stack c=Components.connect(new IComponent[] {
+		Stack c=Components.stack(new IComponent[] {
 			new Operator(op1,LEN),
 			new Operator(op2,LEN),
 			new Operator(op2,LEN)});

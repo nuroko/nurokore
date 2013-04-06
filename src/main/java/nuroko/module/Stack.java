@@ -7,6 +7,13 @@ import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 
+/**
+ * A stack of connected components, with the output of each feeding into the 
+ * input of the next
+ * 
+ * @author Mike
+ *
+ */
 public class Stack extends ACompoundComponent {
 
 	public Stack(List<? extends IComponent> comps) {

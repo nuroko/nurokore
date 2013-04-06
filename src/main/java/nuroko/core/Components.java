@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mikera.vectorz.Op;
+import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.Join;
 import nuroko.module.Operator;
@@ -16,11 +17,11 @@ public final class Components {
 
 	private static final int DEFAULT_SPARSE_LINKS = 50;
 
-	public static Stack connect(List<? extends IComponent> components) {
+	public static Stack stack(List<? extends IComponent> components) {
 		return new Stack(components);
 	}
 	
-	public static Stack connect(IComponent... components) {
+	public static Stack stack(IComponent... components) {
 		return new Stack(Arrays.asList(components));
 	}
 	
@@ -28,14 +29,14 @@ public final class Components {
 		return new Join(components);
 	}
 	
-	public static Operator operator(Op op, int length) {
-		return new Operator(op, length);
-	}
-	
 	public static Join join(IComponent... components) {
 		return new Join(Arrays.asList(components));
 	}
 	
+	public static Operator operator(Op op, int length) {
+		return new Operator(op, length);
+	}
+
 	public static NeuralNet neuralLayer(int inputLength, int outputLength, Op op) {
 		return neuralLayer(inputLength,outputLength,op,false);
 	}
@@ -56,5 +57,10 @@ public final class Components {
 			wl=weightLayer(inputLength,outputLength,DEFAULT_SPARSE_LINKS);
 		}
 		return new NeuralNet(new AWeightLayer[] {wl},op);
+	}
+	
+	public static ALayerStack asLayerStack(IComponent comp) {
+		// TODO
+		return null;
 	}
 }
