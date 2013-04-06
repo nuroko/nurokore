@@ -33,7 +33,7 @@ public class GenericModuleTests {
 	}
 	
 	private static void testCloneNotLinked(IParameterised p) {
-		// Test that a clone does not share any elements of the parameter or gardient vectors
+		// Test that a clone does not share any elements of the parameter or gradient vectors
 		if(p.getParameterLength()==0) return;
 		
 		p=p.clone();
@@ -73,8 +73,22 @@ public class GenericModuleTests {
 		}
 	}
 	
+	private static void testParameterVectors(IParameterised p) {
+		int pl=p.getParameterLength();
+		AVector parameters=p.getParameters();
+		AVector gradient=p.getGradient();
+		assertEquals(pl,parameters.length());
+		assertEquals(pl,gradient.length());
+		
+		if (pl>0) {
+			assertTrue(Tools.distinctObjects(p.getParameters(),p.getGradient()));
+		}
+	}
+	
+	
 	private static void testParameterized(IParameterised p) {
 		p=p.clone();
+		testParameterVectors(p);
 		testFill(p);
 		testCloneNotLinked(p);
 		testCloneCopyParameters(p);
