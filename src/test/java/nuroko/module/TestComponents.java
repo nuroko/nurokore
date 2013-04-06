@@ -21,7 +21,7 @@ public class TestComponents {
 		Op op1=Op.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
 		
-		Connect c=Components.connect(Arrays.asList(new IComponent[] {
+		Stack c=Components.connect(Arrays.asList(new IComponent[] {
 			new OpComponent(LEN,op1),
 			new OpComponent(LEN,op2),
 			new OpComponent(LEN,op2)}));

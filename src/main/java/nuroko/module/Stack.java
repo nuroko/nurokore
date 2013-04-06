@@ -7,9 +7,9 @@ import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 
-public class Connect extends ACompoundComponent {
+public class Stack extends ACompoundComponent {
 
-	public Connect(List<? extends IComponent> comps) {
+	public Stack(List<? extends IComponent> comps) {
 		super(comps);
 	}
 
@@ -40,12 +40,12 @@ public class Connect extends ACompoundComponent {
 	}
 
 	@Override
-	public Connect clone() {
+	public Stack clone() {
 		ArrayList<IComponent> al=new ArrayList<IComponent>();
 		for (IComponent c: components) {
 			al.add(c.clone());
 		}
-		return new Connect(al);
+		return new Stack(al);
 	}
 
 	@Override

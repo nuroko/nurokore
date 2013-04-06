@@ -5,7 +5,7 @@ import java.util.List;
 
 import mikera.vectorz.Op;
 import nuroko.module.AWeightLayer;
-import nuroko.module.Connect;
+import nuroko.module.Stack;
 import nuroko.module.NeuralNet;
 import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.layers.SparseWeightLayer;
@@ -14,12 +14,12 @@ public final class Components {
 
 	private static final int DEFAULT_SPARSE_LINKS = 50;
 
-	public static Connect connect(List<? extends IComponent> components) {
-		return new Connect(components);
+	public static Stack connect(List<? extends IComponent> components) {
+		return new Stack(components);
 	}
 	
-	public static Connect connect(IComponent... components) {
-		return new Connect(Arrays.asList(components));
+	public static Stack connect(IComponent... components) {
+		return new Stack(Arrays.asList(components));
 	}
 	
 	public static NeuralNet neuralLayer(int inputLength, int outputLength, Op op) {
