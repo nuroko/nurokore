@@ -2,8 +2,6 @@ package nuroko.module;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
