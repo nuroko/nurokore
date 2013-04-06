@@ -3,7 +3,6 @@ package nuroko.module;
 import nuroko.core.IInputState;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
-import mikera.vectorz.Vectorz;
 
 /**
  * Component with input state

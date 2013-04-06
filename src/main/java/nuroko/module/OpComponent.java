@@ -5,6 +5,7 @@ import java.util.List;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
+import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 import nuroko.core.IModule;
 
@@ -27,13 +28,19 @@ public class OpComponent extends AStateComponent {
 	
 	@Override 
 	public void trainGradient(AVector gradient, double factor) {
-		AVector ig=getInputGradient();
-		AVector output=getOutput();		
+		getOutputGradient().set(gradient);
+	}
+	
+	@Override
+	public void trainGradientInternal(double factor) {
+		Vector ig=getInputGradient();
+		Vector output=getOutput();		
+		Vector gradient=getOutputGradient();
 		int len=ig.length();
 		for (int i=0; i<len; i++) {
 			double y=output.get(i);
 			ig.addAt(i, gradient.get(i)*op.derivativeForOutput(y));
-		}
+		}	
 	}
 
 	@Override
@@ -66,6 +73,8 @@ public class OpComponent extends AStateComponent {
 	public int getInputLength() {
 		return length;
 	}
+
+
 
 
 

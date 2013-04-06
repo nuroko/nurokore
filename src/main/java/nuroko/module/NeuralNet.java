@@ -107,6 +107,11 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	}
 	
 	@Override
+	public void trainGradientInternal(double factor) {
+		backpropGradient(factor,false);
+	}
+	
+	@Override
 	public void trainGradient(AVector gradient, double factor) {
 		grad[layerCount].set(gradient);
 		backpropGradient(factor,false);

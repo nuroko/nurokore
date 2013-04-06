@@ -9,4 +9,6 @@ public interface IComponent extends IThinker, IParameterised, IGradientTrainable
 	public IInputState getInputState();
 	
 	public void thinkInternal();
+
+	public void trainGradientInternal(double factor);
 }

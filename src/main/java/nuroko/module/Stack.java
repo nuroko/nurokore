@@ -60,10 +60,18 @@ public class Stack extends ACompoundComponent {
 
 	@Override
 	public void trainGradient(AVector gradient, double factor) {
+		getComponent(componentCount-1).getOutputGradient().set(gradient);
+		trainGradientInternal(factor);
+	}
+	
+	public void trainGradientInternal(double factor) {
 		int n=this.componentCount;
-		for (int i=n-1; i>=0; i--) {
+		getComponent(n-1).trainGradientInternal(factor);
+		for (int i=n-2; i>=0; i--) {
+			AVector gradient=getComponent(i+1).getInputGradient();
 			IComponent comp=getComponent(i);
-			comp.trainGradient(gradient, 1.0);
+			comp.getOutputGradient().set(gradient);
+			comp.trainGradientInternal(factor);
 			gradient=comp.getInputGradient();
 		}
 	}
