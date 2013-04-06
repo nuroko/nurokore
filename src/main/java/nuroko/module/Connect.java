@@ -48,8 +48,6 @@ public class Connect extends ACompoundComponent {
 		return components.get(componentCount-1).getOutputLength();
 	}
 
-
-
 	@Override
 	public Connect clone() {
 		ArrayList<IComponent> al=new ArrayList<IComponent>();

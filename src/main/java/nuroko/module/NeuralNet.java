@@ -112,11 +112,10 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 		backpropGradient(factor,false);
 	}
 
-
 	private void backpropGradient(double factor,boolean skipTopDerivative) {
 		for (int i=layerCount-1; i>=0; i--) {
 			// clear the input gradient
-			grad[i].fill(0.0);
+			if (i>0) grad[i].fill(0.0);
 			
 			Op op=(skipTopDerivative&&(i==layerCount-1))?Op.LINEAR:getLayerOp(i);
 			Util.scaleByDerivative(op,data[i+1],grad[i+1]);
