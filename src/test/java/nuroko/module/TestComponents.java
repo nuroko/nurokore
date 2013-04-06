@@ -36,6 +36,9 @@ public class TestComponents {
 		
 		assertEquals(input,c.getInput());
 		
+		c.trainGradient(Vector.of(10,20,30), 10.0);
+		assertEquals(Vector.of(40,80,120),c.getInputGradient());
+		
 		GenericModuleTests.test(c);
 	}
 	
