@@ -1,5 +1,6 @@
 package nuroko.module;
 
+import mikera.util.Tools;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
 import nuroko.core.IComponent;
@@ -123,7 +124,7 @@ public class GenericModuleTests {
 		for (int i=0; i<output.length(); i++) {
 			assertTrue(output.get(i)!=Double.NaN);
 		}
-		
+		 
 		AVector res=p.think(input);
 		if (!p.isStochastic()) {
 			assertEquals(res,output);
@@ -132,8 +133,13 @@ public class GenericModuleTests {
 		assertEquals(output,p.getOutput());
 	}
 	
+	private static void testStates(IComponent p) {
+		assertTrue(Tools.distinctObjects(p.getInput(),p.getOutput(),p.getInputGradient(),p.getOutputGradient()));
+	}
+	
 	private static void testComponent(IComponent o) {
 		testGeneralThinking(o);
+		testStates(o);
 		assertTrue(o.getInputState().getInput()==o.getInput());
 	}
 	

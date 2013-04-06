@@ -29,11 +29,13 @@ public class Operator extends AStateComponent {
 	@Override 
 	public void trainGradient(AVector gradient, double factor) {
 		getOutputGradient().set(gradient);
+		trainGradientInternal(factor);
 	}
 	
 	@Override
 	public void trainGradientInternal(double factor) {
 		Vector ig=getInputGradient();
+		ig.fill(0.0);
 		Vector output=getOutput();		
 		Vector gradient=getOutputGradient();
 		int len=ig.length();
