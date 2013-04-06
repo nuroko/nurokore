@@ -34,13 +34,14 @@ public abstract class AComponent implements IComponent {
 	}
 	
 	public void train(AVector input, AVector target) {
-		train(input,target,SquaredErrorLoss.INSTANCE);
+		train(input,target,SquaredErrorLoss.INSTANCE,1.0);
 	}
 	
-	public void train(AVector input, AVector target, LossFunction loss) {
+	public void train(AVector input, AVector target, LossFunction loss, double factor) {
 		setInput(input);
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
+		trainGradientInternal(factor);
 	}
 	
 	
