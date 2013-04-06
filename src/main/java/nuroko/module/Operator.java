@@ -9,11 +9,11 @@ import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 import nuroko.core.IModule;
 
-public class OpComponent extends AStateComponent {
+public class Operator extends AStateComponent {
 	private final int length;
 	private final Op op;
 
-	public OpComponent(Op op, int inputLength) {
+	public Operator(Op op, int inputLength) {
 		super(inputLength,inputLength);
 		this.length=inputLength;
 		this.op=op;
@@ -65,8 +65,8 @@ public class OpComponent extends AStateComponent {
 	}
 
 	@Override
-	public OpComponent clone() {
-		return new OpComponent(op,length);
+	public Operator clone() {
+		return new Operator(op,length);
 	}
 
 	@Override

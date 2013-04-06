@@ -6,7 +6,7 @@ import java.util.List;
 import mikera.vectorz.Op;
 import nuroko.module.AWeightLayer;
 import nuroko.module.Join;
-import nuroko.module.OpComponent;
+import nuroko.module.Operator;
 import nuroko.module.Stack;
 import nuroko.module.NeuralNet;
 import nuroko.module.layers.FullWeightLayer;
@@ -28,8 +28,8 @@ public final class Components {
 		return new Join(components);
 	}
 	
-	public static OpComponent operator(Op op, int length) {
-		return new OpComponent(op, length);
+	public static Operator operator(Op op, int length) {
+		return new Operator(op, length);
 	}
 	
 	public static Join join(IComponent... components) {
