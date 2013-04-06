@@ -2,7 +2,7 @@ package nuroko.core;
 
 import nuroko.core.IInputState;
 
-public interface IComponent extends IThinker, IParameterised, IGradientTrainable, IInputState, IOutputState {
+public interface IComponent extends ITrainable, IGradientTrainable, IInputState, IOutputState {
 
 	public IComponent clone();
 

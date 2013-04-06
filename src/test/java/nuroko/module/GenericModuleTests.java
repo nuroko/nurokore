@@ -2,6 +2,7 @@ package nuroko.module;
 
 import mikera.util.Tools;
 import mikera.vectorz.AVector;
+import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
@@ -151,9 +152,33 @@ public class GenericModuleTests {
 		assertTrue(Tools.distinctObjects(p.getInput(),p.getOutput(),p.getInputGradient(),p.getOutputGradient()));
 	}
 	
+	private static void testParameterUpdates(IComponent p) {
+		// testing that trainGradient overwrites input gradient
+		p=p.clone();
+		int ol=p.getOutputLength();
+		int il=p.getInputLength();
+		AVector grad=p.getGradient();
+		grad.fill(0.0);
+		
+		AVector output=Vector.createLength(ol);
+		AVector target=Vector.createLength(ol);
+		AVector input=Vector.createLength(il);
+		Vectorz.fillGaussian(target);
+		Vectorz.fillGaussian(input);
+		
+		p.think(input,output);
+		assertTrue(grad.isZeroVector());
+		
+		p.train(input,target);
+		
+		
+		
+	}
+	
 	private static void testComponent(IComponent o) {
 		testGeneralThinking(o);
 		testStates(o);
+		testParameterUpdates(o);
 		assertTrue(o.getInputState().getInput()==o.getInput());
 	}
 	

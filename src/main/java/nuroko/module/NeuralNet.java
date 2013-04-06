@@ -8,10 +8,9 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
 import nuroko.core.IModule;
-import nuroko.core.ITrainable;
 import nuroko.core.Util;
 
-public class NeuralNet extends ALayerStack implements ITrainable {
+public class NeuralNet extends ALayerStack {
 	
 	private final int layerCount;
 	private final AWeightLayer[] layers;

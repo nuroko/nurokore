@@ -12,6 +12,10 @@ public class Stack extends ACompoundComponent {
 	public Stack(List<? extends IComponent> comps) {
 		super(comps);
 	}
+	
+	public IComponent topComponent() {
+		return components.get(componentCount-1);
+	}
 
 	@Override
 	public AVector getInput() {
@@ -60,7 +64,7 @@ public class Stack extends ACompoundComponent {
 
 	@Override
 	public void trainGradient(AVector gradient, double factor) {
-		getComponent(componentCount-1).getOutputGradient().set(gradient);
+		topComponent().getOutputGradient().set(gradient);
 		trainGradientInternal(factor);
 	}
 	
