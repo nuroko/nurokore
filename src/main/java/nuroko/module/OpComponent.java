@@ -13,7 +13,7 @@ public class OpComponent extends AStateComponent {
 	private final int length;
 	private final Op op;
 
-	public OpComponent(int inputLength, Op op) {
+	public OpComponent(Op op, int inputLength) {
 		super(inputLength,inputLength);
 		this.length=inputLength;
 		this.op=op;
@@ -66,7 +66,7 @@ public class OpComponent extends AStateComponent {
 
 	@Override
 	public OpComponent clone() {
-		return new OpComponent(length,op);
+		return new OpComponent(op,length);
 	}
 
 	@Override

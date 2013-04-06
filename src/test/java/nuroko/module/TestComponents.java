@@ -22,9 +22,9 @@ public class TestComponents {
 		Op op2=LinearOp.create(2.0, 1.0);
 		
 		Stack c=Components.connect(Arrays.asList(new IComponent[] {
-			new OpComponent(LEN,op1),
-			new OpComponent(LEN,op2),
-			new OpComponent(LEN,op2)}));
+			new OpComponent(op1,LEN),
+			new OpComponent(op2,LEN),
+			new OpComponent(op2,LEN)}));
 		
 		AVector input=Vector.of(0,1,2);
 		AVector output=Vectorz.newVector(LEN);
