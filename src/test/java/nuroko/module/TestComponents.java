@@ -90,5 +90,8 @@ public class TestComponents {
 		IComponent c=Components.stack(nn1,nn2);
 		ALayerStack st=Components.asLayerStack(c);
 		assertEquals(3,st.getData(2).length());
+		assertEquals(2,st.getLayerCount());
+		assertTrue(st.getData(0)==nn1.getInput());
+		assertTrue(st.getData(2)==nn2.getOutput());
 	}
 }
