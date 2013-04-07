@@ -8,7 +8,6 @@ import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 import nuroko.core.IComponent;
-import nuroko.core.IModule;
 
 public class Operator extends AStateComponent {
 	private final int length;

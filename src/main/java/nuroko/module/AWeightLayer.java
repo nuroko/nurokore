@@ -3,7 +3,6 @@ package nuroko.module;
 import java.util.Collections;
 import java.util.List;
 
-import nuroko.core.IComponent;
 import nuroko.core.IModule;
 import mikera.indexz.Index;
 import mikera.matrixx.AMatrix;
