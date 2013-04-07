@@ -1,10 +1,7 @@
-package nuroko.module;
+package nuroko.module.layers;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import nuroko.core.IModule;
+import nuroko.module.AWeightLayer;
 
 import mikera.indexz.Index;
 import mikera.indexz.Indexz;
@@ -92,11 +89,6 @@ public final class SparseWeightLayer extends AWeightLayer {
 
 	}
 	
-	@Override 
-	public List<IModule> getComponents() {
-		return Collections.EMPTY_LIST;
-	}
-	
 	@Override
 	public AMatrix asMatrix() {
 		return Matrixx.createSparse(getInputLength(),indexes,weights);
@@ -155,7 +147,7 @@ public final class SparseWeightLayer extends AWeightLayer {
 
 	@Override
 	public double getLinkWeight(int outputIndex, int number) {
-		return weights[outputIndex].array[number];
+		return weights[outputIndex].data[number];
 	}
 
 	@Override

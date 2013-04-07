@@ -8,6 +8,11 @@ import mikera.indexz.Index;
 import mikera.matrixx.AMatrix;
 import mikera.vectorz.AVector;
 
+/**
+ * Abstract base class representing a weighted linear transformation.
+ * @author Mike
+ *
+ */
 public abstract class AWeightLayer extends ALayer {
 	protected static final double INITIAL_WEIGHT_SCALE = 0.5;
 	protected static final double BIAS_INITIAL_SCALE = 0.01;
@@ -21,7 +26,7 @@ public abstract class AWeightLayer extends ALayer {
 	}
 	
 	@Override 
-	public List<IModule> getComponents() {
+	public List<IModule> getModules() {
 		return Collections.EMPTY_LIST;
 	}
 

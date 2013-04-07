@@ -1,7 +1,12 @@
 package nuroko.module;
 
+import mikera.util.Tools;
 import mikera.vectorz.AVector;
+import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
+import nuroko.core.IComponent;
+import nuroko.core.IInputState;
+import nuroko.core.IModule;
 import nuroko.core.IParameterised;
 import nuroko.core.IThinker;
 import static org.junit.Assert.*;
@@ -29,7 +34,9 @@ public class GenericModuleTests {
 	}
 	
 	private static void testCloneNotLinked(IParameterised p) {
-		// Test that a clone does not share any elements of the parameter or gardient vectors
+		// Test that a clone does not share any elements of the parameter or gradient vectors
+		if(p.getParameterLength()==0) return;
+		
 		p=p.clone();
 		
 		AVector param=p.getParameters();
@@ -67,8 +74,22 @@ public class GenericModuleTests {
 		}
 	}
 	
+	private static void testParameterVectors(IParameterised p) {
+		int pl=p.getParameterLength();
+		AVector parameters=p.getParameters();
+		AVector gradient=p.getGradient();
+		assertEquals(pl,parameters.length());
+		assertEquals(pl,gradient.length());
+		
+		if (pl>0) {
+			assertTrue(Tools.distinctObjects(p.getParameters(),p.getGradient()));
+		}
+	}
+	
+	
 	private static void testParameterized(IParameterised p) {
 		p=p.clone();
+		testParameterVectors(p);
 		testFill(p);
 		testCloneNotLinked(p);
 		testCloneCopyParameters(p);
@@ -87,17 +108,109 @@ public class GenericModuleTests {
 		}
 	}
 	
+
+	
 	private static void testThinker(IThinker p) {
 		p=p.clone();
 		testOverwriteOutput(p);
+	}
+	
+
+	private static void testInput(IInputState o) {
+		AVector input=o.getInput();
+		assertEquals(o.getInputLength(),input.length());
+		assertEquals(input.length(),o.getInputGradient().length());
+	}
+	
+
+	private static void testModule(IModule o) {
+		for (IModule m:o.getModules()) {
+			test(m);
+		}	
+	}
+	
+	private static void testGeneralThinking(IComponent p) {
+		// test that output vector is completely overwritten by any IThinker
+		p=p.clone();
+		AVector input=Vectorz.createUniformRandomVector(p.getInputLength());
+		AVector output=Vectorz.createUniformRandomVector(p.getOutputLength());
+		
+		p.think(input, output);
+		for (int i=0; i<output.length(); i++) {
+			assertTrue(output.get(i)!=Double.NaN);
+		}
+		 
+		AVector res=p.think(input);
+		if (!p.isStochastic()) {
+			assertEquals(res,output);
+		}
+		
+		assertEquals(output,p.getOutput());
+	}
+	
+	private static void testStates(IComponent p) {
+		assertTrue(Tools.distinctObjects(p.getInput(),p.getOutput(),p.getInputGradient(),p.getOutputGradient()));
+	}
+	
+	private static void testParameterUpdates(IComponent p) {
+		// testing that trainGradient overwrites input gradient
+		p=p.clone();
+		int ol=p.getOutputLength();
+		int il=p.getInputLength();
+		AVector grad=p.getGradient();
+		grad.fill(0.0);
+		
+		AVector output=Vector.createLength(ol);
+		AVector target=Vector.createLength(ol);
+		AVector input=Vector.createLength(il);
+		Vectorz.fillGaussian(target);
+		Vectorz.fillGaussian(input);
+		
+		p.think(input,output);
+		assertTrue(grad.isZeroVector());
+		
+		p.train(input,target);
+		AVector tg=grad.clone();
+		
+		if (!p.isStochastic()) {
+			p.train(input, output); // shouldn't accumulate any gradient
+			assertEquals(tg,grad);
+		}		
+	}
+	
+
+	private static void testSubComponents(IComponent o) {
+		for (IComponent m:o.getComponents()) {
+			test(m);
+		}	
+	}
+	
+	private static void testComponent(IComponent o) {
+		testGeneralThinking(o);
+		testStates(o);
+		testSubComponents(o);
+		testParameterUpdates(o);
+		assertTrue(o.getInputState().getInput()==o.getInput());
 	}
 	
 	public static void test(Object o) {
 		if (o instanceof IParameterised) {
 			testParameterized((IParameterised)o);
 		}
+		if (o instanceof IInputState) {
+			testInput((IInputState)o);
+		}
 		if (o instanceof IThinker) {
 			testThinker((IThinker)o);
 		}
+		
+		if (o instanceof IModule) {
+			testModule((IModule)o);
+		}
+		if (o instanceof IComponent) {
+			testComponent((IComponent)o);
+		}
 	}
+
+
 }

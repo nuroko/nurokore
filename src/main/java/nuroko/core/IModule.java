@@ -13,7 +13,7 @@ public interface IModule extends Cloneable {
 	 * Returns a list of sub-components of this module
 	 * @return
 	 */
-	public List<? extends IModule> getComponents();
+	public List<? extends IModule> getModules();
 	
 	/**
 	 * Creates a clone of a module, including a deep copy of any mutable state.

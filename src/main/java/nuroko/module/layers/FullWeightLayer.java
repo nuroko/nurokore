@@ -1,9 +1,6 @@
-package nuroko.module;
+package nuroko.module.layers;
 
-import java.util.Collections;
-import java.util.List;
-
-import nuroko.core.IModule;
+import nuroko.module.AWeightLayer;
 
 import mikera.indexz.Index;
 import mikera.indexz.Indexz;
@@ -59,10 +56,7 @@ public final class FullWeightLayer extends AWeightLayer {
 		return parameters;
 	}
 	
-	@Override 
-	public List<IModule> getComponents() {
-		return Collections.EMPTY_LIST;
-	}
+
 	
 	@Override
 	public int getParameterLength() {
@@ -110,7 +104,7 @@ public final class FullWeightLayer extends AWeightLayer {
 
 	@Override
 	public double getLinkWeight(int outputIndex, int number) {
-		return weights[outputIndex].array[number];
+		return weights[outputIndex].data[number];
 	}
 
 	@Override

@@ -12,7 +12,10 @@ import mikera.vectorz.AVector;
  * @author Mike
  */
 public interface IThinker extends IInputOutput {
+	
 	public void think(AVector input, AVector output);
+	
+	public AVector think(AVector input);
 	
 	@Override
 	public IThinker clone();

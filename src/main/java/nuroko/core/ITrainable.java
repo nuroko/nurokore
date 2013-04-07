@@ -1,5 +1,6 @@
 package nuroko.core;
 
+import nuroko.module.loss.LossFunction;
 import mikera.vectorz.AVector;
 
 /**
@@ -10,6 +11,10 @@ import mikera.vectorz.AVector;
  */
 public interface ITrainable extends IThinker, IParameterised {
 	public void train(AVector input, AVector target);
+
+	public void train(AVector input, AVector target, LossFunction loss, double factor);
+
+	public void thinkInternalTraining();
 
 	@Override
 	public ITrainable clone();

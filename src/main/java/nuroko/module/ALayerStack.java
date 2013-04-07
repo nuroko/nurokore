@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mikera.vectorz.AVector;
-import nuroko.core.*;
 
 /**
  * Abstract base class representing a stack of WeightLayer components
  * 
  * @author Mike
  */
-public abstract class ALayerStack implements  IThinker, IParameterised {
+public abstract class ALayerStack extends AComponent {
 	
 	public abstract int getLayerCount();
 	
@@ -19,10 +18,12 @@ public abstract class ALayerStack implements  IThinker, IParameterised {
 	
 	public abstract AVector getData(int i);
 	
+	@Override
 	public AVector getOutput() {
 		return getData(getLayerCount());
 	}
 	
+	@Override
 	public AVector getInput() {
 		return getData(0);
 	}
@@ -36,13 +37,7 @@ public abstract class ALayerStack implements  IThinker, IParameterised {
 		return al;
 	}
 
-	
 	public abstract ALayerStack clone();
-	
-	@Override
-	public int getParameterLength() {
-		return getParameters().length();
-	}
 	
 	public abstract void train(AVector input, AVector target);
 

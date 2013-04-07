@@ -2,9 +2,11 @@ package nuroko.module;
 
 import static org.junit.Assert.assertEquals;
 import mikera.vectorz.AVector;
+import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
+import nuroko.module.layers.FullWeightLayer;
 
 import org.junit.Test;
 
@@ -26,7 +28,7 @@ public class TestNeuralStack {
 	
 	@Test 
 	public void testMininal() {
-		Op op=Op.LOGISTIC;
+		Op op=Ops.LOGISTIC;
 		
 		AWeightLayer wl=new FullWeightLayer(2,2);
 		NeuralNet ns=new NeuralNet(wl);
@@ -64,7 +66,7 @@ public class TestNeuralStack {
 		ns.train(input, target);
 		
 		// output gradient signal
-		AVector og=ns.getOutputSignal();
+		AVector og=ns.getOutputGradient();
 		assertEquals(1.0-op.apply(v),og.get(0),0.00001);
 		assertEquals(1.0-op.apply(0.5),og.get(1),0.00001);
 		
@@ -75,7 +77,7 @@ public class TestNeuralStack {
 		assertEquals(v*(1.0-op.apply(v)),g.get(2),0.000001);
 		
 		// input gradient signal
-		AVector ig=ns.getInputSignal();
+		AVector ig=ns.getInputGradient();
 		assertEquals(input.length(),ig.length());
 		assertEquals(1.0-op.apply(v),ig.get(0),0.000001);
 		assertEquals(0.0,ig.get(1),0.000001);

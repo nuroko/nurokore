@@ -2,16 +2,18 @@ package nuroko.module;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
+import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
+import nuroko.core.IComponent;
 import nuroko.core.IModule;
-import nuroko.core.ITrainable;
 import nuroko.core.Util;
 
-public class NeuralNet extends ALayerStack implements ITrainable {
+public class NeuralNet extends ALayerStack {
 	
 	private final int layerCount;
 	private final AWeightLayer[] layers;
@@ -22,11 +24,11 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	private final Op[] layerOps;
 	
 	public NeuralNet(AWeightLayer... layers) {
-		this(layers, Op.LOGISTIC);
+		this(layers, Ops.LOGISTIC);
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op outputOp) {
-		this(layers, Op.TANH, Op.LOGISTIC);
+		this(layers, Ops.TANH, Ops.LOGISTIC);
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op hiddenOp, Op outputOp) {
@@ -59,16 +61,20 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 			g=g.join(layers[i].getGradient());
 		}
 		gradient=g;
-		
 	}
 	
 	@Override 
-	public List<IModule> getComponents() {
+	public List<IModule> getModules() {
 		ArrayList<IModule> al=new ArrayList<IModule>();
 		for (IModule m: layers) {
 			al.add(m);
 		}
 		return al;
+	}
+	
+	@Override 
+	public List<IComponent> getComponents() {
+		return Collections.EMPTY_LIST;
 	}
 	
 	public NeuralNet getInverse() {
@@ -106,14 +112,24 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 			inputGradient.add(grad[0]);
 		}
 	}
-
+	
+	@Override
+	public void trainGradientInternal(double factor) {
+		backpropGradient(factor,false);
+	}
+	
+	@Override
+	public void trainGradient(AVector gradient, double factor) {
+		grad[layerCount].set(gradient);
+		backpropGradient(factor,false);
+	}
 
 	private void backpropGradient(double factor,boolean skipTopDerivative) {
 		for (int i=layerCount-1; i>=0; i--) {
 			// clear the input gradient
-			grad[i].fill(0.0);
+			if (i>0) grad[i].fill(0.0);
 			
-			Op op=(skipTopDerivative&&(i==layerCount-1))?Op.LINEAR:getLayerOp(i);
+			Op op=(skipTopDerivative&&(i==layerCount-1))?Ops.LINEAR:getLayerOp(i);
 			Util.scaleByDerivative(op,data[i+1],grad[i+1]);
 				
 			// backprop on current layer
@@ -126,13 +142,11 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	}
 
 	@Override
-	public void think(AVector input, AVector output) {
-		data[0].set(input);
+	public void thinkInternal() {
 		for (int i=0; i<layerCount; i++) {
 			layers[i].think(data[i], data[i+1]);
 			getLayerOp(i).applyTo(data[i+1].getArray());
 		}
-		if (output!=null) output.set(data[layerCount]);
 	}
 	
 	@Override
@@ -169,14 +183,6 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 		return Arrays.asList(layers);
 	}
 	
-	public AVector getInputSignal() {
-		return grad[0];
-	}
-
-	public AVector getOutputSignal() {
-		return grad[layerCount];
-	}
-
 	public AVector getOutput() {
 		return data[layerCount];
 	}
@@ -203,4 +209,16 @@ public class NeuralNet extends ALayerStack implements ITrainable {
 	public int getLayerCount() {
 		return layerCount;
 	}
+
+	@Override
+	public AVector getInputGradient() {
+		return grad[0];
+	}
+
+	@Override
+	public AVector getOutputGradient() {
+		return grad[layerCount];
+	}
+
+
 }
