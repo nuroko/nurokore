@@ -60,10 +60,7 @@ public final class FullWeightLayer extends AWeightLayer {
 		return parameters;
 	}
 	
-	@Override 
-	public List<IModule> getComponents() {
-		return Collections.EMPTY_LIST;
-	}
+
 	
 	@Override
 	public int getParameterLength() {

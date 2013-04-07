@@ -1,5 +1,7 @@
 package nuroko.core;
 
+import java.util.List;
+
 import nuroko.core.IInputState;
 
 public interface IComponent extends ITrainable, IGradientTrainable, IInputState, IOutputState {
@@ -22,4 +24,7 @@ public interface IComponent extends ITrainable, IGradientTrainable, IInputState,
 	public void trainGradientInternal(double factor);
 
 	public boolean isStochastic();
+	
+	public List<? extends IComponent> getComponents();
+
 }

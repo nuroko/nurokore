@@ -63,6 +63,8 @@ public final class Components {
 		if (comp instanceof ALayerStack) {
 			return (ALayerStack)comp;
 		}
+		List<IComponent> comps=(List<IComponent>) comp.getComponents();
+		
 		throw new IllegalArgumentException("Can't convert to ALayerStack: " +comp);
 	}
 }

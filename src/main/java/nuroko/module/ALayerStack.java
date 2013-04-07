@@ -37,13 +37,7 @@ public abstract class ALayerStack extends AComponent {
 		return al;
 	}
 
-	
 	public abstract ALayerStack clone();
-	
-	@Override
-	public int getParameterLength() {
-		return getParameters().length();
-	}
 	
 	public abstract void train(AVector input, AVector target);
 

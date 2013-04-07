@@ -93,11 +93,6 @@ public final class SparseWeightLayer extends AWeightLayer {
 
 	}
 	
-	@Override 
-	public List<IModule> getComponents() {
-		return Collections.EMPTY_LIST;
-	}
-	
 	@Override
 	public AMatrix asMatrix() {
 		return Matrixx.createSparse(getInputLength(),indexes,weights);

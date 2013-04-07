@@ -1,9 +1,12 @@
 package nuroko.module;
 
+import java.util.List;
+
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
+import nuroko.core.IModule;
 import nuroko.module.loss.LossFunction;
 import nuroko.module.loss.SquaredErrorLoss;
 
@@ -61,7 +64,11 @@ public abstract class AComponent implements IComponent {
 	}
 	
 	public IComponent getComponent(int i) {
-		return (IComponent) getComponents().get(i);
+		return getComponents().get(i);
+	}
+	
+	public List<IModule> getModules() {
+		return (List<IModule>) getComponents();
 	}
 	
 	@Override 

@@ -124,7 +124,7 @@ public class GenericModuleTests {
 	
 
 	private static void testModule(IModule o) {
-		for (IModule m:o.getComponents()) {
+		for (IModule m:o.getModules()) {
 			test(m);
 		}	
 	}
@@ -178,9 +178,17 @@ public class GenericModuleTests {
 		}		
 	}
 	
+
+	private static void testSubComponents(IComponent o) {
+		for (IComponent m:o.getComponents()) {
+			test(m);
+		}	
+	}
+	
 	private static void testComponent(IComponent o) {
 		testGeneralThinking(o);
 		testStates(o);
+		testSubComponents(o);
 		testParameterUpdates(o);
 		assertTrue(o.getInputState().getInput()==o.getInput());
 	}

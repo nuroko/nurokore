@@ -2,11 +2,13 @@ package nuroko.module;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
+import nuroko.core.IComponent;
 import nuroko.core.IModule;
 import nuroko.core.Util;
 
@@ -61,12 +63,17 @@ public class NeuralNet extends ALayerStack {
 	}
 	
 	@Override 
-	public List<IModule> getComponents() {
+	public List<IModule> getModules() {
 		ArrayList<IModule> al=new ArrayList<IModule>();
 		for (IModule m: layers) {
 			al.add(m);
 		}
 		return al;
+	}
+	
+	@Override 
+	public List<IComponent> getComponents() {
+		return Collections.EMPTY_LIST;
 	}
 	
 	public NeuralNet getInverse() {

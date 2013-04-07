@@ -7,6 +7,7 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
+import nuroko.core.IComponent;
 import nuroko.core.IModule;
 
 public class Operator extends AStateComponent {
@@ -46,7 +47,7 @@ public class Operator extends AStateComponent {
 	}
 
 	@Override
-	public List<? extends IModule> getComponents() {
+	public List<IComponent> getComponents() {
 		return Collections.EMPTY_LIST;
 	}
 
