@@ -25,6 +25,6 @@ public interface IComponent extends ITrainable, IGradientTrainable, IInputState,
 
 	public boolean isStochastic();
 	
-	public List<? extends IComponent> getComponents();
+	public List<IComponent> getComponents();
 
 }

@@ -20,6 +20,11 @@ public class CompoundLayerStack extends ALayerStack {
 		split=a.getLayerCount();
 		layerCount=split+b.getLayerCount();
 	}
+	
+
+	public static CompoundLayerStack stack(ALayerStack a, ALayerStack b) {
+		return new CompoundLayerStack(a,b);
+	}
 
 	@Override
 	public void thinkInternal() {
@@ -102,5 +107,6 @@ public class CompoundLayerStack extends ALayerStack {
 			AVector inputGradient, double factor, boolean skipTopDerivative) {
 		throw new UnsupportedOperationException("CompundLayerStack is view-only");
 	}
+
 
 }

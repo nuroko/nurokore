@@ -1,5 +1,6 @@
 package nuroko.module;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mikera.vectorz.AVector;
@@ -68,7 +69,9 @@ public abstract class AComponent implements IComponent {
 	}
 	
 	public List<IModule> getModules() {
-		return (List<IModule>) getComponents();
+		ArrayList<IModule> al=new ArrayList<IModule>();
+		al.addAll(getComponents());
+		return al;
 	}
 	
 	@Override 

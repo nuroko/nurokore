@@ -6,6 +6,7 @@ import java.util.List;
 import mikera.vectorz.Op;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
+import nuroko.module.CompoundLayerStack;
 import nuroko.module.Join;
 import nuroko.module.Operator;
 import nuroko.module.Stack;
@@ -63,7 +64,12 @@ public final class Components {
 		if (comp instanceof ALayerStack) {
 			return (ALayerStack)comp;
 		}
-		List<IComponent> comps=(List<IComponent>) comp.getComponents();
+		List<IComponent> comps=comp.getComponents();
+		ALayerStack st=asLayerStack(comps.get(0));
+		for (int i=1; i<comps.size(); i++) {
+			ALayerStack st2=asLayerStack(comps.get(i));
+			st=CompoundLayerStack.stack(st,st2);
+		}
 		
 		throw new IllegalArgumentException("Can't convert to ALayerStack: " +comp);
 	}
