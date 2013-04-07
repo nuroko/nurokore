@@ -2,6 +2,7 @@ package nuroko.module;
 
 import static org.junit.Assert.assertEquals;
 import mikera.vectorz.AVector;
+import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
@@ -27,7 +28,7 @@ public class TestNeuralStack {
 	
 	@Test 
 	public void testMininal() {
-		Op op=Op.LOGISTIC;
+		Op op=Ops.LOGISTIC;
 		
 		AWeightLayer wl=new FullWeightLayer(2,2);
 		NeuralNet ns=new NeuralNet(wl);

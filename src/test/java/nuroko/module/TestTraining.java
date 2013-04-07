@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
+import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.ops.LinearOp;
@@ -16,7 +17,7 @@ public class TestTraining {
 
 	@Test public void testTrainLoss() {	
 		int LEN=3;
-		Op op1=Op.LINEAR;
+		Op op1=Ops.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
 		
 		Stack c=Components.stack(new IComponent[] {

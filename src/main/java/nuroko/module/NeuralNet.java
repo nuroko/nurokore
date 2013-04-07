@@ -7,6 +7,7 @@ import java.util.List;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
+import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
 import nuroko.core.IModule;
@@ -23,11 +24,11 @@ public class NeuralNet extends ALayerStack {
 	private final Op[] layerOps;
 	
 	public NeuralNet(AWeightLayer... layers) {
-		this(layers, Op.LOGISTIC);
+		this(layers, Ops.LOGISTIC);
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op outputOp) {
-		this(layers, Op.TANH, Op.LOGISTIC);
+		this(layers, Ops.TANH, Ops.LOGISTIC);
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op hiddenOp, Op outputOp) {
@@ -128,7 +129,7 @@ public class NeuralNet extends ALayerStack {
 			// clear the input gradient
 			if (i>0) grad[i].fill(0.0);
 			
-			Op op=(skipTopDerivative&&(i==layerCount-1))?Op.LINEAR:getLayerOp(i);
+			Op op=(skipTopDerivative&&(i==layerCount-1))?Ops.LINEAR:getLayerOp(i);
 			Util.scaleByDerivative(op,data[i+1],grad[i+1]);
 				
 			// backprop on current layer

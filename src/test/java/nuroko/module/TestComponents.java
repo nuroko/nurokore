@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
+import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.ops.LinearOp;
@@ -17,7 +18,7 @@ public class TestComponents {
 
 	@Test public void testOpConnect() {	
 		int LEN=3;
-		Op op1=Op.LINEAR;
+		Op op1=Ops.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
 		
 		Stack c=Components.stack(new IComponent[] {
@@ -45,9 +46,9 @@ public class TestComponents {
 	}
 	
 	@Test public void testJoin() {
-		Operator op1=Components.operator(Op.LINEAR, 2);
-		Operator op2=Components.operator(Op.LOGISTIC, 2);
-		NeuralNet nn1=Components.neuralLayer(2, 1, Op.SOFTPLUS);
+		Operator op1=Components.operator(Ops.LINEAR, 2);
+		Operator op2=Components.operator(Ops.LOGISTIC, 2);
+		NeuralNet nn1=Components.neuralLayer(2, 1, Ops.SOFTPLUS);
 		
 		
 		IComponent j=Components.join(new IComponent[] {op1,op2,nn1});
@@ -64,7 +65,7 @@ public class TestComponents {
 	}
 	
 	@Test public void testNeuralNet() {
-		NeuralNet nn=Components.neuralLayer(3, 3, Op.LOGISTIC);
+		NeuralNet nn=Components.neuralLayer(3, 3, Ops.LOGISTIC);
 		assertEquals(12,nn.getParameterLength());
 		Vectorz.fillGaussian(nn.getParameters());
 		GenericModuleTests.test(nn);
@@ -85,8 +86,8 @@ public class TestComponents {
 	}
 	
 	@Test public void testCompoundLayerStack() {
-		NeuralNet nn1=Components.neuralLayer(3, 3, Op.LOGISTIC);
-		NeuralNet nn2=Components.neuralLayer(3, 3, Op.LOGISTIC);
+		NeuralNet nn1=Components.neuralLayer(3, 3, Ops.LOGISTIC);
+		NeuralNet nn2=Components.neuralLayer(3, 3, Ops.LOGISTIC);
 		IComponent c=Components.stack(nn1,nn2);
 		ALayerStack st=Components.asLayerStack(c);
 		assertEquals(3,st.getData(2).length());
