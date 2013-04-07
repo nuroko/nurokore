@@ -83,5 +83,12 @@ public class TestComponents {
 		assertTrue(grad.get(11)>0); // should be positive, since output grad positive and input positive
 		System.out.println(grad);
 	}
-
+	
+	@Test public void testCompoundLayerStack() {
+		NeuralNet nn1=Components.neuralLayer(3, 3, Op.LOGISTIC);
+		NeuralNet nn2=Components.neuralLayer(3, 3, Op.LOGISTIC);
+		IComponent c=Components.stack(nn1,nn2);
+		ALayerStack st=Components.asLayerStack(c);
+		assertEquals(3,st.getData(2).length());
+	}
 }

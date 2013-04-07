@@ -70,7 +70,6 @@ public final class Components {
 			ALayerStack st2=asLayerStack(comps.get(i));
 			st=CompoundLayerStack.stack(st,st2);
 		}
-		
-		throw new IllegalArgumentException("Can't convert to ALayerStack: " +comp);
+		return st;
 	}
 }
