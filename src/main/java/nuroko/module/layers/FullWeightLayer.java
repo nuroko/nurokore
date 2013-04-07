@@ -104,7 +104,7 @@ public final class FullWeightLayer extends AWeightLayer {
 
 	@Override
 	public double getLinkWeight(int outputIndex, int number) {
-		return weights[outputIndex].array[number];
+		return weights[outputIndex].data[number];
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class Util {
 	public static void scaleByDerivative(Op op, Vector outputs, Vector gradToScale) {
 		int len=gradToScale.length();
 		assert(len==outputs.length());
-		double[] data=gradToScale.array;
+		double[] data=gradToScale.data;
 		for (int i=0; i<len; i++) {
 			data[i]*=op.derivativeForOutput(outputs.get(i));
 		}
