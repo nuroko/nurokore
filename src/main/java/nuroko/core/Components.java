@@ -75,10 +75,15 @@ public final class Components {
 			return (ALayerStack)comp;
 		}
 		List<IComponent> comps=comp.getComponents();
+		if (comps.isEmpty()) return null;
 		ALayerStack st=asLayerStack(comps.get(0));
 		for (int i=1; i<comps.size(); i++) {
 			ALayerStack st2=asLayerStack(comps.get(i));
-			st=CompoundLayerStack.stack(st,st2);
+			if (st==null) {
+				st=st2;
+			} else {
+				if (st2!=null) st=CompoundLayerStack.stack(st,st2);
+			}
 		}
 		return st;
 	}
