@@ -49,6 +49,16 @@ public class Stack extends ACompoundComponent {
 			}
 		}
 	}
+	
+	@Override
+	public void thinkInternalTraining() {
+		for (int i=0; i<componentCount; i++) {
+			getComponent(i).thinkInternalTraining();
+			if (i<(componentCount-1)) {
+				getComponent(i+1).setInput(getComponent(i).getOutput());
+			}
+		}
+	}
 
 	@Override
 	public Stack clone() {
@@ -77,7 +87,7 @@ public class Stack extends ACompoundComponent {
 	
 	public void trainGradientInternal(double factor) {
 		int n=this.componentCount;
-		getComponent(n-1).trainGradientInternal(factor);
+		topComponent().trainGradientInternal(factor);
 		for (int i=n-2; i>=0; i--) {
 			AVector gradient=getComponent(i+1).getInputGradient();
 			IComponent comp=getComponent(i);

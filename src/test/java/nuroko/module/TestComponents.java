@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class TestComponents {
 
-	@Test public void testOpConnect() {	
+	@Test public void testStack() {	
 		int LEN=3;
 		Op op1=Ops.LINEAR;
 		Op op2=LinearOp.create(2.0, 1.0);
