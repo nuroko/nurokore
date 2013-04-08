@@ -7,6 +7,7 @@ import mikera.vectorz.Op;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.CompoundLayerStack;
+import nuroko.module.Dropout;
 import nuroko.module.Join;
 import nuroko.module.Operator;
 import nuroko.module.Stack;
@@ -17,6 +18,7 @@ import nuroko.module.layers.SparseWeightLayer;
 public final class Components {
 
 	private static final int DEFAULT_SPARSE_LINKS = 50;
+	private static final double DEFAULT_DROPOUT_RATE = 0.5;
 
 	public static Stack stack(List<? extends IComponent> components) {
 		return new Stack(components);
@@ -40,6 +42,14 @@ public final class Components {
 
 	public static NeuralNet neuralLayer(int inputLength, int outputLength, Op op) {
 		return neuralLayer(inputLength,outputLength,op,false);
+	}
+	
+	public static Dropout dropout(int length) {
+		return new Dropout(length, DEFAULT_DROPOUT_RATE);
+	}
+	
+	public static Dropout dropout(int length, double dropoutRate) {
+		return new Dropout(length, dropoutRate);
 	}
 	
 	public static AWeightLayer weightLayer(int inputLength, int outputLength, int maxLinks) {
