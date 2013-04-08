@@ -3,6 +3,7 @@ package nuroko.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import mikera.util.Rand;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
@@ -26,6 +27,7 @@ public abstract class AComponent implements IComponent {
 		}
 	}
 	
+	@Override
 	public void thinkInternalTraining() {
 		thinkInternal();
 	}
@@ -56,7 +58,7 @@ public abstract class AComponent implements IComponent {
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
 		trainGradientInternal(factor);
-		applyConstraints();
+		if (Rand.chance(0.1)) applyConstraints();
 	}
 	
 	@Override
