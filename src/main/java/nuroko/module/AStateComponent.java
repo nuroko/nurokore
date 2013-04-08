@@ -1,5 +1,9 @@
 package nuroko.module;
 
+import java.util.Collections;
+import java.util.List;
+
+import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
@@ -54,5 +58,10 @@ abstract class AStateComponent extends AComponent {
 	@Override 
 	public Vector getInputGradient() {
 		return inputGradient;
+	}
+	
+	@Override
+	public List<IComponent> getComponents() {
+		return Collections.EMPTY_LIST;
 	}
 }

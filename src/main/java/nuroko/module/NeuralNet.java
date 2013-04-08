@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import mikera.util.Rand;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
@@ -16,7 +15,6 @@ import nuroko.core.Util;
 
 public class NeuralNet extends ALayerStack {
 	
-	private static final double DROPOUT_RATE = 0.0;
 	private final int layerCount;
 	private final AWeightLayer[] layers;
 	private final Vector[] data;
@@ -143,23 +141,6 @@ public class NeuralNet extends ALayerStack {
 		for (int i=0; i<layerCount; i++) {
 			layers[i].think(data[i], data[i+1]);
 			getLayerOp(i).applyTo(data[i+1].getArray());
-		}
-	}
-	
-	@SuppressWarnings("unused")
-	@Override
-	public void thinkInternalTraining() {
-		for (int i=0; i<layerCount; i++) {
-			layers[i].think(data[i], data[i+1]);
-			getLayerOp(i).applyTo(data[i+1].getArray());
-			
-			if (DROPOUT_RATE>0.0) {
-				// double FACTOR=1.0/DROPOUT_RATE;
-				double[] dt=data[i+1].getArray();
-				for (int j=0; j<dt.length; j++) {
-					if (Rand.chance(DROPOUT_RATE)) dt[j]=0.0;
-				}
-			}
 		}
 	}
 	
