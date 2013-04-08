@@ -8,12 +8,37 @@ import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.ops.LinearOp;
+import nuroko.algo.SimpleBackProp;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
 
 import org.junit.Test;
 
 public class TestTraining {
+	
+	@Test public void testSimpleBackProp() {
+		IComponent nn=Components.neuralLayer(3, 3, Ops.LOGISTIC);
+		//System.out.println(nn.getParameters());
+		
+		AVector input =Vector.of(1,0,-1);
+		AVector target =Vector.of(1,0,0.5);
+		
+		AVector o1=nn.think(input);
+		SimpleBackProp.train(nn, input, target, 0.1);
+		AVector o2=nn.think(input);
+		
+		assertTrue(o1.distance(target)>o2.distance(target));
+		
+		for (int i=0; i<1000; i++) {
+			o1=o2;
+			SimpleBackProp.train(nn, input, target, 0.1);
+			o2=nn.think(input);	
+			assertTrue(o1.distance(target)>o2.distance(target));
+		}
+		
+		//System.out.println(o2);
+		assertTrue(o2.epsilonEquals(target,0.1));
+	}
 
 	@Test public void testTrainLoss() {	
 		int LEN=3;
