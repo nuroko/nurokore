@@ -37,6 +37,16 @@ public abstract class AComponent implements IComponent {
 		return output;
 	}
 	
+	public AVector generate(AVector output) {
+		Vector input=Vector.createLength(getInputLength());
+		generate(input,output);
+		return input;
+	}
+	
+	public void generate(AVector input, AVector output) {
+		throw new UnsupportedOperationException("Can't do generate: "+this.getClass());
+	}
+
 	public void train(AVector input, AVector target) {
 		train(input,target,SquaredErrorLoss.INSTANCE,1.0);
 	}
