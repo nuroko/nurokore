@@ -48,6 +48,12 @@ public abstract class AComponent implements IComponent {
 		trainGradientInternal(factor);
 	}
 	
+	@Override
+	public void trainGradient(AVector gradient, double factor) {
+		getOutputGradient().set(gradient);
+		trainGradientInternal(factor);
+	}
+	
 	public abstract void trainGradientInternal(double factor);
 	
 	

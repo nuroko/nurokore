@@ -12,10 +12,10 @@ import mikera.vectorz.Vector;
  */
 abstract class AStateComponent extends AComponent {
 
-	private final Vector input;
-	private final Vector inputGradient;
-	private final Vector output;
-	private final Vector outputGradient;
+	protected final Vector input;
+	protected final Vector inputGradient;
+	protected final Vector output;
+	protected final Vector outputGradient;
 	
 	public AStateComponent (int inputLength, int outputLength) {
 		input=Vector.createLength(inputLength);
