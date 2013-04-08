@@ -16,6 +16,7 @@ import mikera.vectorz.Vectorz;
  * @author Mike
  */
 public final class FullWeightLayer extends AWeightLayer {
+	private static final double MAX_WEIGHT_VECTOR_LENGTH = 15.0;
 	private final Vector bias;
 	private final Vector biasGradient;
 	private final Vector[] weights;
@@ -110,6 +111,16 @@ public final class FullWeightLayer extends AWeightLayer {
 	@Override
 	public int getLinkSource(int outputIndex, int number) {
 		return number;
+	}
+	
+	@Override
+	public void applyConstraints() {
+		for (Vector v: weights) {
+			double len=v.magnitude();
+			if (len>MAX_WEIGHT_VECTOR_LENGTH) {
+				v.multiply(MAX_WEIGHT_VECTOR_LENGTH/len);
+			}
+		}
 	}
 	
 	@Override

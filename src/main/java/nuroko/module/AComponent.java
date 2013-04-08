@@ -112,5 +112,11 @@ public abstract class AComponent implements IComponent {
 		return false;
 	}
 	
+	public void applyConstraints() {
+		for (IComponent c: getComponents()) {
+			c.applyConstraints();
+		}
+	}
+	
 	public abstract AComponent clone();
 }
