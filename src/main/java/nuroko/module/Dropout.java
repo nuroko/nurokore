@@ -4,16 +4,16 @@ import mikera.util.Rand;
 import mikera.vectorz.AVector;
 import mikera.vectorz.impl.Vector0;
 
-public class DropOut extends AStateComponent {
+public class Dropout extends AStateComponent {
 	private double dropoutRate=0.5;
 	private final boolean[] dropped;
 
-	public DropOut(int length) {
+	public Dropout(int length) {
 		super(length, length);
 		dropped=new boolean[length];
 	}
 
-	public DropOut(int length, double dropoutRate) {
+	public Dropout(int length, double dropoutRate) {
 		this(length);
 		this.dropoutRate=dropoutRate;
 	}
@@ -62,8 +62,8 @@ public class DropOut extends AStateComponent {
 	}
 
 	@Override
-	public DropOut clone() {
-		return new DropOut(getInputLength(),dropoutRate);
+	public Dropout clone() {
+		return new Dropout(getInputLength(),dropoutRate);
 	}
 
 }
