@@ -25,6 +25,13 @@ public class Normaliser extends AStateComponent implements ISynthesiser {
 		n.stdev.set(stdev);
 		return n;
 	}
+	
+	public static Normaliser create(int length, double mean, double stdev) {
+		Normaliser n=new Normaliser(length);
+		n.mean.fill(mean);
+		n.stdev.fill(stdev);
+		return n;
+	}
 
 	@Override
 	public void thinkInternal() {
