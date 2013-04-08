@@ -56,6 +56,7 @@ public abstract class AComponent implements IComponent {
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
 		trainGradientInternal(factor);
+		applyConstraints();
 	}
 	
 	@Override
