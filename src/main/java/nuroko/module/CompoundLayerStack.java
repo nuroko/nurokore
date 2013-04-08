@@ -28,12 +28,12 @@ public class CompoundLayerStack extends ALayerStack {
 
 	@Override
 	public void thinkInternal() {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
+		throw new UnsupportedOperationException("CompoundLayerStack is view-only");
 	}
 
 	@Override
 	public void trainGradientInternal(double factor) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
+		throw new UnsupportedOperationException("CompoundLayerStack is view-only");
 	}
 
 	@Override
