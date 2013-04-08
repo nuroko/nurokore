@@ -48,6 +48,8 @@ public abstract class AComponent implements IComponent {
 		trainGradientInternal(factor);
 	}
 	
+	public abstract void trainGradientInternal(double factor);
+	
 	
 	@Override 
 	public void setInput(AVector inputValues) {

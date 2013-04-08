@@ -38,8 +38,6 @@ public abstract class ALayerStack extends AComponent {
 	}
 
 	public abstract ALayerStack clone();
-	
-	public abstract void train(AVector input, AVector target);
 
 	/**
 	 * Trains with a direct gradient. Assumes think has been called immediately prior to set any intermediate values.

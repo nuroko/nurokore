@@ -19,6 +19,7 @@ public class NeuralNet extends ALayerStack {
 	private final AWeightLayer[] layers;
 	private final Vector[] data;
 	private final Vector[] grad;
+	private final Vector outputGradient;
 	private final AVector parameters;
 	private final AVector gradient;
 	private final Op[] layerOps;
@@ -49,6 +50,8 @@ public class NeuralNet extends ALayerStack {
 			data[i+1]=Vector.createLength(layers[i].getOutputLength());
 			grad[i+1]=Vector.createLength(layers[i].getOutputLength());
 		}
+		
+		outputGradient=Vector.createLength(layers[layerCount-1].getOutputLength());
 		
 		AVector params=layers[0].getParameters();
 		for (int i=1; i<layerCount; i++) {
@@ -91,15 +94,6 @@ public class NeuralNet extends ALayerStack {
 			wl.initRandom();
 		}
 	}
-
-	@Override
-	public void train(AVector input, AVector target) {
-		assert(getOutputLength()==target.length());
-		think(input,null);
-		grad[layerCount].set(target);
-		grad[layerCount].sub(data[layerCount]);
-		backpropGradient(1.0,true);
-	}
 	
 	@Override
 	public void trainGradient(AVector input,
@@ -120,11 +114,12 @@ public class NeuralNet extends ALayerStack {
 	
 	@Override
 	public void trainGradient(AVector gradient, double factor) {
-		grad[layerCount].set(gradient);
+		outputGradient.set(gradient);
 		backpropGradient(factor,false);
 	}
 
 	private void backpropGradient(double factor,boolean skipTopDerivative) {
+		grad[layerCount].set(outputGradient);
 		for (int i=layerCount-1; i>=0; i--) {
 			// clear the input gradient
 			if (i>0) grad[i].fill(0.0);
@@ -217,7 +212,7 @@ public class NeuralNet extends ALayerStack {
 
 	@Override
 	public AVector getOutputGradient() {
-		return grad[layerCount];
+		return outputGradient;
 	}
 
 
