@@ -36,10 +36,13 @@ public abstract class ALayerStack extends AComponent {
 		}
 		return al;
 	}
+	
+	public ALayerStack subStack(int start, int length) {
+		List<AWeightLayer> layers=getLayers().subList(start, start+length);
+		return CompoundLayerStack.create(layers);
+	}
 
 	public abstract ALayerStack clone();
-	
-	public abstract void train(AVector input, AVector target);
 
 	/**
 	 * Trains with a direct gradient. Assumes think has been called immediately prior to set any intermediate values.

@@ -62,4 +62,6 @@ public abstract class AWeightLayer extends ALayer {
 
 	public abstract AMatrix asMatrix();
 
+	public abstract void applyConstraints();
+
 }

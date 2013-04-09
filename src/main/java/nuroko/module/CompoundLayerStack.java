@@ -22,18 +22,20 @@ public class CompoundLayerStack extends ALayerStack {
 	}
 	
 
-	public static CompoundLayerStack stack(ALayerStack a, ALayerStack b) {
+	public static ALayerStack stack(ALayerStack a, ALayerStack b) {
+		if (a==null) return b;
+		if (b==null) return a;
 		return new CompoundLayerStack(a,b);
 	}
 
 	@Override
 	public void thinkInternal() {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
+		throw new UnsupportedOperationException("CompoundLayerStack is view-only");
 	}
 
 	@Override
 	public void trainGradientInternal(double factor) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
+		throw new UnsupportedOperationException("CompoundLayerStack is view-only");
 	}
 
 	@Override
@@ -109,4 +111,11 @@ public class CompoundLayerStack extends ALayerStack {
 	}
 
 
+	public static ALayerStack create(List<AWeightLayer> layers) {
+		ALayerStack c=null;
+		for (AWeightLayer wl: layers) {
+			c=CompoundLayerStack.stack(c,new NeuralNet(wl));
+		}
+		return c;
+	}
 }

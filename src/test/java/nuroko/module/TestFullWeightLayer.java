@@ -10,6 +10,17 @@ import org.junit.Test;
 
 public class TestFullWeightLayer {
 	@Test
+	public void testWeightLengthConstraints() {
+		FullWeightLayer wl=new FullWeightLayer(2,2);
+		
+		AVector params=wl.getParameters();
+		params.fill(100.0);
+		assertEquals(100.0,params.get(3),0.001);
+		wl.applyConstraints();
+		assertEquals(FullWeightLayer.MAX_WEIGHT_VECTOR_LENGTH/Math.sqrt(2),params.get(3),0.001);
+	}
+	
+	@Test
 	public void testFullWeightLayer() {
 		FullWeightLayer wl=new FullWeightLayer(2,2);
 		

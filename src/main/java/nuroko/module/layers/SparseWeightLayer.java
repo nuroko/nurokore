@@ -18,6 +18,8 @@ import mikera.vectorz.Vectorz;
  * @author Mike
  */
 public final class SparseWeightLayer extends AWeightLayer {
+	private static final double MAX_WEIGHT_VECTOR_LENGTH = 4.0;
+
 	private final Vector bias;
 	private final Vector biasGradient;
 	private final Index[] indexes;
@@ -153,6 +155,16 @@ public final class SparseWeightLayer extends AWeightLayer {
 	@Override
 	public int getLinkSource(int outputIndex, int number) {
 		return indexes[outputIndex].data[number];
+	}
+	
+	@Override
+	public void applyConstraints() {
+		for (Vector v: weights) {
+			double len=v.magnitude();
+			if (len>MAX_WEIGHT_VECTOR_LENGTH) {
+				v.multiply(MAX_WEIGHT_VECTOR_LENGTH/len);
+			}
+		}
 	}
 
 	@Override

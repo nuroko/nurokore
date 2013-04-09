@@ -3,6 +3,7 @@ package nuroko.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import mikera.util.Rand;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
@@ -26,6 +27,7 @@ public abstract class AComponent implements IComponent {
 		}
 	}
 	
+	@Override
 	public void thinkInternalTraining() {
 		thinkInternal();
 	}
@@ -37,6 +39,16 @@ public abstract class AComponent implements IComponent {
 		return output;
 	}
 	
+	public AVector generate(AVector output) {
+		Vector input=Vector.createLength(getInputLength());
+		generate(input,output);
+		return input;
+	}
+	
+	public void generate(AVector input, AVector output) {
+		throw new UnsupportedOperationException("Can't do generate: "+this.getClass());
+	}
+
 	public void train(AVector input, AVector target) {
 		train(input,target,SquaredErrorLoss.INSTANCE,1.0);
 	}
@@ -46,7 +58,16 @@ public abstract class AComponent implements IComponent {
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
 		trainGradientInternal(factor);
+		if (Rand.chance(0.1)) applyConstraints();
 	}
+	
+	@Override
+	public void trainGradient(AVector gradient, double factor) {
+		getOutputGradient().set(gradient);
+		trainGradientInternal(factor);
+	}
+	
+	public abstract void trainGradientInternal(double factor);
 	
 	
 	@Override 
@@ -92,6 +113,12 @@ public abstract class AComponent implements IComponent {
 	@Override 
 	public boolean isStochastic() {
 		return false;
+	}
+	
+	public void applyConstraints() {
+		for (IComponent c: getComponents()) {
+			c.applyConstraints();
+		}
 	}
 	
 	public abstract AComponent clone();

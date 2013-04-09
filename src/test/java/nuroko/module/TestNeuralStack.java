@@ -1,6 +1,6 @@
 package nuroko.module;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
@@ -55,31 +55,34 @@ public class TestNeuralStack {
 		p.set(2,1.0);
 		ns.think(input, output);
 		assertEquals(op.apply(input.get(0)),output.get(0),0.00001); // identity
-		assertEquals(op.apply(0.5),output.get(1),0.00001); // constant
+		assertEquals(op.apply(0.5),output.get(1),0.00001); // constant bias 
 		
 		// calculate a gradient
 		AVector target=Vectorz.newVector(2);
 		target.fill(1.0);
 
+		assertTrue(ns.getOutputGradient().isZeroVector());
+		
 		// do training
 		double v=input.get(0);
 		ns.train(input, target);
 		
-		// output gradient signal
+		// output gradient signal (squared error loss)
 		AVector og=ns.getOutputGradient();
-		assertEquals(1.0-op.apply(v),og.get(0),0.00001);
-		assertEquals(1.0-op.apply(0.5),og.get(1),0.00001);
+		assertEquals(2,og.length());
+		assertEquals(2*(1-op.apply(0.5)),og.get(1),0.00001);
+		assertEquals(2*(1-op.apply(v)),og.get(0),0.00001);
 		
 		// check gradient values
 		AVector g=ns.getGradient();
-		assertEquals(1.0-op.apply(0.5),g.get(1),0.000001);
-		assertEquals(1.0-op.apply(v),g.get(0),0.000001);
-		assertEquals(v*(1.0-op.apply(v)),g.get(2),0.000001);
+		assertEquals(2*(1-op.apply(0.5))*op.derivative(0.5),g.get(1),0.000001);
+		assertEquals(2*(1-op.apply(v))*op.derivative(v),g.get(0),0.000001);
+		assertEquals(2*(1-op.apply(v))*v*op.derivative(v),g.get(2),0.000001);
 		
 		// input gradient signal
 		AVector ig=ns.getInputGradient();
 		assertEquals(input.length(),ig.length());
-		assertEquals(1.0-op.apply(v),ig.get(0),0.000001);
+		assertEquals(2*(1-op.apply(v))*op.derivative(v),ig.get(0),0.000001);
 		assertEquals(0.0,ig.get(1),0.000001);
 	}
 }
