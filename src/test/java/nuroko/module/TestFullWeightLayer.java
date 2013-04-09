@@ -17,7 +17,7 @@ public class TestFullWeightLayer {
 		params.fill(100.0);
 		assertEquals(100.0,params.get(3),0.001);
 		wl.applyConstraints();
-		assertEquals(Math.sqrt(225.0/2),params.get(3),0.001);
+		assertEquals(FullWeightLayer.MAX_WEIGHT_VECTOR_LENGTH/Math.sqrt(2),params.get(3),0.001);
 	}
 	
 	@Test
