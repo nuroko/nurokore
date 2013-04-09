@@ -13,7 +13,7 @@ import nuroko.module.loss.LossFunction;
 import nuroko.module.loss.SquaredErrorLoss;
 
 public abstract class AComponent implements IComponent {
-
+	
 	public IComponent topComponent() {
 		return this;
 	}
@@ -48,22 +48,24 @@ public abstract class AComponent implements IComponent {
 	public void generate(AVector input, AVector output) {
 		throw new UnsupportedOperationException("Can't do generate: "+this.getClass());
 	}
+	
+	public LossFunction getLossFunction() {
+		return SquaredErrorLoss.INSTANCE;
+	}
 
-	/**
-	 * Trains towards a target value. Performs thinking as required.
-	 * 
-	 * Updates parameter gradient
-	 * Overwrites outputGradient and inputGradient
-	 */
+	public double getLearnFactor() {
+		return 1.0;
+	}
+
 	public void train(AVector input, AVector target) {
-		train(input,target,SquaredErrorLoss.INSTANCE,1.0);
+		train(input,target,getLossFunction(),1.0);
 	}
 	
 	public void train(AVector input, AVector target, LossFunction loss, double factor) {
 		setInput(input);
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
-		trainGradientInternal(factor);
+		trainGradientInternal(factor*getLearnFactor());
 		if (Rand.chance(0.1)) applyConstraints();
 	}
 	
