@@ -36,10 +36,12 @@ public class TestComponents {
 		
 		assertEquals(input,c.getInput());
 		
-		c.trainGradient(Vector.of(10,20,30), 10.0);
+		c.getOutputGradient().set(Vector.of(10,20,30));
+		c.trainGradientInternal(10.0);
 		assertEquals(Vector.of(40,80,120),c.getInputGradient());
 		
-		c.trainGradient(Vector.of(1,2,3), 100000.0);
+		c.getOutputGradient().set(Vector.of(1,2,3));
+		c.trainGradientInternal(100000.0);
 		assertEquals(Vector.of(4,8,12),c.getInputGradient());
 
 		GenericModuleTests.test(c);

@@ -26,12 +26,6 @@ public class Operator extends AStateComponent {
 		op.applyTo(output);
 	}
 	
-	@Override 
-	public void trainGradient(AVector gradient, double factor) {
-		getOutputGradient().set(gradient);
-		trainGradientInternal(factor);
-	}
-	
 	@Override
 	public void trainGradientInternal(double factor) {
 		Vector ig=getInputGradient();

@@ -59,12 +59,6 @@ public class Join extends ACompoundComponent {
 			c.thinkInternalTraining();
 		}
 	}
-
-	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		outputGradient.set(gradient);
-		trainGradientInternal(factor);
-	}
 	
 	@Override
 	public void trainGradientInternal(double factor) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import nuroko.core.IInputState;
 
-public interface IComponent extends ITrainable, IGradientTrainable, IInputState, IOutputState {
+public interface IComponent extends ITrainable, IInputState, IOutputState {
 
 	public IComponent clone();
 

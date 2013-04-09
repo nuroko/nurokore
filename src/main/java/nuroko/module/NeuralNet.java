@@ -111,12 +111,6 @@ public class NeuralNet extends ALayerStack {
 	public void trainGradientInternal(double factor) {
 		backpropGradient(factor,false);
 	}
-	
-	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		outputGradient.set(gradient);
-		backpropGradient(factor,false);
-	}
 
 	private void backpropGradient(double factor,boolean skipTopDerivative) {
 		grad[layerCount].set(outputGradient);

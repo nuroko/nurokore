@@ -69,12 +69,6 @@ public abstract class AComponent implements IComponent {
 		if (Rand.chance(0.1)) applyConstraints();
 	}
 	
-	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		getOutputGradient().set(gradient);
-		trainGradientInternal(factor);
-	}
-	
 	public abstract void trainGradientInternal(double factor);
 	
 	

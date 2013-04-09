@@ -57,11 +57,6 @@ public class CompoundLayerStack extends ALayerStack {
 	}
 
 	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
-	}
-
-	@Override
 	public AVector getInputGradient() {
 		return bottom.getInputGradient();
 	}

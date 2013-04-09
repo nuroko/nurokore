@@ -78,12 +78,6 @@ public class Stack extends ACompoundComponent {
 	public IInputState getInputState() {
 		return components.get(0).getInputState();
 	}
-
-	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		topComponent().getOutputGradient().set(gradient);
-		trainGradientInternal(factor);
-	}
 	
 	public void trainGradientInternal(double factor) {
 		int n=this.componentCount;
