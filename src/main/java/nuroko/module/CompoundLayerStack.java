@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mikera.vectorz.AVector;
+import nuroko.core.Components;
 import nuroko.core.IComponent;
 
 public class CompoundLayerStack extends ALayerStack {
@@ -22,7 +23,9 @@ public class CompoundLayerStack extends ALayerStack {
 	}
 	
 
-	public static CompoundLayerStack stack(ALayerStack a, ALayerStack b) {
+	public static ALayerStack stack(ALayerStack a, ALayerStack b) {
+		if (a==null) return b;
+		if (b==null) return a;
 		return new CompoundLayerStack(a,b);
 	}
 
@@ -109,4 +112,11 @@ public class CompoundLayerStack extends ALayerStack {
 	}
 
 
+	public static ALayerStack create(List<AWeightLayer> layers) {
+		ALayerStack c=null;
+		for (AWeightLayer wl: layers) {
+			c=CompoundLayerStack.stack(c,new NeuralNet(wl));
+		}
+		return c;
+	}
 }

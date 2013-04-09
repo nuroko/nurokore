@@ -1,6 +1,7 @@
 package nuroko.module;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import mikera.vectorz.AVector;
@@ -35,6 +36,11 @@ public abstract class ALayerStack extends AComponent {
 			al.add(getLayer(i));
 		}
 		return al;
+	}
+	
+	public ALayerStack subStack(int start, int length) {
+		List<AWeightLayer> layers=getLayers().subList(start, start+length);
+		return CompoundLayerStack.create(layers);
 	}
 
 	public abstract ALayerStack clone();

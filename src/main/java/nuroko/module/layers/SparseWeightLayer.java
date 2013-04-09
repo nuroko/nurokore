@@ -18,7 +18,7 @@ import mikera.vectorz.Vectorz;
  * @author Mike
  */
 public final class SparseWeightLayer extends AWeightLayer {
-	private static final double MAX_WEIGHT_VECTOR_LENGTH = 15.0;
+	private static final double MAX_WEIGHT_VECTOR_LENGTH = 4.0;
 
 	private final Vector bias;
 	private final Vector biasGradient;
