@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mikera.vectorz.AVector;
-import nuroko.core.Components;
 import nuroko.core.IComponent;
 
 public class CompoundLayerStack extends ALayerStack {
