@@ -49,6 +49,12 @@ public abstract class AComponent implements IComponent {
 		throw new UnsupportedOperationException("Can't do generate: "+this.getClass());
 	}
 
+	/**
+	 * Trains towards a target value. Performs thinking as required.
+	 * 
+	 * Updates parameter gradient
+	 * Overwrites outputGradient and inputGradient
+	 */
 	public void train(AVector input, AVector target) {
 		train(input,target,SquaredErrorLoss.INSTANCE,1.0);
 	}
