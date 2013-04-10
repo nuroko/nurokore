@@ -15,6 +15,18 @@ import nuroko.module.loss.CrossEntropyLoss;
 import org.junit.Test;
 
 public class TestComponents {
+	
+	@Test public void testTrainingOp () {
+		AVector v=Vector.of(1,2,3);
+		int LEN=v.length();
+		IComponent op1=new TrainingOp(LEN,Ops.NEGATE);
+
+		AVector r=op1.think(v);
+		assertEquals(v,r);
+		
+		op1.thinkInternalTraining();
+		assertEquals(Vector.of(-1,-2,-3),op1.getOutput());
+	}
 
 	@Test public void testStack() {	
 		int LEN=3;
