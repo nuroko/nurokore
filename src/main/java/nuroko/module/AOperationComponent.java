@@ -45,4 +45,8 @@ public abstract class AOperationComponent extends AStateComponent {
 	public AVector getParameters() {
 		return Vector0.INSTANCE;
 	}
+	
+
+	@Override
+	public abstract AOperationComponent clone();
 }

@@ -2,11 +2,40 @@ package nuroko.module;
 
 import mikera.vectorz.Op;
 
-public abstract class TrainingOp extends AOperationComponent {
-
+public class TrainingOp extends AOperationComponent {
+	private final Op op;
+	
 	public TrainingOp(int length, Op  op) {
 		super(length);
-		// TODO Auto-generated constructor stub
+		this.op = op;
+	}
+
+	@Override
+	public void thinkInternal() {
+		// identity function while thinking normally
+		output.set(input);
+	}
+	
+	@Override
+	public void thinkInternalTraining() {
+		// apply op when training
+		output.set(input);
+		op.applyTo(output);
+	}
+
+	@Override
+	public void trainGradientInternal(double factor) {
+		double[] ov=output.getArray();
+		double[] og=outputGradient.getArray();
+		double[] ig=outputGradient.getArray();
+		for (int i=0; i<length; i++) {
+			ig[i]=op.derivativeForOutput(ov[i])*og[i];
+		}
+	}
+
+	@Override
+	public TrainingOp clone() {
+		return new TrainingOp(length,op);
 	}
 
 }
