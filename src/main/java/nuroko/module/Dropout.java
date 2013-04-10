@@ -1,15 +1,13 @@
 package nuroko.module;
 
 import mikera.util.Rand;
-import mikera.vectorz.AVector;
-import mikera.vectorz.impl.Vector0;
 
-public class Dropout extends AStateComponent {
+public class Dropout extends AOperationComponent {
 	private double dropoutRate=0.5;
 	private final boolean[] dropped;
 
 	public Dropout(int length) {
-		super(length, length);
+		super(length);
 		dropped=new boolean[length];
 	}
 
@@ -40,17 +38,7 @@ public class Dropout extends AStateComponent {
 			}
 		}
 	}
-
-	@Override
-	public AVector getParameters() {
-		return Vector0.INSTANCE;
-	}
-
-	@Override
-	public AVector getGradient() {
-		return Vector0.INSTANCE;
-	}
-
+	
 	@Override
 	public void trainGradientInternal(double factor) {
 		inputGradient.set(outputGradient);

@@ -1,13 +1,8 @@
 package nuroko.module;
 
-import java.util.Collections;
-import java.util.List;
-
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
-import mikera.vectorz.impl.Vector0;
-import nuroko.core.IComponent;
 
 public class Operator extends AOperationComponent {
 	private final Op op;
