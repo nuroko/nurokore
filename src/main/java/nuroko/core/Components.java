@@ -48,6 +48,10 @@ public final class Components {
 		return neuralLayer(inputLength,outputLength,op,false);
 	}
 	
+	public static NeuralNet neuralLayer(int inputLength, int outputLength, Op op, int maxLinks) {
+		return new NeuralNet(weightLayer(inputLength, outputLength, maxLinks),op);
+	}
+	
 	public static Dropout dropout(int length) {
 		return new Dropout(length, DEFAULT_DROPOUT_RATE);
 	}
