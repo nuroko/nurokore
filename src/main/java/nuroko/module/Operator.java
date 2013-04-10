@@ -9,13 +9,11 @@ import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 import nuroko.core.IComponent;
 
-public class Operator extends AStateComponent {
-	private final int length;
+public class Operator extends AOperationComponent {
 	private final Op op;
 
-	public Operator(Op op, int inputLength) {
-		super(inputLength,inputLength);
-		this.length=inputLength;
+	public Operator(Op op, int length) {
+		super(length);
 		this.op=op;
 	}
 
