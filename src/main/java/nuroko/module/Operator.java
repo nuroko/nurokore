@@ -37,35 +37,12 @@ public class Operator extends AOperationComponent {
 		}	
 	}
 
-	@Override
-	public List<IComponent> getComponents() {
-		return Collections.EMPTY_LIST;
-	}
 
 
-	@Override
-	public int getOutputLength() {
-		return length;
-	}
-
-	@Override
-	public AVector getGradient() {
-		return Vector0.INSTANCE;
-	}
-	
-	@Override
-	public AVector getParameters() {
-		return Vector0.INSTANCE;
-	}
 
 	@Override
 	public Operator clone() {
 		return new Operator(op,length);
-	}
-
-	@Override
-	public int getInputLength() {
-		return length;
 	}
 
 	@Override 
