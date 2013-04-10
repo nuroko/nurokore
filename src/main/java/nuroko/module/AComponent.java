@@ -49,7 +49,8 @@ public abstract class AComponent implements IComponent {
 		throw new UnsupportedOperationException("Can't do generate: "+this.getClass());
 	}
 	
-	public LossFunction getLossFunction() {
+	@Override
+	public LossFunction getDefaultLossFunction() {
 		return SquaredErrorLoss.INSTANCE;
 	}
 
@@ -58,7 +59,7 @@ public abstract class AComponent implements IComponent {
 	}
 
 	public void train(AVector input, AVector target) {
-		train(input,target,getLossFunction(),1.0);
+		train(input,target,getDefaultLossFunction(),1.0);
 	}
 	
 	public void train(AVector input, AVector target, LossFunction loss, double factor) {

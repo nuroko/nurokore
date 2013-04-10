@@ -3,12 +3,11 @@ package nuroko.module;
 import java.util.List;
 
 import nuroko.core.IComponent;
-import nuroko.core.ISynthesiser;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 
-public class Normaliser extends AStateComponent implements ISynthesiser {
+public class Normaliser extends AStateComponent {
 	private final Vector mean;
 	private final Vector stdev;
 	
@@ -77,11 +76,4 @@ public class Normaliser extends AStateComponent implements ISynthesiser {
 		this.input.add(mean);
 		input.set(this.input);
 	}
-
-	@Override
-	public void trainSynth(AVector input) {
-		this.input.set(input);
-		thinkInternal();
-	}
-
 }

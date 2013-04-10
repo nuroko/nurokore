@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mikera.vectorz.Op;
+import mikera.vectorz.ops.Logistic;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.CompoundLayerStack;
@@ -14,6 +15,9 @@ import nuroko.module.Stack;
 import nuroko.module.NeuralNet;
 import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.layers.SparseWeightLayer;
+import nuroko.module.loss.CrossEntropyLoss;
+import nuroko.module.loss.LossFunction;
+import nuroko.module.loss.SquaredErrorLoss;
 
 public final class Components {
 
@@ -86,5 +90,17 @@ public final class Components {
 			}
 		}
 		return st;
+	}
+
+	/**
+	 * Returns a default loss function for a specific operator
+	 * @param topOp
+	 * @return
+	 */
+	public static LossFunction defaultLossFunction(Op op) {
+		if (op instanceof Logistic) {
+			return CrossEntropyLoss.INSTANCE;
+		}
+		return SquaredErrorLoss.INSTANCE;
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
+import nuroko.module.loss.LossFunction;
+import nuroko.module.loss.SquaredErrorLoss;
 
 /**
  * A stack of connected components, with the output of each feeding into the 
@@ -23,6 +25,12 @@ public class Stack extends ACompoundComponent {
 	public IComponent topComponent() {
 		return components.get(componentCount-1);
 	}
+	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		return topComponent().getDefaultLossFunction();
+	}
+
 
 	@Override
 	public AVector getInput() {

@@ -3,6 +3,7 @@ package nuroko.core;
 import java.util.List;
 
 import nuroko.core.IInputState;
+import nuroko.module.loss.LossFunction;
 
 public interface IComponent extends ITrainable, IInputState, IOutputState {
 
@@ -20,6 +21,12 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 	 * May be different from regular thinking.
 	 */
 	public void thinkInternalTraining();
+	
+	/**
+	 * Returns the default loss function that should be used
+	 * @return
+	 */
+	public LossFunction getDefaultLossFunction();
 
 	public void trainGradientInternal(double factor);
 

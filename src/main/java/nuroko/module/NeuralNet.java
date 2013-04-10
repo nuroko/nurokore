@@ -9,9 +9,11 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
+import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.core.IModule;
 import nuroko.core.Util;
+import nuroko.module.loss.LossFunction;
 
 public class NeuralNet extends ALayerStack {
 	
@@ -73,6 +75,12 @@ public class NeuralNet extends ALayerStack {
 			al.add(m);
 		}
 		return al;
+	}
+	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		Op topOp=layerOps[layerCount-1];
+		return Components.defaultLossFunction(topOp);
 	}
 	
 	@Override 
