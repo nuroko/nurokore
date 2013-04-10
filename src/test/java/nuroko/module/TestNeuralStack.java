@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
-import mikera.vectorz.Vector2;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
 import nuroko.core.Components;
+import nuroko.core.IComponent;
 import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.loss.CrossEntropyLoss;
 import nuroko.module.loss.SquaredErrorLoss;
@@ -30,6 +30,27 @@ public class TestNeuralStack {
 		GenericModuleTests.test(ns);
 	}
 	
+	public boolean isEquivalentParameters(IComponent a, IComponent b) {
+		return a.getParameters().equals(b.getParameters());
+	}
+	
+	public boolean isEquivalentThinker(IComponent a, IComponent b) {
+		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
+		return a.think(input).equals(b.think(input));
+	}
+	
+	public boolean isEquivalentTraining(IComponent a, IComponent b) {
+		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
+		AVector target=Vectorz.createUniformRandomVector(a.getOutputLength());
+		
+		a.train(input,target);
+		b.train(input,target);
+		
+		return (a.getInputGradient().equals(b.getInputGradient()))
+				&&(a.getOutputGradient().equals(b.getOutputGradient()))
+				&&(a.getGradient().equals(b.getGradient()));
+	}
+	
 	@Test 
 	public void equivalenceTests() {
 		AWeightLayer wl1=new FullWeightLayer(2,2);
@@ -42,14 +63,10 @@ public class TestNeuralStack {
 		
 		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
 		
-		AVector input=Vectorz.createUniformRandomVector(2);
-		assertEquals(ns.think(input),ss.think(input));
-		
-		ns.train(input,Vector2.of(1,0));
-		ss.train(input,Vector2.of(1,0));
-		
-		assertEquals(ns.getInputGradient(),ss.getInputGradient());
-		assertEquals(ns.getGradient(),ss.getGradient());
+		assertTrue(isEquivalentParameters(ns,ss));
+		assertTrue(isEquivalentThinker(ns,ss));
+		assertTrue(isEquivalentTraining(ns,ss));
+	
 	}
 	
 	@Test 
