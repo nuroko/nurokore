@@ -80,7 +80,12 @@ public class TestComponents {
 	
 	@Test public void testNeuralNet() {
 		NeuralNet nn=Components.neuralLayer(3, 3, Ops.LOGISTIC);
+		
 		assertEquals(12,nn.getParameterLength());
+		assertTrue(nn.getParameters().isZeroVector());
+		Components.stack(nn).initRandom();
+		assertFalse(nn.getParameters().isZeroVector());
+		
 		Vectorz.fillGaussian(nn.getParameters());
 		GenericModuleTests.test(nn);
 		

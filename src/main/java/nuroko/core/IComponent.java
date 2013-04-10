@@ -36,4 +36,9 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 	
 	public List<IComponent> getComponents();
 
+	/**
+	 * Randomly initialises a component's parameters
+	 */
+	public void initRandom();
+
 }

@@ -72,6 +72,12 @@ public abstract class AComponent implements IComponent {
 	
 	public abstract void trainGradientInternal(double factor);
 	
+	@Override
+	public void initRandom() {
+		for (IComponent c: getComponents()) {
+			c.initRandom();
+		}
+	}
 	
 	@Override 
 	public void setInput(AVector inputValues) {
