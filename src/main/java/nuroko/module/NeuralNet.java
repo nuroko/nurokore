@@ -31,7 +31,11 @@ public class NeuralNet extends ALayerStack {
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op outputOp) {
-		this(layers, Ops.TANH, Ops.LOGISTIC);
+		this(layers, Ops.TANH, outputOp);
+	}
+	
+	public NeuralNet(AWeightLayer layer, Op outputOp) {
+		this(new AWeightLayer[] {layer}, null, outputOp);
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op hiddenOp, Op outputOp) {

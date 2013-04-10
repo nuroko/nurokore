@@ -6,6 +6,7 @@ import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
+import nuroko.core.Components;
 import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.loss.CrossEntropyLoss;
 import nuroko.module.loss.SquaredErrorLoss;
@@ -26,6 +27,22 @@ public class TestNeuralStack {
 
 		GenericModuleTests.test(wl);
 		GenericModuleTests.test(ns);
+	}
+	
+	@Test 
+	public void equivalenceTests() {
+		AWeightLayer wl1=new FullWeightLayer(2,2);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		AWeightLayer wl2=new FullWeightLayer(2,2);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.LOGISTIC,Ops.LOGISTIC);
+		
+		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
+		
+		AVector input=Vectorz.createUniformRandomVector(2);
+		assertEquals(ns.think(input),ss.think(input));
 	}
 	
 	@Test 
