@@ -51,6 +51,14 @@ public class TestNeuralStack {
 		assertEquals(a.getGradient(),b.getGradient());
 	}
 	
+	public void testEquivalence(IComponent a, IComponent b) {
+		
+		isEquivalentParameters(a,b);
+		isEquivalentThinker(a,b);
+		isEquivalentTraining(a,b);
+		
+	}
+	
 	@Test 
 	public void equivalenceTests() {
 		AWeightLayer wl1=new FullWeightLayer(2,2);
@@ -59,14 +67,13 @@ public class TestNeuralStack {
 		AWeightLayer wl2=new FullWeightLayer(2,2);
 		Vectorz.fillGaussian(wl1.getParameters());
 		
-		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.LOGISTIC,Ops.LOGISTIC);
-		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.LOGISTIC,Ops.LOGISTIC);	
 		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
+		testEquivalence(ns,ss);
 		
-		isEquivalentParameters(ns,ss);
-		isEquivalentThinker(ns,ss);
-		isEquivalentTraining(ns,ss);
-	
+		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
+		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
+		testEquivalence(ns2,ss2);
 	}
 	
 	@Test 
