@@ -30,25 +30,25 @@ public class TestNeuralStack {
 		GenericModuleTests.test(ns);
 	}
 	
-	public boolean isEquivalentParameters(IComponent a, IComponent b) {
-		return a.getParameters().equals(b.getParameters());
+	public void isEquivalentParameters(IComponent a, IComponent b) {
+		assertEquals(a.getParameters(),b.getParameters());
 	}
 	
-	public boolean isEquivalentThinker(IComponent a, IComponent b) {
+	public void isEquivalentThinker(IComponent a, IComponent b) {
 		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
-		return a.think(input).equals(b.think(input));
+		assertEquals( a.think(input),b.think(input));
 	}
 	
-	public boolean isEquivalentTraining(IComponent a, IComponent b) {
+	public void isEquivalentTraining(IComponent a, IComponent b) {
 		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
 		AVector target=Vectorz.createUniformRandomVector(a.getOutputLength());
 		
 		a.train(input,target);
 		b.train(input,target);
 		
-		return (a.getInputGradient().equals(b.getInputGradient()))
-				&&(a.getOutputGradient().equals(b.getOutputGradient()))
-				&&(a.getGradient().equals(b.getGradient()));
+		assertEquals(a.getInputGradient(),b.getInputGradient());
+		assertEquals(a.getOutputGradient(),b.getOutputGradient());
+		assertEquals(a.getGradient(),b.getGradient());
 	}
 	
 	@Test 
@@ -63,9 +63,9 @@ public class TestNeuralStack {
 		
 		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
 		
-		assertTrue(isEquivalentParameters(ns,ss));
-		assertTrue(isEquivalentThinker(ns,ss));
-		assertTrue(isEquivalentTraining(ns,ss));
+		isEquivalentParameters(ns,ss);
+		isEquivalentThinker(ns,ss);
+		isEquivalentTraining(ns,ss);
 	
 	}
 	
