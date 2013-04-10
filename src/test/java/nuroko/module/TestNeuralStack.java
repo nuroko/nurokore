@@ -7,6 +7,8 @@ import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
 import nuroko.module.layers.FullWeightLayer;
+import nuroko.module.loss.CrossEntropyLoss;
+import nuroko.module.loss.SquaredErrorLoss;
 
 import org.junit.Test;
 
@@ -32,6 +34,8 @@ public class TestNeuralStack {
 		
 		AWeightLayer wl=new FullWeightLayer(2,2);
 		NeuralNet ns=new NeuralNet(wl);
+		
+		assertEquals(CrossEntropyLoss.INSTANCE, ns.getDefaultLossFunction());
 		
 		assertEquals(6,wl.getParameterLength());
 		assertEquals(6,ns.getParameterLength());
@@ -65,7 +69,7 @@ public class TestNeuralStack {
 		
 		// do training
 		double v=input.get(0);
-		ns.train(input, target);
+		ns.train(input, target,SquaredErrorLoss.INSTANCE,1.0);
 		
 		// output gradient signal (squared error loss)
 		AVector og=ns.getOutputGradient();
