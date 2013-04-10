@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
+import mikera.vectorz.Vector2;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
 import nuroko.core.Components;
@@ -43,6 +44,12 @@ public class TestNeuralStack {
 		
 		AVector input=Vectorz.createUniformRandomVector(2);
 		assertEquals(ns.think(input),ss.think(input));
+		
+		ns.train(input,Vector2.of(1,0));
+		ss.train(input,Vector2.of(1,0));
+		
+		assertEquals(ns.getInputGradient(),ss.getInputGradient());
+		assertEquals(ns.getGradient(),ss.getGradient());
 	}
 	
 	@Test 
