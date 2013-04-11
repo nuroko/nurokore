@@ -41,10 +41,15 @@ public class Dropout extends AOperationComponent {
 	
 	@Override
 	public void trainGradientInternal(double factor) {
+		double scaleFactor=1.0/dropoutRate;
 		inputGradient.set(outputGradient);
-		// double[] ig=inputGradient.getArray();
+		double[] ig=inputGradient.getArray();
 		for (int i=0; i<length; i++) {
-			// if (dropped[i]) ig[i]=0.0;
+			if (dropped[i]) {
+				ig[i]=0.0;
+			} else {
+				ig[i]*=scaleFactor;
+			}
 		}
 	}
 

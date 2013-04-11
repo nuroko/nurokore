@@ -14,8 +14,8 @@ import mikera.vectorz.AVector;
  *
  */
 public abstract class AWeightLayer extends ALayer {
-	protected static final double INITIAL_WEIGHT_SCALE = 0.5;
-	protected static final double BIAS_INITIAL_SCALE = 0.01;
+	protected static final double INITIAL_WEIGHT_SCALE = 1.0;
+	protected static final double BIAS_INITIAL_SCALE = 0.3;
 
 	protected final int inputLength;
 	protected final int outputLength;
