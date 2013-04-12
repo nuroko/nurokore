@@ -60,9 +60,13 @@ public class Stack extends ACompoundComponent {
 	@Override
 	public void thinkInternalTraining() {
 		for (int i=0; i<componentCount; i++) {
-			getComponent(i).thinkInternalTraining();
+			IComponent ci=getComponent(i);
+			ci.thinkInternal();
 			if (i<(componentCount-1)) {
-				getComponent(i+1).setInput(getComponent(i).getOutput());
+				getComponent(i+1).setInput(ci.getOutput());
+			}
+			if (ci.hasDifferentTrainingThinking()) {
+				ci.thinkInternalTraining();
 			}
 		}
 	}

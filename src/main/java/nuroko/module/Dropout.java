@@ -58,6 +58,11 @@ public class Dropout extends AOperationComponent {
 			}
 		}
 	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return true;
+	}
 
 	@Override
 	public Dropout clone() {

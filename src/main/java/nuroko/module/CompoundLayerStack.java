@@ -108,4 +108,13 @@ public class CompoundLayerStack extends ALayerStack {
 		}
 		return c;
 	}
+
+
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		for (IComponent c:getComponents()) {
+			if (c.hasDifferentTrainingThinking()) return true;
+		}
+		return false;
+	}
 }

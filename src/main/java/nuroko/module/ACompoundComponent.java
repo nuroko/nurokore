@@ -44,4 +44,12 @@ public abstract class ACompoundComponent extends AComponent {
 	public List<IComponent> getComponents() {
 		return components;
 	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		for (IComponent c:getComponents()) {
+			if (c.hasDifferentTrainingThinking()) return true;
+		}
+		return false;
+	}
 }

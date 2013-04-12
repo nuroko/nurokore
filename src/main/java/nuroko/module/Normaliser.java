@@ -76,4 +76,9 @@ public class Normaliser extends AStateComponent {
 		this.input.add(mean);
 		input.set(this.input);
 	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
+	}
 }

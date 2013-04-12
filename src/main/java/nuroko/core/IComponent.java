@@ -43,4 +43,6 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 	 */
 	public void initRandom();
 
+	public boolean hasDifferentTrainingThinking();
+
 }

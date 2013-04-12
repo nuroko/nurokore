@@ -226,6 +226,11 @@ public class NeuralNet extends ALayerStack {
 	public AVector getOutputGradient() {
 		return outputGradient;
 	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
+	}
 
 
 }

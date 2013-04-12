@@ -18,7 +18,7 @@ public class TrainingOp extends AOperationComponent {
 	
 	@Override
 	public void thinkInternalTraining() {
-		// apply op when training
+		// apply op only when training
 		output.set(input);
 		op.applyTo(output);
 	}
@@ -31,6 +31,11 @@ public class TrainingOp extends AOperationComponent {
 		for (int i=0; i<length; i++) {
 			ig[i]=op.derivativeForOutput(ov[i])*og[i];
 		}
+	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return true;
 	}
 
 	@Override

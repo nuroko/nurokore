@@ -32,9 +32,6 @@ public class Operator extends AOperationComponent {
 		}	
 	}
 
-
-
-
 	@Override
 	public Operator clone() {
 		return new Operator(op,length);
@@ -46,5 +43,8 @@ public class Operator extends AOperationComponent {
 	}
 
 
-
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
+	}
 }
