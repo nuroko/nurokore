@@ -70,6 +70,12 @@ public class TestTraining {
 		c.train(input, Vector.of(2,5,8));
 		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)	
 		assertEquals(Vector.of(4,8,12),c.getInputGradient());
+		
+		// zero learn factor should stop any gradient effect
+		c.getGradient().fill(0.0);
+		c.setLearnFactor(0.0);
+		c.train(input, Vector.of(2,5,8));
+		assertTrue(c.getGradient().isZeroVector());
 
 	}
 
