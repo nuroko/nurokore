@@ -43,6 +43,12 @@ public class TestTraining {
 		//System.out.println(o2);
 		//System.out.println(nn.getParameters());
 		assertTrue(o2.epsilonEquals(target,0.1));
+		
+		// zero learn factor should stop any gradient effect
+		nn.getGradient().fill(0.0);
+		nn.setLearnFactor(0.0);
+		nn.train(input, Vector.of(1,1,1));
+		assertTrue(nn.getGradient().isZeroVector());
 	}
 
 	@Test public void testTrainLoss() {	
@@ -71,11 +77,7 @@ public class TestTraining {
 		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)	
 		assertEquals(Vector.of(4,8,12),c.getInputGradient());
 		
-		// zero learn factor should stop any gradient effect
-		c.getGradient().fill(0.0);
-		c.setLearnFactor(0.0);
-		c.train(input, Vector.of(2,5,8));
-		assertTrue(c.getGradient().isZeroVector());
+	
 
 	}
 

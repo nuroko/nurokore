@@ -45,4 +45,6 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 
 	public boolean hasDifferentTrainingThinking();
 
+	public void setLearnFactor(double d);
+
 }

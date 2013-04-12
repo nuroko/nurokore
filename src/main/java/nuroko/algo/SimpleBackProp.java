@@ -11,8 +11,8 @@ public class SimpleBackProp {
 	}
 	
 	public static void train(IComponent comp, AVector input, AVector target,double learnRate, LossFunction loss) {
+		comp.getGradient().fill(0.0);
 		comp.train(input,target,loss,1.0);
 		comp.getParameters().addMultiple(comp.getGradient(), learnRate);
-		comp.getGradient().fill(0.0);
 	}
 }
