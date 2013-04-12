@@ -2,22 +2,30 @@ package nuroko.module.ops;
 
 import mikera.vectorz.Op;
 
-public class ScaledLogistic extends Op {
-
-	public static final ScaledLogistic INSTANCE=new ScaledLogistic();
+public final class ScaledLogistic extends Op {
 	
-	static double scaledLogisticFunction(double a) {
-		double ea=Math.exp(-4.0*a);
+	private final double factor;
+	private final double inverseFactor;
+
+	public static final ScaledLogistic INSTANCE=new ScaledLogistic(6.0);
+	
+	public ScaledLogistic(double d) {
+		factor=d;
+		inverseFactor=1.0/d;
+	}
+
+	private double scaledLogisticFunction(double a) {
+		double ea=Math.exp(-factor*a);
 		double df=(1/(1.0f+ea));
 		if (Double.isNaN(df)) return (a>0)?1:0;
 		return df;
 	}
 	
-	private static double inverseLogistic (double a) {
+	private double inverseLogistic (double a) {
 		if (a>=1) return 200;
 		if (a<=0) return -200;
 		double ea=a/(1.0-a);
-		return 0.25*Math.log(ea);
+		return inverseFactor*Math.log(ea);
 	}
 	
 	@Override
@@ -44,13 +52,13 @@ public class ScaledLogistic extends Op {
 	
 	@Override
 	public double derivativeForOutput(double y) {
-		return 4*y*(1-y);
+		return factor*y*(1-y);
 	}
 	
 	@Override
 	public double derivative(double x) {
 		double y=scaledLogisticFunction(x);
-		return 4*y*(1-y);
+		return factor*y*(1-y);
 	}
 
 	@Override
