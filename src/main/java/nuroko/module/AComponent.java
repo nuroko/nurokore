@@ -14,6 +14,9 @@ import nuroko.module.loss.SquaredErrorLoss;
 
 public abstract class AComponent implements IComponent {
 	
+	// learn rate multiplier for entire component
+	private double learnFactor;
+
 	public IComponent topComponent() {
 		return this;
 	}
@@ -55,14 +58,18 @@ public abstract class AComponent implements IComponent {
 	}
 
 	public double getLearnFactor() {
-		return 1.0;
+		return learnFactor;
+	}
+	
+	public double setLearnFactor() {
+		return learnFactor;
 	}
 
-	public void train(AVector input, AVector target) {
+	public final void train(AVector input, AVector target) {
 		train(input,target,getDefaultLossFunction(),1.0);
 	}
 	
-	public void train(AVector input, AVector target, LossFunction loss, double factor) {
+	public final void train(AVector input, AVector target, LossFunction loss, double factor) {
 		setInput(input);
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
