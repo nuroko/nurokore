@@ -29,6 +29,8 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 	public LossFunction getDefaultLossFunction();
 
 	public void trainGradientInternal(double factor);
+	
+	public double getLearnFactor();
 
 	public boolean isStochastic();
 	

@@ -61,8 +61,8 @@ public abstract class AComponent implements IComponent {
 		return learnFactor;
 	}
 	
-	public double setLearnFactor() {
-		return learnFactor;
+	public void setLearnFactor(double value) {
+		learnFactor=value;
 	}
 
 	public final void train(AVector input, AVector target) {
