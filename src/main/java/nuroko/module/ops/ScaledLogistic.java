@@ -6,7 +6,7 @@ public class ScaledLogistic extends Op {
 
 	public static final ScaledLogistic INSTANCE=new ScaledLogistic();
 	
-	static double logisticFunction(double a) {
+	static double scaledLogisticFunction(double a) {
 		double ea=Math.exp(-4.0*a);
 		double df=(1/(1.0f+ea));
 		if (Double.isNaN(df)) return (a>0)?1:0;
@@ -17,12 +17,12 @@ public class ScaledLogistic extends Op {
 		if (a>=1) return 200;
 		if (a<=0) return -200;
 		double ea=a/(1.0-a);
-		return Math.log(ea);
+		return 0.25*Math.log(ea);
 	}
 	
 	@Override
 	public double apply(double x) {
-		return logisticFunction(x);
+		return scaledLogisticFunction(x);
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class ScaledLogistic extends Op {
 	@Override
 	public void applyTo(double[] data, int start,int length) {
 		for (int i=0; i<length; i++) {
-			data[i+start]=logisticFunction(data[i+start]);
+			data[i+start]=scaledLogisticFunction(data[i+start]);
 		}	
 	}
 	
@@ -49,7 +49,7 @@ public class ScaledLogistic extends Op {
 	
 	@Override
 	public double derivative(double x) {
-		double y=logisticFunction(x);
+		double y=scaledLogisticFunction(x);
 		return 4*y*(1-y);
 	}
 
