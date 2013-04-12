@@ -3,7 +3,8 @@ package nuroko.module;
 import mikera.util.Rand;
 
 /**
- * Compoenent that performs dropout on activation values
+ * Component that performs dropout on activation values. Useful for avoiding over-fitting.
+ * 
  * @author Mike
  *
  */
