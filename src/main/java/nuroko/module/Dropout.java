@@ -2,6 +2,11 @@ package nuroko.module;
 
 import mikera.util.Rand;
 
+/**
+ * Compoenent that performs dropout on activation values
+ * @author Mike
+ *
+ */
 public class Dropout extends AOperationComponent {
 	private double dropoutRate=0.5;
 	private final boolean[] dropped;

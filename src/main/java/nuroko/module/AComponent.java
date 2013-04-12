@@ -15,7 +15,7 @@ import nuroko.module.loss.SquaredErrorLoss;
 public abstract class AComponent implements IComponent {
 	
 	// learn rate multiplier for entire component
-	private double learnFactor;
+	private double learnFactor=1.0;
 
 	public IComponent topComponent() {
 		return this;
