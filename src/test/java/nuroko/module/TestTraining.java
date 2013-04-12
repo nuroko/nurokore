@@ -62,9 +62,15 @@ public class TestTraining {
 		assertEquals(Vector.of(1,3,5),output);
 		
 		c.train(input, Vector.of(2,5,8));
-		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)
-		
+		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)	
 		assertEquals(Vector.of(4,8,12),c.getInputGradient());
+		
+		// learn factor shouldn't affect gradient propagation
+		c.setLearnFactor(c.getLearnFactor()*10);
+		c.train(input, Vector.of(2,5,8));
+		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)	
+		assertEquals(Vector.of(4,8,12),c.getInputGradient());
+
 	}
 
 }
