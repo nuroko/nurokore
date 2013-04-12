@@ -62,5 +62,4 @@ public class Dropout extends AOperationComponent {
 	public Dropout clone() {
 		return new Dropout(getInputLength(),dropoutRate);
 	}
-
 }

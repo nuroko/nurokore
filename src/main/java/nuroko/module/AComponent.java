@@ -1,6 +1,7 @@
 package nuroko.module;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import mikera.util.Rand;
@@ -12,7 +13,7 @@ import nuroko.core.IModule;
 import nuroko.module.loss.LossFunction;
 import nuroko.module.loss.SquaredErrorLoss;
 
-public abstract class AComponent implements IComponent {
+public abstract class AComponent implements IComponent , Iterable<IComponent> {
 	
 	// learn rate multiplier for entire component
 	private double learnFactor=1.0;
@@ -138,4 +139,10 @@ public abstract class AComponent implements IComponent {
 	}
 	
 	public abstract AComponent clone();
+	
+
+	@Override
+	public Iterator<IComponent> iterator() {
+		return getComponents().iterator();
+	}
 }
