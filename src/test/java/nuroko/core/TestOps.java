@@ -6,7 +6,6 @@ import mikera.util.Arrays;
 import mikera.util.Rand;
 import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
-import mikera.vectorz.ops.IdentityOp;
 
 import org.junit.Test;
 
@@ -53,7 +52,7 @@ public class TestOps {
 	
 	@Test public void testAllOps() {
 		testOp(Ops.LOGISTIC);
-		testOp(IdentityOp.INSTANCE);
+		testOp(Ops.IDENTITY);
 		testOp(Ops.LINEAR);
 		testOp(Ops.STOCHASTIC_BINARY);
 		testOp(Ops.STOCHASTIC_LOGISTIC);

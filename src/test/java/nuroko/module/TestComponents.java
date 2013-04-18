@@ -7,7 +7,7 @@ import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
-import mikera.vectorz.ops.LinearOp;
+import mikera.vectorz.ops.Linear;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.module.loss.CrossEntropyLoss;
@@ -31,7 +31,7 @@ public class TestComponents {
 	@Test public void testStack() {	
 		int LEN=3;
 		Op op1=Ops.LINEAR;
-		Op op2=LinearOp.create(2.0, 1.0);
+		Op op2=Linear.create(2.0, 1.0);
 		
 		Stack c=Components.stack(new IComponent[] {
 			new Operator(op1,LEN),
