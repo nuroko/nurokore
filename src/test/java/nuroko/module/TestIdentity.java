@@ -16,8 +16,8 @@ public class TestIdentity {
 		AVector r=id.think(Vector.of(1,2,3));
 		
 		assertEquals(Vector.of(1,2,3),r);
+		assertEquals(0,id.getParameters().length());
 		
-		GenericModuleTests.test(id);
-		
+		GenericModuleTests.test(id);	
 	}
 }
