@@ -9,6 +9,7 @@ import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.CompoundLayerStack;
 import nuroko.module.Dropout;
+import nuroko.module.Identity;
 import nuroko.module.Join;
 import nuroko.module.Operator;
 import nuroko.module.Stack;
@@ -106,5 +107,9 @@ public final class Components {
 			return CrossEntropyLoss.INSTANCE;
 		}
 		return SquaredErrorLoss.INSTANCE;
+	}
+
+	public static Identity identity(int length) {
+		return new Identity(length);
 	}
 }
