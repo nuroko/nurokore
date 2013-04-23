@@ -8,6 +8,7 @@ import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 import nuroko.core.IModule;
 import nuroko.core.IParameterised;
+import nuroko.core.ISynthesiser;
 import nuroko.core.IThinker;
 import static org.junit.Assert.*;
 
@@ -172,7 +173,7 @@ public class GenericModuleTests {
 		p.train(input,target);
 		AVector tg=grad.clone();
 		
-		if (!p.isStochastic()) {
+		if (!p.isStochastic()&&(!(p instanceof ISynthesiser))) {
 			p.train(input, output); // shouldn't accumulate any gradient
 			assertEquals(tg,grad);
 		}		
