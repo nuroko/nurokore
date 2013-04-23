@@ -11,6 +11,7 @@ import mikera.vectorz.ops.Linear;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.module.loss.CrossEntropyLoss;
+import nuroko.testing.GenericModuleTests;
 
 import org.junit.Test;
 

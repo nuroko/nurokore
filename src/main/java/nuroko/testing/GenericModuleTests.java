@@ -1,4 +1,4 @@
-package nuroko.module;
+package nuroko.testing;
 
 import mikera.util.Tools;
 import mikera.vectorz.AVector;

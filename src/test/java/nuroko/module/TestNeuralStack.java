@@ -11,6 +11,7 @@ import nuroko.core.IComponent;
 import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.loss.CrossEntropyLoss;
 import nuroko.module.loss.SquaredErrorLoss;
+import nuroko.testing.GenericModuleTests;
 
 import org.junit.Test;
 
