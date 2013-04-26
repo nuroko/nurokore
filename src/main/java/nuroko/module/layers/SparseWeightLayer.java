@@ -135,6 +135,7 @@ public final class SparseWeightLayer extends AWeightLayer {
 
 	@Override
 	public void trainGradientInternal(double factor) {
+		inputGradient.fill(0.0);
 		biasGradient.addMultiple(outputGradient,factor);
 		for (int j=0; j<outputLength; j++) {
 			double grad=outputGradient.get(j);
