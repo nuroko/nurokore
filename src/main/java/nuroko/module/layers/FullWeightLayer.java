@@ -161,7 +161,16 @@ public final class FullWeightLayer extends AWeightLayer {
 		return VectorMatrixMN.wrap(weights);
 	}
 
-
+	
+	@Override
+	public void applyConstraintsInternal() {
+		for (Vector v: weights) {
+			double len=v.magnitude();
+			if (len>MAX_WEIGHT_VECTOR_LENGTH) {
+				v.multiply(MAX_WEIGHT_VECTOR_LENGTH/len);
+			}
+		}
+	}
 
 
 	@Override

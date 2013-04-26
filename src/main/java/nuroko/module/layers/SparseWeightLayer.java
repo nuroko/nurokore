@@ -167,7 +167,7 @@ public final class SparseWeightLayer extends AWeightLayer {
 	}
 	
 	@Override
-	public void applyConstraints() {
+	public void applyConstraintsInternal() {
 		for (Vector v: weights) {
 			double len=v.magnitude();
 			if (len>MAX_WEIGHT_VECTOR_LENGTH) {

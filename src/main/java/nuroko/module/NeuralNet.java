@@ -184,7 +184,7 @@ public class NeuralNet extends ALayerStack {
 		return Arrays.asList(layers);
 	}
 	
-	public void applyConstraints() {
+	public void applyConstraintsInternal() {
 		for (AWeightLayer c: getLayers()) {
 			c.applyConstraints();
 		}

@@ -146,7 +146,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		}
 	}
 	
-	public void applyConstraints() {
+	public final void applyConstraints() {
 		applyConstraintsInternal();
 		for (IComponent c: getComponents()) {
 			c.applyConstraints();
