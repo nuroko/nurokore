@@ -68,6 +68,13 @@ public final class FullWeightLayer extends AWeightLayer {
 	public void think(AVector input, AVector output) {
 		assert(inputLength==input.length());
 		assert(outputLength==output.length());
+		this.input.set(input);
+		thinkInternal();
+		output.set(this.getOutput());
+	}
+	
+	@Override
+	public void thinkInternal() {
 		for (int j=0; j<outputLength; j++) {
 			double val=bias.get(j);
 			val+=weights[j].dotProduct(input);
@@ -79,10 +86,9 @@ public final class FullWeightLayer extends AWeightLayer {
 	public AVector getGradient() {
 		return gradient;
 	}
-
+	
 	@Override
-	public void trainGradient(AVector input,
-			AVector outputGradient, AVector inputGradient, double factor) {
+	public void trainGradientInternal(double factor) {
 		biasGradient.addMultiple(outputGradient,factor);
 		for (int j=0; j<outputLength; j++) {
 			double grad=outputGradient.get(j);
@@ -111,16 +117,6 @@ public final class FullWeightLayer extends AWeightLayer {
 	@Override
 	public int getLinkSource(int outputIndex, int number) {
 		return number;
-	}
-	
-	@Override
-	public void applyConstraints() {
-		for (Vector v: weights) {
-			double len=v.magnitude();
-			if (len>MAX_WEIGHT_VECTOR_LENGTH) {
-				v.multiply(MAX_WEIGHT_VECTOR_LENGTH/len);
-			}
-		}
 	}
 	
 	@Override
@@ -163,4 +159,14 @@ public final class FullWeightLayer extends AWeightLayer {
 	public AMatrix asMatrix() {
 		return VectorMatrixMN.wrap(weights);
 	}
+
+
+
+
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
+	}
+
+
 }

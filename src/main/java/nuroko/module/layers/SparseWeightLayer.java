@@ -111,6 +111,13 @@ public final class SparseWeightLayer extends AWeightLayer {
 	public void think(AVector input, AVector output) {
 		assert(inputLength==input.length());
 		assert(outputLength==output.length());
+		setInput(input);
+		thinkInternal();
+		output.set(getOutput());
+	}
+	
+	@Override
+	public void thinkInternal() {
 		for (int i=0; i<outputLength; i++) {
 			double val=bias.get(i);
 			Vector wts=weights[i];
@@ -120,13 +127,14 @@ public final class SparseWeightLayer extends AWeightLayer {
 		}
 	}
 
+
 	@Override
 	public AVector getGradient() {
 		return gradient;
 	}
 
 	@Override
-	public void trainGradient(AVector input, AVector outputGradient, AVector inputGradient, double factor) {
+	public void trainGradientInternal(double factor) {
 		biasGradient.addMultiple(outputGradient,factor);
 		for (int j=0; j<outputLength; j++) {
 			double grad=outputGradient.get(j);
@@ -228,5 +236,10 @@ public final class SparseWeightLayer extends AWeightLayer {
 		}
 		parameters=params;
 		gradient=grads;
+	}
+
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
 	}
 }

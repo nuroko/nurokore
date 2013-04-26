@@ -19,8 +19,9 @@ public abstract class AWeightLayer extends ALayer {
 
 	protected final int inputLength;
 	protected final int outputLength;
-
+	
 	public AWeightLayer(int inputLength, int outputLength) {
+		super(inputLength,outputLength);
 		this.inputLength=inputLength;
 		this.outputLength=outputLength;
 	}
@@ -29,12 +30,12 @@ public abstract class AWeightLayer extends ALayer {
 	public List<IModule> getModules() {
 		return Collections.EMPTY_LIST;
 	}
-
+	
 	@Override
 	public int getInputLength() {
 		return inputLength;
 	}
-
+	
 	@Override
 	public int getOutputLength() {
 		return outputLength;
@@ -55,13 +56,15 @@ public abstract class AWeightLayer extends ALayer {
 	@Override
 	public abstract AWeightLayer clone();
 
-	public abstract void trainGradient(AVector input, 
-			AVector outputGradient, AVector inputGradient, double factor);
+	public void trainGradient(AVector input, AVector outputGradient, AVector inputGradient, double factor) {
+		getOutputGradient().set(outputGradient);
+		getInput().set(input);
+		trainGradientInternal(factor);
+		inputGradient.set(getInputGradient());
+	}
 
 	public abstract void initRandom();
 
 	public abstract AMatrix asMatrix();
-
-	public abstract void applyConstraints();
 
 }

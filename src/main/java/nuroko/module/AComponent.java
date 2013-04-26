@@ -8,6 +8,7 @@ import mikera.util.Rand;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
+import nuroko.core.IConstraint;
 import nuroko.core.IInputState;
 import nuroko.core.IModule;
 import nuroko.module.loss.LossFunction;
@@ -17,6 +18,8 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 	
 	// learn rate multiplier for entire component
 	private double learnFactor=1.0;
+	
+	private ArrayList<IConstraint> constraints=new ArrayList<IConstraint>();
 
 	public IComponent topComponent() {
 		return this;
@@ -41,6 +44,11 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		Vector output=Vector.createLength(getOutputLength());
 		think(input,output);
 		return output;
+	}
+	
+	public void setConstraint(IConstraint con) {
+		constraints.clear();
+		constraints.add(con);
 	}
 	
 	public AVector generate(AVector output) {
@@ -132,13 +140,29 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return false;
 	}
 	
+	protected void applyConstraintsInternal() {
+		for (IConstraint c: constraints) {
+			c.applyTo(this);
+		}
+	}
+	
 	public void applyConstraints() {
+		applyConstraintsInternal();
 		for (IComponent c: getComponents()) {
 			c.applyConstraints();
 		}
 	}
 	
-	public abstract AComponent clone();
+	public AComponent clone() {
+		AComponent c=null;
+		try {
+			c=(AComponent) super.clone();
+			c.constraints=(ArrayList<IConstraint>) this.constraints.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
 	
 
 	@Override
