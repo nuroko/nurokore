@@ -98,7 +98,6 @@ public class Stack extends ACompoundComponent {
 			IComponent comp=getComponent(i);
 			comp.getOutputGradient().set(gradient);
 			comp.trainGradientInternal(factor);
-			gradient=comp.getInputGradient();
 		}
 	}
 
