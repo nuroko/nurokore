@@ -12,6 +12,8 @@ public class Dropout extends AOperationComponent {
 	private double dropoutRate=0.5;
 	private final boolean[] dropped;
 
+	private static final boolean DROPOUT_GRADIENTS=false;
+	
 	public Dropout(int length) {
 		super(length);
 		dropped=new boolean[length];
@@ -50,11 +52,13 @@ public class Dropout extends AOperationComponent {
 		double scaleFactor=1.0/dropoutRate;
 		inputGradient.set(outputGradient);
 		double[] ig=inputGradient.getArray();
-		for (int i=0; i<length; i++) {
-			if (dropped[i]) {
-				ig[i]=0.0;
-			} else {
-				ig[i]*=scaleFactor;
+		if (DROPOUT_GRADIENTS) {
+			for (int i=0; i<length; i++) {
+				if (dropped[i]) {
+					ig[i]=0.0;
+				} else {
+					ig[i]*=scaleFactor;
+				}
 			}
 		}
 	}

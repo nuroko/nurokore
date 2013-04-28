@@ -42,5 +42,9 @@ public class TrainingOp extends AOperationComponent {
 	public TrainingOp clone() {
 		return new TrainingOp(length,op);
 	}
+	
+	@Override public String toString() {
+		return length+":"+length+" "+op.toString();
+	}
 
 }

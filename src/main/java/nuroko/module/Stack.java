@@ -61,13 +61,13 @@ public class Stack extends ACompoundComponent {
 	public void thinkInternalTraining() {
 		for (int i=0; i<componentCount; i++) {
 			IComponent ci=getComponent(i);
-			ci.thinkInternal();
+			ci.thinkInternalTraining(); // main flow using regular thinking??
 			if (i<(componentCount-1)) {
 				getComponent(i+1).setInput(ci.getOutput());
 			}
-			if (ci.hasDifferentTrainingThinking()) {
-				ci.thinkInternalTraining();
-			}
+			//if (ci.hasDifferentTrainingThinking()) {
+			//	ci.thinkInternalTraining();
+			//}
 		}
 	}
 
