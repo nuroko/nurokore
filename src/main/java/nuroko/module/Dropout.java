@@ -12,7 +12,7 @@ public class Dropout extends AOperationComponent {
 	private double dropoutRate=0.5;
 	private final boolean[] dropped;
 
-	private static final boolean DROPOUT_GRADIENTS=false;
+	private static final boolean DROPOUT_GRADIENTS=true;
 	
 	public Dropout(int length) {
 		super(length);
