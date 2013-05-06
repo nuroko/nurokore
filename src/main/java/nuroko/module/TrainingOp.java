@@ -27,7 +27,7 @@ public class TrainingOp extends AOperationComponent {
 	public void trainGradientInternal(double factor) {
 		double[] ov=output.getArray();
 		double[] og=outputGradient.getArray();
-		double[] ig=outputGradient.getArray();
+		double[] ig=inputGradient.getArray();
 		for (int i=0; i<length; i++) {
 			ig[i]=op.derivativeForOutput(ov[i])*og[i];
 		}
