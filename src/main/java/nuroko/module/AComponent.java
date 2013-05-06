@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import mikera.util.Rand;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
@@ -83,11 +82,14 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
 		trainGradientInternal(factor);
-		if (Rand.chance(0.1)) applyConstraints();
 	}
 	
 	/**
-	 * Abstract method for training gradients. Should overwrite inputGradient, and adjust gradient
+	 * Abstract method for training gradients. 
+	 * 
+	 * Assumes use of the current activation states for all inputs/outputs.
+	 * 
+	 * Should overwrite inputGradient, and adjust gradient
 	 * for all parameters. Should apply own internal learn rate factor
 	 */
 	public abstract void trainGradientInternal(double factor);
