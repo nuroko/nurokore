@@ -1,9 +1,12 @@
 package nuroko.testing;
 
+import java.util.List;
+
 import mikera.util.Tools;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
+import mikera.vectorz.impl.Vector0;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 import nuroko.core.IModule;
@@ -13,6 +16,33 @@ import nuroko.core.IThinker;
 import static org.junit.Assert.*;
 
 public class GenericModuleTests {
+	
+	private static void testDecomposeParams(IComponent c) {
+		c=c.clone();
+		
+		List<IComponent> cs=c.getComponents();
+		int ccount=cs.size();
+		
+		AVector cp=Vector0.INSTANCE;
+		AVector cg=Vector0.INSTANCE;
+		for (int i=0; i<ccount; i++) {
+			IComponent ch=cs.get(i);
+			cp=cp.join(ch.getParameters());
+			cg=cg.join(ch.getGradient());
+		}
+		
+		Vectorz.fillGaussian(cp);
+		Vectorz.fillGaussian(cg);
+		
+		
+		if (ccount!=0) {
+			assertEquals(c.getParameterLength(),cp.length());
+			assertEquals(c.getParameterLength(),cg.length());
+			assertEquals(cp,c.getParameters());
+			assertEquals(cg,c.getGradient());
+		}
+	}
+
 
 	private static void testFill(IParameterised p) {
 		// test that parameters and gradient can both be filled
@@ -190,6 +220,7 @@ public class GenericModuleTests {
 		testGeneralThinking(o);
 		testStates(o);
 		testSubComponents(o);
+		testDecomposeParams(o);
 		testParameterUpdates(o);
 		assertTrue(o.getInputState().getInput()==o.getInput());
 	}

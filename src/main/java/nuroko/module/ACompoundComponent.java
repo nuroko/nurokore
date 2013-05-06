@@ -27,10 +27,10 @@ public abstract class ACompoundComponent extends AComponent {
 	}
 	
 	@Override
-	public AVector getGradient() {return gradient;}
+	public final AVector getGradient() {return gradient;}
 	
 	@Override
-	public AVector getParameters() {return parameters;}
+	public final AVector getParameters() {return parameters;}
 	
 	@Override
 	public int getParameterLength() {

@@ -63,6 +63,8 @@ public class Join extends ACompoundComponent {
 	@Override
 	public void trainGradientInternal(double factor) {
 		factor*=this.getLearnFactor();
+		
+		// this is simple, since Join is just a side-by-side aggregation of components
 		for (IComponent c:components) {
 			c.trainGradientInternal(factor);
 		}
