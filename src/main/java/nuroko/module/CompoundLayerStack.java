@@ -94,13 +94,6 @@ public class CompoundLayerStack extends ALayerStack {
 		throw new UnsupportedOperationException("CompundLayerStack is view-only");
 	}
 
-	@Override
-	public void trainGradient(AVector input, AVector outputGradient,
-			AVector inputGradient, double factor, boolean skipTopDerivative) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
-	}
-
-
 	public static ALayerStack create(List<AWeightLayer> layers) {
 		ALayerStack c=null;
 		for (AWeightLayer wl: layers) {

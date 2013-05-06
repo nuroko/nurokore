@@ -108,18 +108,6 @@ public class NeuralNet extends ALayerStack {
 	}
 	
 	@Override
-	public void trainGradient(AVector input,
-			AVector outputGradient, AVector inputGradient, double factor,boolean skipTopDerivative) {
-		assert(getInputLength()==input.length());
-		think(input,null);
-		grad[layerCount].set(outputGradient);
-		backpropGradient(factor,skipTopDerivative);
-		if (inputGradient!=null) {
-			inputGradient.add(grad[0]);
-		}
-	}
-	
-	@Override
 	public void trainGradientInternal(double factor) {
 		factor*=this.getLearnFactor();
 		backpropGradient(factor,false);
