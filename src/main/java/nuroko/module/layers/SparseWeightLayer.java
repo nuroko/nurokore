@@ -140,7 +140,7 @@ public final class SparseWeightLayer extends AWeightLayer {
 		biasGradient.addMultiple(outputGradient,factor);
 		for (int j=0; j<outputLength; j++) {
 			double grad=outputGradient.get(j);
-			weightGradients[j].addMultiple(input, grad*factor);
+			weightGradients[j].addMultiple(indexes[j], input, grad*factor);
 			inputGradient.addMultiple(weights[j], indexes[j],grad);
 		}
 	}
