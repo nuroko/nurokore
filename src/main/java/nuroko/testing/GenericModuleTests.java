@@ -23,6 +23,8 @@ public class GenericModuleTests {
 		List<IComponent> cs=c.getComponents();
 		int ccount=cs.size();
 		
+		if (ccount==0) return;
+		
 		AVector cp=Vector0.INSTANCE;
 		AVector cg=Vector0.INSTANCE;
 		for (int i=0; i<ccount; i++) {
@@ -32,15 +34,12 @@ public class GenericModuleTests {
 		}
 		
 		Vectorz.fillGaussian(cp);
-		Vectorz.fillGaussian(cg);
+		Vectorz.fillGaussian(cg);	
 		
-		
-		if (ccount!=0) {
-			assertEquals(c.getParameterLength(),cp.length());
-			assertEquals(c.getParameterLength(),cg.length());
-			assertEquals(cp,c.getParameters());
-			assertEquals(cg,c.getGradient());
-		}
+		assertEquals(c.getParameterLength(),cp.length());
+		assertEquals(c.getParameterLength(),cg.length());
+		assertEquals(cp,c.getParameters());
+		assertEquals(cg,c.getGradient());
 	}
 
 
