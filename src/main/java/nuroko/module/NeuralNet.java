@@ -121,6 +121,7 @@ public class NeuralNet extends ALayerStack {
 	
 	@Override
 	public void trainGradientInternal(double factor) {
+		factor*=this.getLearnFactor();
 		backpropGradient(factor,false);
 	}
 

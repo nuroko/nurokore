@@ -91,6 +91,7 @@ public class Stack extends ACompoundComponent {
 	}
 	
 	public void trainGradientInternal(double factor) {
+		factor*=this.getLearnFactor();
 		int n=this.componentCount;
 		topComponent().trainGradientInternal(factor);
 		for (int i=n-2; i>=0; i--) {

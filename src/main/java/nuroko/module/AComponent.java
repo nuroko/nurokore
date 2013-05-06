@@ -82,13 +82,13 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		setInput(input);
 		thinkInternalTraining();
 		loss.calculateErrorDerivative(getOutput(), target, this);
-		trainGradientInternal(factor*getLearnFactor());
+		trainGradientInternal(factor);
 		if (Rand.chance(0.1)) applyConstraints();
 	}
 	
 	/**
 	 * Abstract method for training gradients. Should overwrite inputGradient, and adjust gradient
-	 * for all parameters
+	 * for all parameters. Should apply own internal learn rate factor
 	 */
 	public abstract void trainGradientInternal(double factor);
 	
