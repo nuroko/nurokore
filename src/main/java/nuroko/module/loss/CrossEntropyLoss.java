@@ -1,5 +1,6 @@
 package nuroko.module.loss;
 
+import nuroko.core.NurokoException;
 import mikera.vectorz.AVector;
 
 public class CrossEntropyLoss extends LossFunction {
@@ -7,6 +8,7 @@ public class CrossEntropyLoss extends LossFunction {
 	
 	@Override
 	public void calculateErrorDerivative(AVector output, AVector target, AVector gradientOut) {
+		if (output.length()!=target.length()) throw new NurokoException("Target / output size mismtach");
 		int n=target.length();
 		for (int i=0; i<n; i++) {
 			double y=output.get(i);
