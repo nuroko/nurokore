@@ -8,11 +8,15 @@ import mikera.vectorz.AVector;
  * @author Mike
  *
  */
-public interface ISynthesiser extends IThinker, IParameterised {
+public interface ISynthesiser extends IComponent {
 
 	public void generate(AVector input, AVector output);
 	
 	public void trainSynth(AVector input);
+	
+	public IComponent getUpStack();
+	
+	public IComponent getDownStack();
 	
 	@Override
 	public ISynthesiser clone();

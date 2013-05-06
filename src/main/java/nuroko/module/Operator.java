@@ -1,21 +1,14 @@
 package nuroko.module;
 
-import java.util.Collections;
-import java.util.List;
-
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
-import mikera.vectorz.impl.Vector0;
-import nuroko.core.IComponent;
 
-public class Operator extends AStateComponent {
-	private final int length;
+public class Operator extends AOperationComponent {
 	private final Op op;
 
-	public Operator(Op op, int inputLength) {
-		super(inputLength,inputLength);
-		this.length=inputLength;
+	public Operator(Op op, int length) {
+		super(length);
 		this.op=op;
 	}
 
@@ -24,12 +17,6 @@ public class Operator extends AStateComponent {
 		AVector output=getOutput();
 		output.set(getInput());
 		op.applyTo(output);
-	}
-	
-	@Override 
-	public void trainGradient(AVector gradient, double factor) {
-		getOutputGradient().set(gradient);
-		trainGradientInternal(factor);
 	}
 	
 	@Override
@@ -46,34 +33,8 @@ public class Operator extends AStateComponent {
 	}
 
 	@Override
-	public List<IComponent> getComponents() {
-		return Collections.EMPTY_LIST;
-	}
-
-
-	@Override
-	public int getOutputLength() {
-		return length;
-	}
-
-	@Override
-	public AVector getGradient() {
-		return Vector0.INSTANCE;
-	}
-	
-	@Override
-	public AVector getParameters() {
-		return Vector0.INSTANCE;
-	}
-
-	@Override
 	public Operator clone() {
 		return new Operator(op,length);
-	}
-
-	@Override
-	public int getInputLength() {
-		return length;
 	}
 
 	@Override 
@@ -82,5 +43,8 @@ public class Operator extends AStateComponent {
 	}
 
 
-
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
+	}
 }

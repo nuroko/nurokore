@@ -9,9 +9,11 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
+import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.core.IModule;
 import nuroko.core.Util;
+import nuroko.module.loss.LossFunction;
 
 public class NeuralNet extends ALayerStack {
 	
@@ -29,7 +31,11 @@ public class NeuralNet extends ALayerStack {
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op outputOp) {
-		this(layers, Ops.TANH, Ops.LOGISTIC);
+		this(layers, Ops.TANH, outputOp);
+	}
+	
+	public NeuralNet(AWeightLayer layer, Op outputOp) {
+		this(new AWeightLayer[] {layer}, null, outputOp);
 	}
 	
 	public NeuralNet(AWeightLayer[] layers, Op hiddenOp, Op outputOp) {
@@ -75,6 +81,12 @@ public class NeuralNet extends ALayerStack {
 		return al;
 	}
 	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		Op topOp=layerOps[layerCount-1];
+		return Components.defaultLossFunction(topOp);
+	}
+	
 	@Override 
 	public List<IComponent> getComponents() {
 		return Collections.EMPTY_LIST;
@@ -96,25 +108,8 @@ public class NeuralNet extends ALayerStack {
 	}
 	
 	@Override
-	public void trainGradient(AVector input,
-			AVector outputGradient, AVector inputGradient, double factor,boolean skipTopDerivative) {
-		assert(getInputLength()==input.length());
-		think(input,null);
-		grad[layerCount].set(outputGradient);
-		backpropGradient(factor,skipTopDerivative);
-		if (inputGradient!=null) {
-			inputGradient.add(grad[0]);
-		}
-	}
-	
-	@Override
 	public void trainGradientInternal(double factor) {
-		backpropGradient(factor,false);
-	}
-	
-	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		outputGradient.set(gradient);
+		factor*=this.getLearnFactor();
 		backpropGradient(factor,false);
 	}
 
@@ -178,7 +173,7 @@ public class NeuralNet extends ALayerStack {
 		return Arrays.asList(layers);
 	}
 	
-	public void applyConstraints() {
+	public void applyConstraintsInternal() {
 		for (AWeightLayer c: getLayers()) {
 			c.applyConstraints();
 		}
@@ -219,6 +214,11 @@ public class NeuralNet extends ALayerStack {
 	@Override
 	public AVector getOutputGradient() {
 		return outputGradient;
+	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return false;
 	}
 
 

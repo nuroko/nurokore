@@ -1,15 +1,21 @@
 package nuroko.module;
 
 import mikera.util.Rand;
-import mikera.vectorz.AVector;
-import mikera.vectorz.impl.Vector0;
 
-public class Dropout extends AStateComponent {
+/**
+ * Component that performs dropout on activation values. Useful for avoiding over-fitting.
+ * 
+ * @author Mike
+ *
+ */
+public class Dropout extends AOperationComponent {
 	private double dropoutRate=0.5;
 	private final boolean[] dropped;
 
+	private static final boolean DROPOUT_GRADIENTS=true;
+	
 	public Dropout(int length) {
-		super(length, length);
+		super(length);
 		dropped=new boolean[length];
 	}
 
@@ -40,30 +46,30 @@ public class Dropout extends AStateComponent {
 			}
 		}
 	}
-
-	@Override
-	public AVector getParameters() {
-		return Vector0.INSTANCE;
-	}
-
-	@Override
-	public AVector getGradient() {
-		return Vector0.INSTANCE;
-	}
-
+	
 	@Override
 	public void trainGradientInternal(double factor) {
+		double scaleFactor=1.0/(1.0-dropoutRate);
 		inputGradient.set(outputGradient);
-		int len=getInputLength();
 		double[] ig=inputGradient.getArray();
-		for (int i=0; i<len; i++) {
-			if (dropped[i]) ig[i]=0.0;
+		if (DROPOUT_GRADIENTS) {
+			for (int i=0; i<length; i++) {
+				if (dropped[i]) {
+					ig[i]=0.0;
+				} else {
+					ig[i]*=scaleFactor;
+				}
+			}
 		}
+	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		return true;
 	}
 
 	@Override
 	public Dropout clone() {
 		return new Dropout(getInputLength(),dropoutRate);
 	}
-
 }

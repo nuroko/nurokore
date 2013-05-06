@@ -57,11 +57,6 @@ public class CompoundLayerStack extends ALayerStack {
 	}
 
 	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
-	}
-
-	@Override
 	public AVector getInputGradient() {
 		return bottom.getInputGradient();
 	}
@@ -99,23 +94,20 @@ public class CompoundLayerStack extends ALayerStack {
 		throw new UnsupportedOperationException("CompundLayerStack is view-only");
 	}
 
-	@Override
-	public void train(AVector input, AVector target) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
-	}
-
-	@Override
-	public void trainGradient(AVector input, AVector outputGradient,
-			AVector inputGradient, double factor, boolean skipTopDerivative) {
-		throw new UnsupportedOperationException("CompundLayerStack is view-only");
-	}
-
-
 	public static ALayerStack create(List<AWeightLayer> layers) {
 		ALayerStack c=null;
 		for (AWeightLayer wl: layers) {
 			c=CompoundLayerStack.stack(c,new NeuralNet(wl));
 		}
 		return c;
+	}
+
+
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		for (IComponent c:getComponents()) {
+			if (c.hasDifferentTrainingThinking()) return true;
+		}
+		return false;
 	}
 }

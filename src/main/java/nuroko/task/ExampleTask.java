@@ -19,6 +19,12 @@ public class ExampleTask extends BaseSupervisedTask {
 	}
 	
 	@Override
+	public long getExampleCount() {
+		return inputs.size();
+	}
+
+	
+	@Override
 	public void getInput(AVector inputOut) {
 		int n=inputs.size();
 		assert(n==outputs.size());

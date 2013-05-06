@@ -4,16 +4,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import mikera.vectorz.Op;
+import mikera.vectorz.ops.Logistic;
+import mikera.vectorz.ops.Offset;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.CompoundLayerStack;
 import nuroko.module.Dropout;
+import nuroko.module.Identity;
 import nuroko.module.Join;
 import nuroko.module.Operator;
 import nuroko.module.Stack;
 import nuroko.module.NeuralNet;
 import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.layers.SparseWeightLayer;
+import nuroko.module.loss.CrossEntropyLoss;
+import nuroko.module.loss.LossFunction;
+import nuroko.module.loss.SquaredErrorLoss;
 
 public final class Components {
 
@@ -42,6 +48,10 @@ public final class Components {
 
 	public static NeuralNet neuralLayer(int inputLength, int outputLength, Op op) {
 		return neuralLayer(inputLength,outputLength,op,false);
+	}
+	
+	public static NeuralNet neuralLayer(int inputLength, int outputLength, Op op, int maxLinks) {
+		return new NeuralNet(weightLayer(inputLength, outputLength, maxLinks),op);
 	}
 	
 	public static Dropout dropout(int length) {
@@ -86,5 +96,25 @@ public final class Components {
 			}
 		}
 		return st;
+	}
+
+	/**
+	 * Returns a default loss function for a specific operator
+	 * @param topOp
+	 * @return
+	 */
+	public static LossFunction defaultLossFunction(Op op) {
+		if (op instanceof Logistic) {
+			return CrossEntropyLoss.INSTANCE;
+		}
+		return SquaredErrorLoss.INSTANCE;
+	}
+
+	public static Identity identity(int length) {
+		return new Identity(length);
+	}
+	
+	public static Operator offset(int length, double offset) {
+		return new Operator(Offset.create(offset),length);
 	}
 }

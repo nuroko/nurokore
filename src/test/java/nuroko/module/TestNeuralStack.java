@@ -6,7 +6,12 @@ import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.Op;
+import nuroko.core.Components;
+import nuroko.core.IComponent;
 import nuroko.module.layers.FullWeightLayer;
+import nuroko.module.loss.CrossEntropyLoss;
+import nuroko.module.loss.SquaredErrorLoss;
+import nuroko.testing.GenericModuleTests;
 
 import org.junit.Test;
 
@@ -26,12 +31,60 @@ public class TestNeuralStack {
 		GenericModuleTests.test(ns);
 	}
 	
+	public void isEquivalentParameters(IComponent a, IComponent b) {
+		assertEquals(a.getParameters(),b.getParameters());
+	}
+	
+	public void isEquivalentThinker(IComponent a, IComponent b) {
+		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
+		assertEquals( a.think(input),b.think(input));
+	}
+	
+	public void isEquivalentTraining(IComponent a, IComponent b) {
+		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
+		AVector target=Vectorz.createUniformRandomVector(a.getOutputLength());
+		
+		a.train(input,target);
+		b.train(input,target);
+		
+		assertEquals(a.getInputGradient(),b.getInputGradient());
+		assertEquals(a.getOutputGradient(),b.getOutputGradient());
+		assertEquals(a.getGradient(),b.getGradient());
+	}
+	
+	public void testEquivalence(IComponent a, IComponent b) {
+		
+		isEquivalentParameters(a,b);
+		isEquivalentThinker(a,b);
+		isEquivalentTraining(a,b);
+		
+	}
+	
+	@Test 
+	public void equivalenceTests() {
+		AWeightLayer wl1=new FullWeightLayer(2,2);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		AWeightLayer wl2=new FullWeightLayer(2,2);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.LOGISTIC,Ops.LOGISTIC);	
+		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
+		testEquivalence(ns,ss);
+		
+		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
+		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
+		testEquivalence(ns2,ss2);
+	}
+	
 	@Test 
 	public void testMininal() {
 		Op op=Ops.LOGISTIC;
 		
 		AWeightLayer wl=new FullWeightLayer(2,2);
 		NeuralNet ns=new NeuralNet(wl);
+		
+		assertEquals(CrossEntropyLoss.INSTANCE, ns.getDefaultLossFunction());
 		
 		assertEquals(6,wl.getParameterLength());
 		assertEquals(6,ns.getParameterLength());
@@ -65,7 +118,7 @@ public class TestNeuralStack {
 		
 		// do training
 		double v=input.get(0);
-		ns.train(input, target);
+		ns.train(input, target,SquaredErrorLoss.INSTANCE,1.0);
 		
 		// output gradient signal (squared error loss)
 		AVector og=ns.getOutputGradient();

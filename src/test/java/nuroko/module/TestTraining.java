@@ -7,7 +7,7 @@ import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
-import mikera.vectorz.ops.LinearOp;
+import mikera.vectorz.ops.Linear;
 import nuroko.algo.SimpleBackProp;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
@@ -43,12 +43,18 @@ public class TestTraining {
 		//System.out.println(o2);
 		//System.out.println(nn.getParameters());
 		assertTrue(o2.epsilonEquals(target,0.1));
+		
+		// zero learn factor should stop any gradient effect
+		nn.getGradient().fill(0.0);
+		nn.setLearnFactor(0.0);
+		nn.train(input, Vector.of(1,1,1));
+		assertTrue(nn.getGradient().isZeroVector());
 	}
 
 	@Test public void testTrainLoss() {	
 		int LEN=3;
 		Op op1=Ops.LINEAR;
-		Op op2=LinearOp.create(2.0, 1.0);
+		Op op2=Linear.create(2.0, 1.0);
 		
 		Stack c=Components.stack(new IComponent[] {
 			new Operator(op1,LEN),
@@ -62,9 +68,17 @@ public class TestTraining {
 		assertEquals(Vector.of(1,3,5),output);
 		
 		c.train(input, Vector.of(2,5,8));
-		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)
-		
+		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)	
 		assertEquals(Vector.of(4,8,12),c.getInputGradient());
+		
+		// learn factor shouldn't affect gradient propagation
+		c.setLearnFactor(c.getLearnFactor()*10);
+		c.train(input, Vector.of(2,5,8));
+		assertEquals(Vector.of(2,4,6),c.getOutputGradient()); // 2*(t-y)	
+		assertEquals(Vector.of(4,8,12),c.getInputGradient());
+		
+	
+
 	}
 
 }

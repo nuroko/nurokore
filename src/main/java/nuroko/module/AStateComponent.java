@@ -9,7 +9,9 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 
 /**
- * Component with input state
+ * A basic component with input and output state.
+ * 
+ * Designed to be extended to implement new components
  * 
  * @author Mike
  *

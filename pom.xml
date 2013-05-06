@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>nurokore</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 
 	<description>Core Java APIs for Nuroko machine learning toolkit</description>
 
 	<parent>
 		<groupId>com.nuroko</groupId>
 		<artifactId>nuroko-pom</artifactId>
-		<version>0.0.4</version>
+		<version>0.0.6</version>
 	</parent>
 
 	<url>https://github.com/nuroko/${project.artifactId}.git</url>
@@ -17,7 +17,7 @@
 		<connection>scm:git:git@github.com:nuroko/${project.artifactId}.git</connection>
 		<url>scm:git:git@github.com:nuroko/${project.artifactId}.git</url>
 		<developerConnection>scm:git:git@github.com:nuroko/${project.artifactId}.git</developerConnection>
-		<tag>nurokore-0.0.4</tag>
+		<tag>nurokore-0.0.5</tag>
 	</scm>
 
 	<licenses>
@@ -38,12 +38,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.mikera</groupId>
 			<artifactId>vectorz</artifactId>
-			<version>0.11.0</version>
+			<version>0.12.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.mikera</groupId>

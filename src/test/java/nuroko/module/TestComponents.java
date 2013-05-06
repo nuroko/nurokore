@@ -7,19 +7,32 @@ import mikera.vectorz.Op;
 import mikera.vectorz.Ops;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
-import mikera.vectorz.ops.LinearOp;
+import mikera.vectorz.ops.Linear;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.module.loss.CrossEntropyLoss;
+import nuroko.testing.GenericModuleTests;
 
 import org.junit.Test;
 
 public class TestComponents {
+	
+	@Test public void testTrainingOp () {
+		AVector v=Vector.of(1,2,3);
+		int LEN=v.length();
+		IComponent op1=new TrainingOp(LEN,Ops.NEGATE);
+
+		AVector r=op1.think(v);
+		assertEquals(v,r);
+		
+		op1.thinkInternalTraining();
+		assertEquals(Vector.of(-1,-2,-3),op1.getOutput());
+	}
 
 	@Test public void testStack() {	
 		int LEN=3;
 		Op op1=Ops.LINEAR;
-		Op op2=LinearOp.create(2.0, 1.0);
+		Op op2=Linear.create(2.0, 1.0);
 		
 		Stack c=Components.stack(new IComponent[] {
 			new Operator(op1,LEN),
@@ -36,10 +49,12 @@ public class TestComponents {
 		
 		assertEquals(input,c.getInput());
 		
-		c.trainGradient(Vector.of(10,20,30), 10.0);
+		c.getOutputGradient().set(Vector.of(10,20,30));
+		c.trainGradientInternal(10.0);
 		assertEquals(Vector.of(40,80,120),c.getInputGradient());
 		
-		c.trainGradient(Vector.of(1,2,3), 100000.0);
+		c.getOutputGradient().set(Vector.of(1,2,3));
+		c.trainGradientInternal(100000.0);
 		assertEquals(Vector.of(4,8,12),c.getInputGradient());
 
 		GenericModuleTests.test(c);
@@ -66,7 +81,12 @@ public class TestComponents {
 	
 	@Test public void testNeuralNet() {
 		NeuralNet nn=Components.neuralLayer(3, 3, Ops.LOGISTIC);
+		
 		assertEquals(12,nn.getParameterLength());
+		assertTrue(nn.getParameters().isZeroVector());
+		Components.stack(nn).initRandom();
+		assertFalse(nn.getParameters().isZeroVector());
+		
 		Vectorz.fillGaussian(nn.getParameters());
 		GenericModuleTests.test(nn);
 		
@@ -94,5 +114,16 @@ public class TestComponents {
 		assertEquals(2,st.getLayerCount());
 		assertTrue(st.getData(0)==nn1.getInput());
 		assertTrue(st.getData(2)==nn2.getOutput());
+	}
+	
+	@Test public void testOffset() {
+		IComponent c=Components.offset(3, -1);
+		assertEquals(Vector.of(0,1,2),c.think(Vector.of(1,2,3)));
+		GenericModuleTests.test(c);
+		
+		Vectorz.fillRandom(c.getOutputGradient());
+		assertNotEquals(c.getInputGradient(),c.getOutputGradient());
+		c.trainGradientInternal(0.0);
+		assertEquals(c.getInputGradient(),c.getOutputGradient());
 	}
 }

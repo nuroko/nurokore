@@ -33,6 +33,12 @@ public interface ITask extends Cloneable {
 	public void getTarget(AVector input, AVector targetOut);
 	
 	/**
+	 * Returns the number of training examples for this task
+	 * @return
+	 */
+	public long getExampleCount(); 
+	
+	/**
 	 * Returns the evaluation of the given output vector
 	 * @param output
 	 * @return

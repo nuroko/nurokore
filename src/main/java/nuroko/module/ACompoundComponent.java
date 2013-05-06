@@ -6,6 +6,11 @@ import java.util.List;
 import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
 
+/**
+ * Abstract base class for components that combine other components.
+ * 
+ * @author Mike
+ */
 public abstract class ACompoundComponent extends AComponent {
 	protected final ArrayList<IComponent> components;
 	protected final AVector gradient;
@@ -27,10 +32,10 @@ public abstract class ACompoundComponent extends AComponent {
 	}
 	
 	@Override
-	public AVector getGradient() {return gradient;}
+	public final AVector getGradient() {return gradient;}
 	
 	@Override
-	public AVector getParameters() {return parameters;}
+	public final AVector getParameters() {return parameters;}
 	
 	@Override
 	public int getParameterLength() {
@@ -43,5 +48,13 @@ public abstract class ACompoundComponent extends AComponent {
 	
 	public List<IComponent> getComponents() {
 		return components;
+	}
+	
+	@Override
+	public boolean hasDifferentTrainingThinking() {
+		for (IComponent c:getComponents()) {
+			if (c.hasDifferentTrainingThinking()) return true;
+		}
+		return false;
 	}
 }

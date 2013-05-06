@@ -11,6 +11,12 @@ public abstract class BaseSupervisedTask extends AbstractTask {
 		this.outputLength=outputLength;
 	}
 	
+	
+	public long getExampleCount() {
+		return Long.MAX_VALUE;
+	}
+
+	
 	@Override
 	public int getInputLength() {
 		return inputLength;

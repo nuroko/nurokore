@@ -6,6 +6,7 @@ import java.util.List;
 import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
+import nuroko.module.loss.LossFunction;
 
 /**
  * A stack of connected components, with the output of each feeding into the 
@@ -23,6 +24,12 @@ public class Stack extends ACompoundComponent {
 	public IComponent topComponent() {
 		return components.get(componentCount-1);
 	}
+	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		return topComponent().getDefaultLossFunction();
+	}
+
 
 	@Override
 	public AVector getInput() {
@@ -53,10 +60,14 @@ public class Stack extends ACompoundComponent {
 	@Override
 	public void thinkInternalTraining() {
 		for (int i=0; i<componentCount; i++) {
-			getComponent(i).thinkInternalTraining();
+			IComponent ci=getComponent(i);
+			ci.thinkInternalTraining(); // main flow using regular thinking??
 			if (i<(componentCount-1)) {
-				getComponent(i+1).setInput(getComponent(i).getOutput());
+				getComponent(i+1).setInput(ci.getOutput());
 			}
+			//if (ci.hasDifferentTrainingThinking()) {
+			//	ci.thinkInternalTraining();
+			//}
 		}
 	}
 
@@ -78,14 +89,9 @@ public class Stack extends ACompoundComponent {
 	public IInputState getInputState() {
 		return components.get(0).getInputState();
 	}
-
-	@Override
-	public void trainGradient(AVector gradient, double factor) {
-		topComponent().getOutputGradient().set(gradient);
-		trainGradientInternal(factor);
-	}
 	
 	public void trainGradientInternal(double factor) {
+		factor*=this.getLearnFactor();
 		int n=this.componentCount;
 		topComponent().trainGradientInternal(factor);
 		for (int i=n-2; i>=0; i--) {
@@ -93,7 +99,6 @@ public class Stack extends ACompoundComponent {
 			IComponent comp=getComponent(i);
 			comp.getOutputGradient().set(gradient);
 			comp.trainGradientInternal(factor);
-			gradient=comp.getInputGradient();
 		}
 	}
 

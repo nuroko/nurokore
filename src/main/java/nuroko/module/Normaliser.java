@@ -3,12 +3,11 @@ package nuroko.module;
 import java.util.List;
 
 import nuroko.core.IComponent;
-import nuroko.core.ISynthesiser;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 
-public class Normaliser extends AStateComponent implements ISynthesiser {
+public class Normaliser extends AStateComponent {
 	private final Vector mean;
 	private final Vector stdev;
 	
@@ -57,8 +56,16 @@ public class Normaliser extends AStateComponent implements ISynthesiser {
 
 	@Override
 	public void trainGradientInternal(double factor) {
-		inputGradient.set(outputGradient);
-		inputGradient.divide(stdev);
+		double[] og=outputGradient.data;
+		double[] ig=inputGradient.data;
+		double[] sd=stdev.data;
+		for (int i=0; i<og.length; i++) {
+			if (sd[i]==0) {
+				ig[i]=og[i];
+			} else {
+				ig[i]=og[i]/sd[i];
+			}
+		}
 	}
 
 	@Override
@@ -77,11 +84,9 @@ public class Normaliser extends AStateComponent implements ISynthesiser {
 		this.input.add(mean);
 		input.set(this.input);
 	}
-
+	
 	@Override
-	public void trainSynth(AVector input) {
-		this.input.set(input);
-		thinkInternal();
+	public boolean hasDifferentTrainingThinking() {
+		return false;
 	}
-
 }

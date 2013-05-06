@@ -1,9 +1,11 @@
 package nuroko.module;
 
 import static org.junit.Assert.assertEquals;
+
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
+import nuroko.module.layers.Constraints;
 import nuroko.module.layers.FullWeightLayer;
 
 import org.junit.Test;
@@ -12,6 +14,7 @@ public class TestFullWeightLayer {
 	@Test
 	public void testWeightLengthConstraints() {
 		FullWeightLayer wl=new FullWeightLayer(2,2);
+		wl.setConstraint(Constraints.weightLength(FullWeightLayer.MAX_WEIGHT_VECTOR_LENGTH));
 		
 		AVector params=wl.getParameters();
 		params.fill(100.0);
