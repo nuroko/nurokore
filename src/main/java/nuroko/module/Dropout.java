@@ -49,7 +49,7 @@ public class Dropout extends AOperationComponent {
 	
 	@Override
 	public void trainGradientInternal(double factor) {
-		double scaleFactor=1.0/dropoutRate;
+		double scaleFactor=1.0/(1.0-dropoutRate);
 		inputGradient.set(outputGradient);
 		double[] ig=inputGradient.getArray();
 		if (DROPOUT_GRADIENTS) {

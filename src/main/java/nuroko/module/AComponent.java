@@ -86,6 +86,10 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		if (Rand.chance(0.1)) applyConstraints();
 	}
 	
+	/**
+	 * Abstract method for training gradients. Should overwrite inputGradient, and adjust gradient
+	 * for all parameters
+	 */
 	public abstract void trainGradientInternal(double factor);
 	
 	@Override
