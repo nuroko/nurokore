@@ -5,6 +5,7 @@ import java.util.List;
 
 import mikera.vectorz.Op;
 import mikera.vectorz.ops.Logistic;
+import mikera.vectorz.ops.Offset;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.CompoundLayerStack;
@@ -111,5 +112,9 @@ public final class Components {
 
 	public static Identity identity(int length) {
 		return new Identity(length);
+	}
+	
+	public static Operator offset(int length, double offset) {
+		return new Operator(Offset.create(offset),length);
 	}
 }

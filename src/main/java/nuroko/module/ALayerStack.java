@@ -6,7 +6,7 @@ import java.util.List;
 import mikera.vectorz.AVector;
 
 /**
- * Abstract base class representing a stack of WeightLayer components
+ * Abstract base class representing a stack of AWeightLayer components
  * 
  * @author Mike
  */

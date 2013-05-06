@@ -115,4 +115,15 @@ public class TestComponents {
 		assertTrue(st.getData(0)==nn1.getInput());
 		assertTrue(st.getData(2)==nn2.getOutput());
 	}
+	
+	@Test public void testOffset() {
+		IComponent c=Components.offset(3, -1);
+		assertEquals(Vector.of(0,1,2),c.think(Vector.of(1,2,3)));
+		GenericModuleTests.test(c);
+		
+		Vectorz.fillRandom(c.getOutputGradient());
+		assertNotEquals(c.getInputGradient(),c.getOutputGradient());
+		c.trainGradientInternal(0.0);
+		assertEquals(c.getInputGradient(),c.getOutputGradient());
+	}
 }

@@ -6,6 +6,11 @@ import java.util.List;
 import mikera.vectorz.AVector;
 import nuroko.core.IComponent;
 
+/**
+ * Abstract base class for components that combine other components.
+ * 
+ * @author Mike
+ */
 public abstract class ACompoundComponent extends AComponent {
 	protected final ArrayList<IComponent> components;
 	protected final AVector gradient;
