@@ -1,9 +1,12 @@
 nurokore
 ========
 
-Java APIs and implementations for machine learning
+Java APIs and implementations for machine learning.
 
-For Nuroko open source Java libraries and tools.
+These provide the underlying classes required Nuroko open source Java libraries and tools. See the Nurokit
+project for more details:
+
+ - https://github.com/nuroko/nurokit
 
 
 ### Contributing
