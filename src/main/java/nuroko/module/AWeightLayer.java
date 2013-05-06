@@ -13,7 +13,7 @@ import mikera.vectorz.AVector;
  * @author Mike
  *
  */
-public abstract class AWeightLayer extends ALayer {
+public abstract class AWeightLayer extends AStateComponent {
 	protected static final double INITIAL_WEIGHT_SCALE = 1.0;
 	protected static final double BIAS_INITIAL_SCALE = 0.3;
 
