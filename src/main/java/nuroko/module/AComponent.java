@@ -65,11 +65,11 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return SquaredErrorLoss.INSTANCE;
 	}
 
-	public double getLearnFactor() {
+	public final double getLearnFactor() {
 		return learnFactor;
 	}
 	
-	public void setLearnFactor(double value) {
+	public final void setLearnFactor(double value) {
 		learnFactor=value;
 	}
 
