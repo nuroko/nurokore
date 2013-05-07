@@ -1,13 +1,14 @@
 package nuroko.module.ops;
 
 import mikera.vectorz.Op;
+import mikera.vectorz.Ops;
 
 public final class ScaledLogistic extends Op {
 	
 	private final double factor;
 	private final double inverseFactor;
 
-	public static final ScaledLogistic INSTANCE=new ScaledLogistic(6.0);
+	public static final Op INSTANCE=Ops.SCALED_LOGISTIC;
 	
 	public ScaledLogistic(double d) {
 		factor=d;
