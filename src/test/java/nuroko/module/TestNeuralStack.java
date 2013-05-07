@@ -9,6 +9,7 @@ import mikera.vectorz.Op;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.module.layers.FullWeightLayer;
+import nuroko.module.layers.SparseWeightLayer;
 import nuroko.module.loss.CrossEntropyLoss;
 import nuroko.module.loss.SquaredErrorLoss;
 import nuroko.testing.GenericModuleTests;
@@ -66,7 +67,7 @@ public class TestNeuralStack {
 		Vectorz.fillGaussian(wl1.getParameters());
 		
 		AWeightLayer wl2=new FullWeightLayer(2,2);
-		Vectorz.fillGaussian(wl1.getParameters());
+		Vectorz.fillGaussian(wl2.getParameters());
 		
 		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.LOGISTIC,Ops.LOGISTIC);	
 		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
@@ -74,7 +75,24 @@ public class TestNeuralStack {
 		
 		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
 		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
-		testEquivalence(ns2,ss2);
+		testEquivalence(ns2,ss2);	
+	}
+	
+	@Test 
+	public void equivalenceTestsSparse() {
+		AWeightLayer wl1=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		AWeightLayer wl2=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl2.getParameters());
+		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SCALED_LOGISTIC,Ops.SCALED_LOGISTIC);	
+		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.SCALED_LOGISTIC),new NeuralNet(wl2.clone(),Ops.SCALED_LOGISTIC));
+		testEquivalence(ns,ss);
+		
+		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
+		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
+		testEquivalence(ns2,ss2);	
 	}
 	
 	@Test 
