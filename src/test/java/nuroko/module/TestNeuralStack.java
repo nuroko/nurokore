@@ -96,6 +96,23 @@ public class TestNeuralStack {
 	}
 	
 	@Test 
+	public void equivalenceTestsOps() {
+		AWeightLayer wl1=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		AWeightLayer wl2=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl2.getParameters());
+		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.SCALED_LOGISTIC);	
+		Stack ss=Components.stack(
+				wl1.clone(),
+				Components.operator(Ops.SOFTPLUS, wl1.getOutputLength()),
+				wl2.clone(),
+				Components.operator(Ops.SCALED_LOGISTIC, wl2.getOutputLength()));
+		testEquivalence(ns,ss);
+	}
+	
+	@Test 
 	public void testMininal() {
 		Op op=Ops.LOGISTIC;
 		
