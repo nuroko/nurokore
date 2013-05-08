@@ -180,4 +180,10 @@ public final class FullWeightLayer extends AWeightLayer {
 	}
 
 
+	@Override
+	public Vector getBias() {
+		return bias;
+	}
+
+
 }

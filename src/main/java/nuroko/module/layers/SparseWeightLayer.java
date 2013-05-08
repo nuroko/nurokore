@@ -244,4 +244,9 @@ public final class SparseWeightLayer extends AWeightLayer {
 	public boolean hasDifferentTrainingThinking() {
 		return false;
 	}
+
+	@Override
+	public Vector getBias() {
+		return bias;
+	}
 }
