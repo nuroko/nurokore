@@ -92,10 +92,14 @@ public class TestNeuralStack {
 		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SCALED_LOGISTIC,Ops.SCALED_LOGISTIC);	
 		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.SCALED_LOGISTIC),new NeuralNet(wl2.clone(),Ops.SCALED_LOGISTIC));
 		testEquivalence(ns,ss);
-		
+
+		DerivativeTest.testDerivative(ns);
+
 		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
 		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
 		testEquivalence(ns2,ss2);	
+		
+		DerivativeTest.testDerivative(ns2);
 	}
 	
 	@Test 
