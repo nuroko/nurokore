@@ -12,6 +12,7 @@ import nuroko.module.layers.FullWeightLayer;
 import nuroko.module.layers.SparseWeightLayer;
 import nuroko.module.loss.CrossEntropyLoss;
 import nuroko.module.loss.SquaredErrorLoss;
+import nuroko.testing.DerivativeTest;
 import nuroko.testing.GenericModuleTests;
 
 import org.junit.Test;
@@ -27,6 +28,8 @@ public class TestNeuralStack {
 		GenericModuleTests.test(ns);
 		
 		Vectorz.fillGaussian(ns.getParameters());
+		
+		DerivativeTest.testDerivative(ns);
 
 		GenericModuleTests.test(wl);
 		GenericModuleTests.test(ns);
