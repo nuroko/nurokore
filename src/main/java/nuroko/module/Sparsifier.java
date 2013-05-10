@@ -49,7 +49,7 @@ public class Sparsifier extends AStateComponent {
 		int n=getInputLength();
 		for (int i=0; i<n; i++) {
 			double mi=mean.get(i);
-			inputGradient.set(this.weight * ( (targetMean/mi) - ((1-targetMean)/(1-mi)) ));
+			inputGradient.set(i,this.weight * ( (targetMean/mi) - ((1-targetMean)/(1-mi)) ));
 		}
 			
 		inputGradient.add(outputGradient);
