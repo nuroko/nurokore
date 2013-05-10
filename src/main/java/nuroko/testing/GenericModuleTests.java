@@ -138,6 +138,21 @@ public class GenericModuleTests {
 		}
 	}
 	
+	private static void testOverwriteInputGradient(IComponent p) {
+		// test that output vector is completely overwritten by any IThinker
+		p=p.clone();
+		AVector og=Vectorz.newVector(p.getOutputLength());
+		Vectorz.fillGaussian(og);
+		
+		p.getInputGradient().fill(Double.NaN);
+		p.getOutputGradient().set(og);
+		p.trainGradientInternal(1.0);
+		AVector ig=p.getInputGradient();
+		for (int i=0; i<ig.length(); i++) {
+			assertTrue(ig.get(i)!=Double.NaN);
+		}
+	}
+	
 
 	
 	private static void testThinker(IThinker p) {
@@ -239,7 +254,9 @@ public class GenericModuleTests {
 			testModule((IModule)o);
 		}
 		if (o instanceof IComponent) {
-			testComponent((IComponent)o);
+			IComponent c=((IComponent)o);
+			testComponent(c);
+			testOverwriteInputGradient(c);
 		}
 	}
 
