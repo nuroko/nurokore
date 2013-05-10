@@ -54,6 +54,13 @@ public class TestNeuralStack {
 		assertEquals(a.getInputGradient(),b.getInputGradient());
 		assertEquals(a.getOutputGradient(),b.getOutputGradient());
 		assertEquals(a.getGradient(),b.getGradient());
+		
+		a.train(input,target);
+		b.train(input,target);
+
+		assertEquals(a.getInputGradient(),b.getInputGradient());
+		assertEquals(a.getOutputGradient(),b.getOutputGradient());
+		assertEquals(a.getGradient(),b.getGradient());
 	}
 	
 	public void testEquivalence(IComponent a, IComponent b) {
@@ -77,7 +84,7 @@ public class TestNeuralStack {
 		testEquivalence(ns,ss);
 		
 		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
-		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
+		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new Identity(wl1.getOutputLength()), new NeuralNet(wl2.clone(),Ops.TANH));
 		testEquivalence(ns2,ss2);	
 	}
 	
