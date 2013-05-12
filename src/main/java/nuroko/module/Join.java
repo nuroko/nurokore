@@ -8,7 +8,7 @@ import mikera.vectorz.impl.Vector0;
 import nuroko.core.IComponent;
 
 /**
- * Class representing a side-by-side joining of networks
+ * Class representing a side-by-side joining of components
  * @author Mike
  *
  */

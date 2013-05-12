@@ -7,6 +7,7 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
 import mikera.vectorz.impl.Vector0;
+import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.core.IInputState;
 import nuroko.core.IModule;
@@ -153,6 +154,40 @@ public class GenericModuleTests {
 		}
 	}
 	
+	private static void testJoinedGradient(IComponent p) {
+		if (p.isStochastic()) return;
+		p=p.clone();
+		int il=p.getInputLength();
+		int pl=p.getParameterLength();
+		
+		AVector og=Vectorz.newVector(p.getOutputLength());
+		Vectorz.fillGaussian(og);
+		og=og.join(og);
+		
+		p=Components.join(p,p.clone());
+		
+		p.getInputGradient().fill(Double.NaN);
+		p.getOutputGradient().set(og);
+		p.trainGradientInternal(1.0);
+		AVector ig=p.getInputGradient();
+		for (int i=0; i<ig.length(); i++) {
+			assertTrue(ig.get(i)!=Double.NaN);
+		}
+		
+		for (int i=0; i<il; i++) {
+			assertTrue(ig.get(i)==ig.get(i+il));
+		}
+		
+		AVector params=p.getParameters();
+		assertEquals(pl*2, params.length());
+		params.addMultiple(p.getGradient(),0.0001);
+		for (int i=0; i<pl; i++) {
+			assertTrue(params.get(i)==params.get(i+pl));
+		}
+		
+	}
+	
+	
 
 	
 	private static void testThinker(IThinker p) {
@@ -257,6 +292,7 @@ public class GenericModuleTests {
 			IComponent c=((IComponent)o);
 			testComponent(c);
 			testOverwriteInputGradient(c);
+			testJoinedGradient(c);
 		}
 	}
 
