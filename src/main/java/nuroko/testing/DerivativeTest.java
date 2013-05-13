@@ -38,9 +38,9 @@ public class DerivativeTest {
 			double expected=((L2-L)/EPS);
 			double calculated=g.get(i);
 			
-			if (calculated!=0.0) {
+			if ((calculated!=0.0)&&(expected!=0.0)) {
 				double d= expected/calculated;
-				boolean ok= (d>0.9)&&(d<1.1);
+				boolean ok= (d>0.5)&&(d<2.0);
 				assertTrue("Gradient at position "+i+" expected="+expected+" calculated="+calculated,ok);
 			}
 		}

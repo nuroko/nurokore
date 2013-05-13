@@ -198,6 +198,10 @@ public class NeuralNet extends ALayerStack {
 			newlayers[i]=layers[i].clone();
 		}
 		NeuralNet ns=new NeuralNet(newlayers);
+		for (int i=0; i<layerCount; i++) {
+			ns.layerOps[i]=layerOps[i];
+		}
+
 		return ns;
 	}
 
