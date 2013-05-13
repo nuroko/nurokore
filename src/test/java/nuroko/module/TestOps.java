@@ -38,7 +38,7 @@ public class TestOps {
 		assertEquals(0.5,ScaledLogistic.INSTANCE.apply(0),0.0001);
 		assertEquals(0.0,ScaledLogistic.INSTANCE.apply(-1000),0.0001);
 		
-		assertEquals(1.5,ScaledLogistic.INSTANCE.derivative(0.0),0.0001);
+		assertEquals(2.0,ScaledLogistic.INSTANCE.derivative(0.0),0.0001);
 		assertEquals(0.0,ScaledLogistic.INSTANCE.applyInverse(0.5),0.0001);
 				
 	}
