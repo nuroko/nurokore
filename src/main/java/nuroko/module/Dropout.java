@@ -33,7 +33,7 @@ public class Dropout extends AOperationComponent {
 	public void thinkInternalTraining() {
 		output.set(input);
 		if (dropoutRate>0.0) {
-			double scaleFactor=1.0/dropoutRate;
+			double scaleFactor=1.0/(1.0-dropoutRate);
 			double[] dt=output.getArray();
 			for (int i=0; i<dt.length; i++) {
 				boolean drop=Rand.chance(dropoutRate);
@@ -49,7 +49,7 @@ public class Dropout extends AOperationComponent {
 	
 	@Override
 	public void trainGradientInternal(double factor) {
-		double scaleFactor=1.0/(1.0-dropoutRate);
+		double scaleFactor=1.0-dropoutRate;
 		inputGradient.set(outputGradient);
 		double[] ig=inputGradient.getArray();
 		if (DROPOUT_GRADIENTS) {
