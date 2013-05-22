@@ -9,8 +9,10 @@ import mikera.vectorz.Op;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
 import nuroko.module.layers.FullWeightLayer;
+import nuroko.module.layers.SparseWeightLayer;
 import nuroko.module.loss.CrossEntropyLoss;
 import nuroko.module.loss.SquaredErrorLoss;
+import nuroko.testing.DerivativeTest;
 import nuroko.testing.GenericModuleTests;
 
 import org.junit.Test;
@@ -26,6 +28,8 @@ public class TestNeuralStack {
 		GenericModuleTests.test(ns);
 		
 		Vectorz.fillGaussian(ns.getParameters());
+		
+		DerivativeTest.testDerivative(ns);
 
 		GenericModuleTests.test(wl);
 		GenericModuleTests.test(ns);
@@ -50,6 +54,13 @@ public class TestNeuralStack {
 		assertEquals(a.getInputGradient(),b.getInputGradient());
 		assertEquals(a.getOutputGradient(),b.getOutputGradient());
 		assertEquals(a.getGradient(),b.getGradient());
+		
+		a.train(input,target);
+		b.train(input,target);
+
+		assertEquals(a.getInputGradient(),b.getInputGradient());
+		assertEquals(a.getOutputGradient(),b.getOutputGradient());
+		assertEquals(a.getGradient(),b.getGradient());
 	}
 	
 	public void testEquivalence(IComponent a, IComponent b) {
@@ -66,15 +77,53 @@ public class TestNeuralStack {
 		Vectorz.fillGaussian(wl1.getParameters());
 		
 		AWeightLayer wl2=new FullWeightLayer(2,2);
-		Vectorz.fillGaussian(wl1.getParameters());
+		Vectorz.fillGaussian(wl2.getParameters());
 		
 		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.LOGISTIC,Ops.LOGISTIC);	
 		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.LOGISTIC),new NeuralNet(wl2.clone(),Ops.LOGISTIC));
 		testEquivalence(ns,ss);
 		
 		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
+		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new Identity(wl1.getOutputLength()), new NeuralNet(wl2.clone(),Ops.TANH));
+		testEquivalence(ns2,ss2);	
+	}
+	
+	@Test 
+	public void equivalenceTestsSparse() {
+		AWeightLayer wl1=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		AWeightLayer wl2=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl2.getParameters());
+		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SCALED_LOGISTIC,Ops.SCALED_LOGISTIC);	
+		Stack ss=Components.stack(new NeuralNet(wl1.clone(),Ops.SCALED_LOGISTIC),new NeuralNet(wl2.clone(),Ops.SCALED_LOGISTIC));
+		testEquivalence(ns,ss);
+
+		DerivativeTest.testDerivative(ns);
+
+		NeuralNet ns2=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.TANH);	
 		Stack ss2=Components.stack(new NeuralNet(wl1.clone(),Ops.SOFTPLUS),new NeuralNet(wl2.clone(),Ops.TANH));
-		testEquivalence(ns2,ss2);
+		testEquivalence(ns2,ss2);	
+		
+		DerivativeTest.testDerivative(ns2);
+	}
+	
+	@Test 
+	public void equivalenceTestsOps() {
+		AWeightLayer wl1=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		AWeightLayer wl2=new SparseWeightLayer(5,5,3);
+		Vectorz.fillGaussian(wl2.getParameters());
+		
+		NeuralNet ns=new NeuralNet(new AWeightLayer[] {wl1.clone(),wl2.clone()},Ops.SOFTPLUS,Ops.SCALED_LOGISTIC);	
+		Stack ss=Components.stack(
+				wl1.clone(),
+				Components.operator(Ops.SOFTPLUS, wl1.getOutputLength()),
+				wl2.clone(),
+				Components.operator(Ops.SCALED_LOGISTIC, wl2.getOutputLength()));
+		testEquivalence(ns,ss);
 	}
 	
 	@Test 

@@ -18,7 +18,7 @@ public abstract class LossFunction {
 	/**
 	 * Calculates an error derivative, storing it in the output gradient of the given component
 	 */
-	public void calculateErrorDerivative(AVector output, AVector target, IComponent comp) {
+	public final void calculateErrorDerivative(AVector output, AVector target, IComponent comp) {
 		calculateErrorDerivative(output,target,comp.getOutputGradient());
 	}
 }

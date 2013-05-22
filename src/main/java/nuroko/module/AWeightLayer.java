@@ -47,6 +47,8 @@ public abstract class AWeightLayer extends AStateComponent {
 	
 	public abstract double getLinkWeight(int outputIndex, int number);
 
+	public abstract AVector getBias();
+
 	public abstract int getLinkSource(int outputIndex, int number);
 	
 	public abstract Index getSourceIndex(int outputIndex);

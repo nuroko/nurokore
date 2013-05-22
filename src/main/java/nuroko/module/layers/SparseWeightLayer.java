@@ -18,8 +18,6 @@ import mikera.vectorz.Vectorz;
  * @author Mike
  */
 public final class SparseWeightLayer extends AWeightLayer {
-	private static final double MAX_WEIGHT_VECTOR_LENGTH = 4.0;
-
 	private final Vector bias;
 	private final Vector biasGradient;
 	private final Index[] indexes;
@@ -140,7 +138,7 @@ public final class SparseWeightLayer extends AWeightLayer {
 		biasGradient.addMultiple(outputGradient,factor);
 		for (int j=0; j<outputLength; j++) {
 			double grad=outputGradient.get(j);
-			weightGradients[j].addMultiple(input, grad*factor);
+			weightGradients[j].addMultiple(indexes[j], input, grad*factor);
 			inputGradient.addMultiple(weights[j], indexes[j],grad);
 		}
 	}
@@ -165,16 +163,6 @@ public final class SparseWeightLayer extends AWeightLayer {
 	@Override
 	public int getLinkSource(int outputIndex, int number) {
 		return indexes[outputIndex].data[number];
-	}
-	
-	@Override
-	public void applyConstraintsInternal() {
-		for (Vector v: weights) {
-			double len=v.magnitude();
-			if (len>MAX_WEIGHT_VECTOR_LENGTH) {
-				v.multiply(MAX_WEIGHT_VECTOR_LENGTH/len);
-			}
-		}
 	}
 
 	@Override
@@ -243,5 +231,10 @@ public final class SparseWeightLayer extends AWeightLayer {
 	@Override
 	public boolean hasDifferentTrainingThinking() {
 		return false;
+	}
+
+	@Override
+	public Vector getBias() {
+		return bias;
 	}
 }

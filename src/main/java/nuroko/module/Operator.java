@@ -1,5 +1,7 @@
 package nuroko.module;
 
+import nuroko.core.Components;
+import nuroko.module.loss.LossFunction;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Op;
 import mikera.vectorz.Vector;
@@ -17,6 +19,11 @@ public class Operator extends AOperationComponent {
 		AVector output=getOutput();
 		output.set(getInput());
 		op.applyTo(output);
+	}
+	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		return Components.defaultLossFunction(op);
 	}
 	
 	@Override

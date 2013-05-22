@@ -14,13 +14,13 @@ public class TestFullWeightLayer {
 	@Test
 	public void testWeightLengthConstraints() {
 		FullWeightLayer wl=new FullWeightLayer(2,2);
-		wl.setConstraint(Constraints.weightLength(FullWeightLayer.MAX_WEIGHT_VECTOR_LENGTH));
+		wl.setConstraint(Constraints.weightLength(4.0));
 		
 		AVector params=wl.getParameters();
 		params.fill(100.0);
 		assertEquals(100.0,params.get(3),0.001);
 		wl.applyConstraints();
-		assertEquals(FullWeightLayer.MAX_WEIGHT_VECTOR_LENGTH/Math.sqrt(2),params.get(3),0.001);
+		assertEquals(4.0/Math.sqrt(2),params.get(3),0.001);
 	}
 	
 	@Test

@@ -65,9 +65,6 @@ public class Stack extends ACompoundComponent {
 			if (i<(componentCount-1)) {
 				getComponent(i+1).setInput(ci.getOutput());
 			}
-			//if (ci.hasDifferentTrainingThinking()) {
-			//	ci.thinkInternalTraining();
-			//}
 		}
 	}
 
@@ -104,11 +101,11 @@ public class Stack extends ACompoundComponent {
 
 	@Override
 	public AVector getOutput() {
-		return getComponent(componentCount-1).getOutput();
+		return topComponent().getOutput();
 	}
 
 	@Override
 	public AVector getOutputGradient() {
-		return getComponent(componentCount-1).getOutputGradient();
+		return topComponent().getOutputGradient();
 	}
 }

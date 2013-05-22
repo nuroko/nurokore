@@ -50,6 +50,10 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		constraints.add(con);
 	}
 	
+	public ArrayList<IConstraint> getConstraints() {
+		return constraints;
+	}
+	
 	public AVector generate(AVector output) {
 		Vector input=Vector.createLength(getInputLength());
 		generate(input,output);
