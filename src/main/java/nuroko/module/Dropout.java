@@ -37,7 +37,7 @@ public class Dropout extends AOperationComponent {
 			double[] dt=output.getArray();
 			for (int i=0; i<dt.length; i++) {
 				boolean drop=Rand.chance(dropoutRate);
-				if (Rand.chance(dropoutRate)) {
+				if (drop) {
 					dt[i]=0.0;
 				} else {
 					dt[i]*=scaleFactor;
