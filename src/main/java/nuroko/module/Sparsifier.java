@@ -10,6 +10,7 @@ public class Sparsifier extends AStateComponent {
 	private final double weight;
 	private final double targetMean;
 	private final Vector mean;
+	private double meanLearnRate=MEAN_RATE;
 	//private final Vector temp;
 	
 	public Sparsifier (int length, double targetMean, double weight) {
@@ -19,6 +20,11 @@ public class Sparsifier extends AStateComponent {
 		mean.fill(targetMean);
 		this.weight=weight;
 		//temp=Vector.createLength(length);
+	}
+	
+	public Sparsifier (int length, double targetMean, double weight, double meanLearnRate) {
+		this(length,targetMean,weight);
+		this.meanLearnRate=meanLearnRate;
 	}
 
 	@Override
@@ -44,7 +50,7 @@ public class Sparsifier extends AStateComponent {
 	@Override
 	public void trainGradientInternal(double factor) {
 		mean.multiply(1-MEAN_RATE);
-		mean.addMultiple(input, MEAN_RATE);
+		mean.addMultiple(input, meanLearnRate);
 		
 		int n=getInputLength();
 		for (int i=0; i<n; i++) {
@@ -59,6 +65,7 @@ public class Sparsifier extends AStateComponent {
 	public Sparsifier clone() {
 		Sparsifier s=new Sparsifier(getInputLength(),targetMean,weight);
 		s.mean.set(this.mean);
+		s.meanLearnRate=this.meanLearnRate;
 		return s;
 	}
 }
