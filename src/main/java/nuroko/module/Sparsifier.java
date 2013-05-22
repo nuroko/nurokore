@@ -5,7 +5,7 @@ import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 
 public class Sparsifier extends AStateComponent {
-	private static final double MEAN_RATE=0.001;
+	private static final double MEAN_RATE=0.01;
 	
 	private final double weight;
 	private final double targetMean;
