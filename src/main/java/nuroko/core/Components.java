@@ -84,6 +84,8 @@ public final class Components {
 	public static ALayerStack asLayerStack(IComponent comp) {
 		if (comp instanceof ALayerStack) {
 			return (ALayerStack)comp;
+		} else if (comp instanceof AWeightLayer) {
+			return new NeuralNet((AWeightLayer)comp);
 		}
 		List<IComponent> comps=comp.getComponents();
 		if (comps.isEmpty()) return null;
