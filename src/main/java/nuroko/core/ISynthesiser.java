@@ -12,7 +12,7 @@ public interface ISynthesiser extends IComponent {
 
 	public void generate(AVector input, AVector output);
 	
-	public void trainSynth(AVector input);
+	public void trainSynth(AVector input, double factor);
 	
 	public IComponent getUpStack();
 	

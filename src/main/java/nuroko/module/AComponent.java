@@ -54,7 +54,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return constraints;
 	}
 	
-	public AVector generate(AVector output) {
+	public final AVector generate(AVector output) {
 		Vector input=Vector.createLength(getInputLength());
 		generate(input,output);
 		return input;
