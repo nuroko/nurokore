@@ -5,7 +5,8 @@ import mikera.vectorz.Vector;
 import mikera.vectorz.impl.Vector0;
 
 public class Sparsifier extends AStateComponent {
-	private static final double MEAN_RATE=0.003;
+	private static final double MEAN_RATE=0.001;
+	private static final double LIMIT_THRESHOLD=0.001;
 	private static final double STANDARD_WEIGHT_FACTOR=0.1;
 	
 	private final double weight;
@@ -50,13 +51,13 @@ public class Sparsifier extends AStateComponent {
 
 	@Override
 	public void trainGradientInternal(double factor) {
-		mean.multiply(1-MEAN_RATE);
+		mean.multiply(1.0-meanLearnRate);
 		mean.addMultiple(input, meanLearnRate);
 		double thisWeight=this.weight*STANDARD_WEIGHT_FACTOR;
 		
 		int n=getInputLength();
 		for (int i=0; i<n; i++) {
-			double mi=mean.get(i);
+			double mi=Math.min(1.0-LIMIT_THRESHOLD, Math.max(LIMIT_THRESHOLD, mean.get(i)));
 			inputGradient.set(i,thisWeight * ( (targetMean/mi) - ((1-targetMean)/(1-mi)) ));
 		}
 			
