@@ -3,7 +3,7 @@ package nuroko.coders;
 import nuroko.core.NurokoException;
 import mikera.vectorz.AVector;
 
-public class DoubleCoder extends AbstractCoder<Number> {
+public class DoubleCoder extends AbstractCoder<Double> {
 
 	private final double mean;
 	private final double sd;
@@ -15,13 +15,13 @@ public class DoubleCoder extends AbstractCoder<Number> {
 	}
 	
 	@Override
-	public Number decode(AVector v, int offset) {
+	public Double decode(AVector v, int offset) {
 		return mean+(sd*v.get(offset));
 	}
 
 	@Override
-	public void encode(Number c, AVector dest, int offset) {
-		dest.set(offset,(c.doubleValue()-mean)/sd);	
+	public void encode(Double c, AVector dest, int offset) {
+		dest.set(offset,(c-mean)/sd);	
 	}
 
 	@Override
