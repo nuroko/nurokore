@@ -1,5 +1,6 @@
 package nuroko.coders;
 
+import nuroko.core.NurokoException;
 import mikera.vectorz.AVector;
 
 public class DoubleCoder extends AbstractCoder<Number> {
@@ -10,6 +11,7 @@ public class DoubleCoder extends AbstractCoder<Number> {
 	public DoubleCoder(double mean, double sd) {
 		this.mean=mean;
 		this.sd=sd;
+		if (sd==0.0) throw new NurokoException("Can't create DoubleCoder with zero sd");
 	}
 	
 	@Override
@@ -19,7 +21,7 @@ public class DoubleCoder extends AbstractCoder<Number> {
 
 	@Override
 	public void encode(Number c, AVector dest, int offset) {
-		encode(c.doubleValue(),dest,offset);	
+		dest.set(offset,(c.doubleValue()-mean)/sd);	
 	}
 
 	@Override
