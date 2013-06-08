@@ -8,7 +8,7 @@ import mikera.vectorz.AVector;
 
 public class TestFixedLongCoder {
 	
-	private static final FixedLongCoder cc=new FixedLongCoder(4);
+	private static final IntegerCoder cc=new IntegerCoder(4);
 	
 	@Test 
 	public void testLength() {

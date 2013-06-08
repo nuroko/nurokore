@@ -13,12 +13,12 @@ import mikera.vectorz.AVector;
  * @author Mike
  * @param <T>
  */
-public class FixedListCoder<T> extends AbstractCoder<List<T>> {
+public class ListCoder<T> extends AbstractCoder<List<T>> {
 	private final int listLength;
 	private final ICoder<T> itemCoder;
 	private final int itemLength;
 
-	public FixedListCoder(int listLength, ICoder<T> itemCoder) {
+	public ListCoder(int listLength, ICoder<T> itemCoder) {
 		this.listLength=listLength;
 		this.itemCoder=itemCoder;
 		itemLength=itemCoder.codeLength();

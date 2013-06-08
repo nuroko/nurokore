@@ -2,14 +2,14 @@ package nuroko.coders;
 
 import mikera.vectorz.AVector;
 
-public class FixedLongCoder extends AbstractCoder<Long> {
+public class IntegerCoder extends AbstractCoder<Long> {
 	private final int bits;
 	
-	public FixedLongCoder() {
+	public IntegerCoder() {
 		this(64);
 	}
 	
-	public FixedLongCoder(int bits) {
+	public IntegerCoder(int bits) {
 		this.bits=bits;
 	}
 	

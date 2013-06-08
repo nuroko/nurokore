@@ -13,7 +13,7 @@ import mikera.vectorz.Vectorz;
 public class TestFixedListCoder {
 	
 	private static final CharCoder cc=new CharCoder();
-	private static final FixedListCoder<Character> lc=new FixedListCoder<Character>(4,cc);
+	private static final ListCoder<Character> lc=new ListCoder<Character>(4,cc);
 	
 	@Test 
 	public void testLength() {
