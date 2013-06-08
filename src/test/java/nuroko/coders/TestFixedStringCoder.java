@@ -2,6 +2,7 @@ package nuroko.coders;
 
 import static org.junit.Assert.assertEquals;
 import mikera.vectorz.AVector;
+import nuroko.core.IFunction;
 import nuroko.core.NurokoException;
 
 import org.junit.Test;
@@ -15,12 +16,21 @@ public class TestFixedStringCoder {
 		assertEquals(4*new CharCoder().codeLength(),sc.codeLength());
 	}
 	
+	
+	@Test 
+	public void testEncodeDecodeFunctions() {
+		IFunction<String, AVector> ef=new EncodeFunction<String>(sc);
+		IFunction<AVector, String> df=new DecodeFunction<String>(sc);
+		assertEquals("foo",df.think(ef.think("foo")));
+	}
+	
 	@Test 
 	public void testRoundTrip() {
 		doTest("");
 		doTest("foo");
 		doTest("foob");
 	}
+
 	
 	@Test (expected=NurokoException.class)
 	public void testTooBig() {
