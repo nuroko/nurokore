@@ -11,7 +11,7 @@ import mikera.vectorz.AVector;
  * 
  * @author Mike
  */
-public interface IThinker extends IInputOutput {
+public interface IThinker extends IFunction<AVector,AVector> , IInputOutput {
 	
 	public void think(AVector input, AVector output);
 	
