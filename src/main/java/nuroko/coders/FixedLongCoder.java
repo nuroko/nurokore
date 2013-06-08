@@ -5,6 +5,10 @@ import mikera.vectorz.AVector;
 public class FixedLongCoder extends AbstractCoder<Long> {
 	private final int bits;
 	
+	public FixedLongCoder() {
+		this(64);
+	}
+	
 	public FixedLongCoder(int bits) {
 		this.bits=bits;
 	}
