@@ -4,6 +4,11 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.Vectorz;
 import nuroko.core.ICoder;
 
+/**
+ * Abstract base class for coders
+ *
+ * @param <T>
+ */
 public abstract class AbstractCoder<T> implements ICoder<T> {
 
 	@Override
