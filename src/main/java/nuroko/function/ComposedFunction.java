@@ -2,7 +2,7 @@ package nuroko.function;
 
 import nuroko.core.IFunction;
 
-public class ComposedFunction <A,B> implements IFunction<A,B> {
+public class ComposedFunction <A,B> extends AbstractFunction <A,B> {
 
 	public final IFunction<A,Object> first;
 	public final IFunction<Object,B> second;
