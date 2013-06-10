@@ -34,7 +34,7 @@ public class AutoEncodingDemo {
 			
 			if ((i%SKIP)==0) {
 				double error=nn.getDefaultLossFunction().calculateError(nn.getOutput(), target);
-				System.out.println(i+ " : "+error + "Output = "+nn.getOutput().toString());
+				System.out.println(i+ " : "+error + "   Output = "+nn.getOutput().toString());
 			}
 		}
 		
