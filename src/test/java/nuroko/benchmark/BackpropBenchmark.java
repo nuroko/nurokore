@@ -1,5 +1,6 @@
 package nuroko.benchmark;
 
+import nuroko.algo.MomentumBackProp;
 import nuroko.algo.SimpleBackProp;
 import nuroko.core.Components;
 import nuroko.module.AComponent;
@@ -42,6 +43,13 @@ public class BackpropBenchmark extends SimpleBenchmark {
 	public void timeStackedBackprop(int runs) {
 		for (int i=0; i<runs; i++) {
 			SimpleBackProp.train(nn3, input, output, 0.001);
+		}
+	}
+	
+	public void timeMomentumBackprop(int runs) {
+		MomentumBackProp m=new MomentumBackProp(nn3,0.9);
+		for (int i=0; i<runs; i++) {
+			m.train(nn3, input, output, 0.001);
 		}
 	}
 
