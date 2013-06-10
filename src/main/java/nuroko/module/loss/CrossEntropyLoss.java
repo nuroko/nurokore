@@ -10,9 +10,10 @@ public class CrossEntropyLoss extends LossFunction {
 	
 	@Override
 	public void calculateErrorDerivative(AVector output, AVector target, AVector gradientOut) {
-		if (output.length()!=target.length()) throw new NurokoException("Target / output size mismtach");
-		int n=target.length();
-		for (int i=0; i<n; i++) {
+		int olen=output.length();
+		int tlen=target.length();
+		if (olen!=tlen) throw new NurokoException("Target / output size mismtach: " +tlen +" vs. "+olen);
+		for (int i=0; i<tlen; i++) {
 			double y=output.get(i);
 			double t=target.get(i);
 			double k=Math.max(BOUND, y*(1.0-y));
