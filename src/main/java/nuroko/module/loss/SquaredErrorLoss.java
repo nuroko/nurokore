@@ -1,6 +1,7 @@
 package nuroko.module.loss;
 
 import mikera.vectorz.AVector;
+import mikera.vectorz.Vectorz;
 
 public class SquaredErrorLoss extends LossFunction {
 	public static SquaredErrorLoss INSTANCE=new SquaredErrorLoss();
@@ -11,6 +12,11 @@ public class SquaredErrorLoss extends LossFunction {
 		gradientOut.set(target);
 		gradientOut.sub(output);
 		gradientOut.scale(2.0);
+	}
+
+	@Override
+	public double calculateError(AVector output, AVector target) {
+		return Vectorz.averageSquaredDifference(output, target);
 	}
 
 }

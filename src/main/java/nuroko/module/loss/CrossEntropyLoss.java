@@ -23,4 +23,16 @@ public class CrossEntropyLoss extends LossFunction {
 			}
 		}
 	}
+
+	@Override
+	public double calculateError(AVector output, AVector target) {
+		int len=output.length();
+		double ce=0;
+		for (int i=0; i<len; i++) {
+			double p=target.get(i);
+			double q=output.get(i);
+			ce-=Math.log(p*q+(1-p)*(1-q));
+		}
+		return ce;
+	}
 }

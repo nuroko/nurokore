@@ -21,4 +21,6 @@ public abstract class LossFunction {
 	public final void calculateErrorDerivative(AVector output, AVector target, IComponent comp) {
 		calculateErrorDerivative(output,target,comp.getOutputGradient());
 	}
+
+	public abstract double calculateError(AVector output, AVector target);
 }

@@ -12,5 +12,17 @@ public class AbsoluteErrorLoss extends LossFunction {
 		gradientOut.sub(output);
 		gradientOut.signum();
 	}
+	
+	@Override
+	public double calculateError(AVector output, AVector target) {
+		int len=output.length();
+		double ce=0;
+		for (int i=0; i<len; i++) {
+			double p=target.get(i);
+			double q=output.get(i);
+			ce+=Math.abs(p-q);
+		}
+		return ce;
+	}
 
 }
