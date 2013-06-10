@@ -10,8 +10,8 @@ public class MomentumBackProp {
 	private Vector lastUpdate;
 	private double momentum;
 
-	public MomentumBackProp(AComponent comp, double momentum) {
-		this(comp.getParameterLength(), momentum);
+	public MomentumBackProp(IComponent nn, double momentum) {
+		this(nn.getParameterLength(), momentum);
 	}
 	
 	public MomentumBackProp(int paramLength, double momentum) {
