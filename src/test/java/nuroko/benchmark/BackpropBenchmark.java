@@ -24,14 +24,25 @@ public class BackpropBenchmark extends SimpleBenchmark {
 	AVector output=Vectorz.createUniformRandomVector(VECTOR_SIZE);
 	private static final AComponent nn1=Components.neuralLayer(VECTOR_SIZE, VECTOR_SIZE, Ops.LOGISTIC, true);
 	private static final AComponent nn2=Components.neuralLayer(VECTOR_SIZE, VECTOR_SIZE, Ops.LOGISTIC, false);
+	private static final AComponent nn3=Components.stack(nn1,nn2);
 	
 	
 	public void timeFullyConnectedBackprop(int runs) {
-		SimpleBackProp.train(nn1, input, output, 0.001);
+		for (int i=0; i<runs; i++) {
+			SimpleBackProp.train(nn1, input, output, 0.001);
+		}
 	}
 	
 	public void timeSparseConnectedBackprop(int runs) {
-		SimpleBackProp.train(nn2, input, output, 0.001);
+		for (int i=0; i<runs; i++) {
+			SimpleBackProp.train(nn2, input, output, 0.001);
+		}
+	}
+	
+	public void timeStackedBackprop(int runs) {
+		for (int i=0; i<runs; i++) {
+			SimpleBackProp.train(nn3, input, output, 0.001);
+		}
 	}
 
 	/**
