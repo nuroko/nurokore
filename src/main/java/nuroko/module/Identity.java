@@ -1,5 +1,7 @@
 package nuroko.module;
 
+import nuroko.core.IComponent;
+
 public class Identity extends AOperationComponent {
 
 	public Identity(int length) {
@@ -19,6 +21,16 @@ public class Identity extends AOperationComponent {
 	@Override
 	public AOperationComponent clone() {
 		return this;
+	}
+	
+	@Override
+	public IComponent getDownStack() {
+		return this;
+	}
+	
+	@Override
+	public boolean isSynthesiser() {
+		return false;
 	}
 
 	@Override

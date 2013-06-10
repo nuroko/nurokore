@@ -34,6 +34,23 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 	}
 	
 	@Override
+	public void generate(AVector input, AVector output) {
+		getDownStack().think(output,input);
+	}
+	
+	@Override
+	public IComponent getUpStack() {
+		return this;
+	}
+	
+	@Override
+	public IComponent getDownStack() {
+		throw new UnsupportedOperationException("Synthesising not supported by: "+this.getClass());
+	}
+	
+
+	
+	@Override
 	public void thinkInternalTraining() {
 		thinkInternal();
 	}
@@ -60,10 +77,6 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return input;
 	}
 	
-	public void generate(AVector input, AVector output) {
-		throw new UnsupportedOperationException("Can't do generate: "+this.getClass());
-	}
-	
 	@Override
 	public LossFunction getDefaultLossFunction() {
 		return SquaredErrorLoss.INSTANCE;
@@ -81,7 +94,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		train(input,target,getDefaultLossFunction(),1.0);
 	}
 	
-	public final void trainSynth(AVector input) {
+	public void trainSynth(AVector input) {
 		setInput(input);
 		thinkInternalTraining();
 		this.getOutputGradient().fill(0.0);
@@ -157,6 +170,12 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 	public boolean isStochastic() {
 		return false;
 	}
+	
+	@Override
+	public boolean isSynthesiser() {
+		return false;
+	}
+
 	
 	protected void applyConstraintsInternal() {
 		for (IConstraint c: constraints) {

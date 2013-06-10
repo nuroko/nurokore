@@ -6,7 +6,7 @@ import mikera.vectorz.AVector;
 import nuroko.core.IInputState;
 import nuroko.module.loss.LossFunction;
 
-public interface IComponent extends ITrainable, IInputState, IOutputState {
+public interface IComponent extends ITrainable, IInputState, IOutputState, ISynthesiser {
 
 	public IComponent clone();
 
@@ -49,5 +49,7 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 	public boolean hasDifferentTrainingThinking();
 
 	public void setLearnFactor(double d);
+
+	public boolean isSynthesiser();
 
 }
