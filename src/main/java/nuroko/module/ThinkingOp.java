@@ -1,5 +1,7 @@
 package nuroko.module;
 
+import nuroko.core.Components;
+import nuroko.module.loss.LossFunction;
 import mikera.vectorz.Op;
 
 public class ThinkingOp extends AOperationComponent {
@@ -25,6 +27,11 @@ public class ThinkingOp extends AOperationComponent {
 	@Override
 	public void trainGradientInternal(double factor) {
 		inputGradient.set(outputGradient);
+	}
+	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		return Components.defaultLossFunction(op);
 	}
 	
 	@Override

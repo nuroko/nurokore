@@ -7,6 +7,7 @@ import mikera.vectorz.Op;
 import mikera.vectorz.ops.Logistic;
 import mikera.vectorz.ops.Offset;
 import mikera.vectorz.ops.ScaledLogistic;
+import mikera.vectorz.ops.StochasticBinary;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
 import nuroko.module.CompoundLayerStack;
@@ -107,7 +108,7 @@ public final class Components {
 	 * @return
 	 */
 	public static LossFunction defaultLossFunction(Op op) {
-		if ((op instanceof Logistic)||(op instanceof ScaledLogistic)) {
+		if ((op instanceof Logistic)||(op instanceof ScaledLogistic)||(op instanceof StochasticBinary)) {
 			return CrossEntropyLoss.INSTANCE;
 		}
 		return SquaredErrorLoss.INSTANCE;

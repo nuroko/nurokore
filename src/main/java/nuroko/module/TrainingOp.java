@@ -1,5 +1,7 @@
 package nuroko.module;
 
+import nuroko.core.Components;
+import nuroko.module.loss.LossFunction;
 import mikera.vectorz.Op;
 
 public class TrainingOp extends AOperationComponent {
@@ -36,6 +38,11 @@ public class TrainingOp extends AOperationComponent {
 	@Override
 	public boolean hasDifferentTrainingThinking() {
 		return true;
+	}
+	
+	@Override
+	public LossFunction getDefaultLossFunction() {
+		return Components.defaultLossFunction(op);
 	}
 
 	@Override
