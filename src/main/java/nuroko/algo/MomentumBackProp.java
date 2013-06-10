@@ -3,7 +3,6 @@ package nuroko.algo;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import nuroko.core.IComponent;
-import nuroko.module.AComponent;
 import nuroko.module.loss.LossFunction;
 
 public class MomentumBackProp {

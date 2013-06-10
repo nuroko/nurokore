@@ -7,7 +7,6 @@ import mikera.vectorz.Vectorz;
 import nuroko.algo.MomentumBackProp;
 import nuroko.core.Components;
 import nuroko.core.IComponent;
-import nuroko.task.samples.XORTask;
 
 public class AutoEncodingDemo {
 	
