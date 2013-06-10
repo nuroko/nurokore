@@ -29,4 +29,12 @@ public class MomentumBackProp {
 		lastUpdate.addMultiple(comp.getGradient(),learnRate);
 		comp.getParameters().add(lastUpdate);
 	}
+
+	public void trainSynth(IComponent comp,AVector input, double learnRate) {
+		comp.getGradient().fill(0.0);
+		comp.trainSynth(input);
+		lastUpdate.multiply(1.0-momentum);
+		lastUpdate.addMultiple(comp.getGradient(),learnRate);
+		comp.getParameters().add(lastUpdate);		
+	}
 }

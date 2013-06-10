@@ -81,6 +81,14 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		train(input,target,getDefaultLossFunction(),1.0);
 	}
 	
+	public final void trainSynth(AVector input) {
+		setInput(input);
+		thinkInternalTraining();
+		this.getOutputGradient().fill(0.0);
+		trainGradientInternal(1.0);	
+	}
+
+	
 	public final void train(AVector input, AVector target, LossFunction loss, double factor) {
 		setInput(input);
 		thinkInternalTraining();

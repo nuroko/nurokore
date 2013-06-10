@@ -2,6 +2,7 @@ package nuroko.core;
 
 import java.util.List;
 
+import mikera.vectorz.AVector;
 import nuroko.core.IInputState;
 import nuroko.module.loss.LossFunction;
 
@@ -35,6 +36,8 @@ public interface IComponent extends ITrainable, IInputState, IOutputState {
 	public boolean isStochastic();
 	
 	public void applyConstraints();
+
+	public void trainSynth(AVector input);
 	
 	public List<IComponent> getComponents();
 
