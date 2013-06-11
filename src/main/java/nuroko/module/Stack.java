@@ -75,11 +75,15 @@ public class Stack extends ACompoundComponent {
 			}
 		}
 	}
-	
-	
+		
 	@Override
 	public void generate(AVector input, AVector output) {
-		getDownStack().think(output,input);
+		for (int i=componentCount-1; i>=0; i--) {
+			IComponent comp=getComponent(i);
+			comp.generate(comp.getInput(), output);
+			output=comp.getInput();
+		}
+		input.set(output);
 	}
 
 	@Override
