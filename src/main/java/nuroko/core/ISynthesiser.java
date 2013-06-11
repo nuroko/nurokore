@@ -14,6 +14,8 @@ public interface ISynthesiser {
 	
 	public void trainSynth(AVector input);
 	
+	public void trainSynth(AVector input, double factor);
+
 	public IComponent getUpStack();
 	
 	public IComponent getDownStack();
