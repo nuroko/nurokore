@@ -75,6 +75,12 @@ public class Stack extends ACompoundComponent {
 			}
 		}
 	}
+	
+	
+	@Override
+	public void generate(AVector input, AVector output) {
+		getDownStack().think(output,input);
+	}
 
 	@Override
 	public Stack clone() {
