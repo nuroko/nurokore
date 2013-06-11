@@ -10,6 +10,8 @@ import mikera.vectorz.AVector;
  */
 public interface ISynthesiser {
 
+	public AVector generate(AVector output);
+	
 	public void generate(AVector input, AVector output);
 	
 	public void trainSynth(AVector input);

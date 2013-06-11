@@ -15,6 +15,29 @@ public class FlipBitNoise extends Op {
 		return true;
 	}
 	
+	@Override public double derivative(double x) {
+		return (1.0-chance);
+	}
+	
+	@Override public double derivativeForOutput(double y) {
+		return (1.0-chance);
+	}
+	
+	@Override
+	public double minValue() {
+		return 0.0;
+	}
+
+	@Override
+	public double maxValue() {
+		return 1.0;
+	}
+	
+	@Override
+	public boolean hasDerivative() {
+		return true;
+	}
+	
 	@Override
 	public double apply(double x) {
 		return Rand.chance(chance)?(1-x):x;
