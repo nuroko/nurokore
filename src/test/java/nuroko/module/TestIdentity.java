@@ -13,7 +13,7 @@ public class TestIdentity {
 	@Test public void testIdentity() {
 		Identity id=new Identity(3);
 		
-		AVector r=id.apply(Vector.of(1,2,3));
+		AVector r=id.think(Vector.of(1,2,3));
 		
 		assertEquals(Vector.of(1,2,3),r);
 		assertEquals(0,id.getParameters().length());

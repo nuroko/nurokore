@@ -14,7 +14,7 @@ public class DecodeFunction<T> implements IFunction <AVector,T>, IDecoder<T> {
 	}
 	
 	@Override
-	public T apply(AVector input) {
+	public T think(AVector input) {
 		return coder.decode(input, 0);
 	}
 

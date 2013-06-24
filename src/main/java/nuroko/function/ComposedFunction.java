@@ -15,8 +15,8 @@ public class ComposedFunction <A,B> extends AFunction <A,B> {
 	}
 	
 	@Override
-	public B apply(A input) {
-		return second.apply(first.apply(input));
+	public B think(A input) {
+		return second.think(first.think(input));
 	}
 
 }

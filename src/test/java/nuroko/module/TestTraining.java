@@ -26,17 +26,17 @@ public class TestTraining {
 		
 		LossFunction loss= CrossEntropyLoss.INSTANCE;
 		
-		AVector o1=nn.apply(input);
+		AVector o1=nn.think(input);
 		SimpleBackProp.train(nn, input, target, 0.1, loss);
 		SimpleBackProp.train(nn, input, target, 0.1, loss);
-		AVector o2=nn.apply(input);
+		AVector o2=nn.think(input);
 		
 		assertTrue(o1.distance(target)>o2.distance(target));
 		
 		for (int i=0; i<1000; i++) {
 			o1=o2;
 			SimpleBackProp.train(nn, input, target, 0.1,loss);
-			o2=nn.apply(input);	
+			o2=nn.think(input);	
 			assertTrue(o1.distance(target)>o2.distance(target));
 		}
 		

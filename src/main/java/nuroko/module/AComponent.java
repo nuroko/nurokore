@@ -56,7 +56,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 	}
 	
 	@Override
-	public AVector apply(AVector input) {
+	public AVector think(AVector input) {
 		Vector output=Vector.createLength(getOutputLength());
 		think(input,output);
 		return output;

@@ -32,7 +32,7 @@ public class DerivativeTest {
 			c.getParameters().set(p);
 			c.getParameters().addAt(i, EPS);
 			
-			AVector y=c.apply(x);
+			AVector y=c.think(x);
 			double L2=-y.distanceSquared(t);
 			
 			double expected=((L2-L)/EPS);
