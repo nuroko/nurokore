@@ -219,7 +219,7 @@ public class GenericModuleTests {
 			assertTrue(output.get(i)!=Double.NaN);
 		}
 		 
-		AVector res=p.think(input);
+		AVector res=p.apply(input);
 		if (!p.isStochastic()) {
 			assertEquals(res,output);
 		}

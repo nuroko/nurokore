@@ -15,7 +15,7 @@ public class EncodeFunction<T> implements IFunction <T,AVector>, IEncoder<T> {
 	}
 	
 	@Override
-	public AVector think(T input) {
+	public AVector apply(T input) {
 		Vector v=Vector.createLength(coder.codeLength());
 		coder.encode(input, v, 0) ;
 		return v;

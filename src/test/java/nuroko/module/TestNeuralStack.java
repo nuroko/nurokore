@@ -41,7 +41,7 @@ public class TestNeuralStack {
 	
 	public void isEquivalentThinker(IComponent a, IComponent b) {
 		AVector input=Vectorz.createUniformRandomVector(a.getInputLength());
-		assertEquals( a.think(input),b.think(input));
+		assertEquals( a.apply(input),b.apply(input));
 	}
 	
 	public void isEquivalentTraining(IComponent a, IComponent b) {

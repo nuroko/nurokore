@@ -21,7 +21,7 @@ public class TestFixedStringCoder {
 	public void testEncodeDecodeFunctions() {
 		IFunction<String, AVector> ef=new EncodeFunction<String>(sc);
 		IFunction<AVector, String> df=new DecodeFunction<String>(sc);
-		assertEquals("foo",df.think(ef.think("foo")));
+		assertEquals("foo",df.apply(ef.apply("foo")));
 	}
 	
 	@Test 

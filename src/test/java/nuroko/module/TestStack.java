@@ -12,7 +12,7 @@ public class TestStack {
 		Vector v=Vector.of(1,2,3);
 		Stack s=Components.stack(Components.identity(3),Components.identity(3));
 		
-		assertEquals(v,s.think(v));
+		assertEquals(v,s.apply(v));
 		assertEquals(v,Components.identity(3).generate(v));
 		assertEquals(v,s.generate(v));
 	}

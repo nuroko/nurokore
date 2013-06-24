@@ -22,7 +22,7 @@ public class TestComponents {
 		int LEN=v.length();
 		IComponent op1=new TrainingOp(LEN,Ops.NEGATE);
 
-		AVector r=op1.think(v);
+		AVector r=op1.apply(v);
 		assertEquals(v,r);
 		
 		op1.thinkInternalTraining();
@@ -71,7 +71,7 @@ public class TestComponents {
 		assertEquals(6,j.getInputLength());
 		
 		AVector input=Vector.of(0,1,0,1,0,1);
-		AVector output=j.think(input);
+		AVector output=j.apply(input);
 		assertEquals(Vector.of(0,1),output.subVector(0, 2));
 		assertEquals(Vector.of(0.5),output.subVector(2,1));
 		
@@ -118,7 +118,7 @@ public class TestComponents {
 	
 	@Test public void testOffset() {
 		IComponent c=Components.offset(3, -1);
-		assertEquals(Vector.of(0,1,2),c.think(Vector.of(1,2,3)));
+		assertEquals(Vector.of(0,1,2),c.apply(Vector.of(1,2,3)));
 		GenericModuleTests.test(c);
 		
 		Vectorz.fillRandom(c.getOutputGradient());

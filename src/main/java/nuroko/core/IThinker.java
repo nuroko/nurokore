@@ -15,7 +15,7 @@ public interface IThinker extends IFunction<AVector,AVector> , IInputOutput {
 	
 	public void think(AVector input, AVector output);
 	
-	public AVector think(AVector input);
+	public AVector apply(AVector input);
 	
 	@Override
 	public IThinker clone();
