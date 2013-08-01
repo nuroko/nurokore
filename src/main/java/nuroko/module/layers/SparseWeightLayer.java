@@ -11,6 +11,7 @@ import mikera.vectorz.AVector;
 import mikera.vectorz.GrowableVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
+import mikera.vectorz.impl.Vector0;
 
 /**
  * Fully connected weight layer
@@ -35,7 +36,7 @@ public final class SparseWeightLayer extends AWeightLayer {
 
 		int links=Math.min(maxLinks, inputLength);
 		
-		AVector params=bias;
+		AVector params=Vector0.INSTANCE;
 		for (int j=0; j<outputLength; j++) {
 			Vector wts=Vector.createLength(links);
 			Index inds=Indexz.createRandomChoice(links, inputLength);
@@ -43,17 +44,19 @@ public final class SparseWeightLayer extends AWeightLayer {
 			indexes[j]=inds;			
 			params=params.join(wts);
 		}
+		params=params.join(bias);
 		parameters=params;
 		
 		biasGradient=Vector.createLength(outputLength);
 		weightGradients=new Vector[outputLength];
 		
-		AVector g=biasGradient;
+		AVector g=Vector0.INSTANCE;
 		for (int j=0; j<outputLength; j++) {
 			Vector grd=Vector.createLength(weights[j].length());
 			weightGradients[j]=grd;
 			g=g.join(grd);
 		}
+		g=g.join(biasGradient);
 		gradient=g;
 		assert(gradient.length()==parameters.length());
 	}
@@ -228,12 +231,14 @@ public final class SparseWeightLayer extends AWeightLayer {
 	}
 
 	private void rebuildVectors() {
-		AVector params=bias;
-		AVector grads=biasGradient;
+		AVector params=Vector0.INSTANCE;
+		AVector grads=Vector0.INSTANCE;
 		for (int i=0; i<outputLength; i++) {
 			params=params.join(weights[i]);
 			grads=grads.join(weightGradients[i]);
 		}
+		params=params.join(bias);
+		grads=grads.join(biasGradient);
 		parameters=params;
 		gradient=grads;
 	}
