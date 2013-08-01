@@ -81,7 +81,7 @@ public class TestSparseWeightLayer {
 	
 	@Test public void testGenerateSparse() {
 		SparseWeightLayer wl=new SparseWeightLayer(3,3,2);
-		wl.getSourceWeights(1).setValues(2.0,2.0);
+		wl.getSourceWeights(1).setValues(2.0,3.0);
 		wl.getSourceIndex(1).set(0, 0);
 		wl.getSourceIndex(1).set(1, 2);
 		
@@ -90,7 +90,7 @@ public class TestSparseWeightLayer {
 		assertEquals(Vector.of(0,2,0),out);
 		
 		AVector regen=wl.generate(out);
-		assertEquals(Vector.of(4,0,4),regen);
+		assertEquals(Vector.of(4,0,6),regen);
 	}
 	
 	@Test
