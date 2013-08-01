@@ -126,4 +126,9 @@ public class TestComponents {
 		c.trainGradientInternal(0.0);
 		assertEquals(c.getInputGradient(),c.getOutputGradient());
 	}
+	
+	@Test public void testBias() {
+		IComponent c=Components.bias(5);
+		GenericModuleTests.test(c);
+	}
 }

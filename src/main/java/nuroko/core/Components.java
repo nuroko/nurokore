@@ -10,6 +10,7 @@ import mikera.vectorz.ops.ScaledLogistic;
 import mikera.vectorz.ops.StochasticBinary;
 import nuroko.module.ALayerStack;
 import nuroko.module.AWeightLayer;
+import nuroko.module.Bias;
 import nuroko.module.CompoundLayerStack;
 import nuroko.module.Dropout;
 import nuroko.module.Identity;
@@ -120,5 +121,9 @@ public final class Components {
 	
 	public static Operator offset(int length, double offset) {
 		return new Operator(Offset.create(offset),length);
+	}
+
+	public static IComponent bias(int length) {
+		return new Bias(length);
 	}
 }
