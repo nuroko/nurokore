@@ -89,6 +89,20 @@ public class TestNeuralStack {
 	}
 	
 	@Test 
+	public void equivalenceTestsWithBias() {
+		AWeightLayer wl1=new FullWeightLayer(2,2);
+		Vectorz.fillGaussian(wl1.getParameters());
+		
+		Bias b=new Bias(2);
+		b.getParameters().set(wl1.getBias());
+		AWeightLayer wl2=wl1.clone();
+		wl2.getBias().fill(0.0);
+		AComponent c1=Components.stack(wl2,b);
+		
+		isEquivalentThinker(wl1,c1);
+	}
+	
+	@Test 
 	public void equivalenceTestsSparse() {
 		AWeightLayer wl1=new SparseWeightLayer(5,5,3);
 		Vectorz.fillGaussian(wl1.getParameters());
