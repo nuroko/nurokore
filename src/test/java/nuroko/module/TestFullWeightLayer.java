@@ -76,8 +76,17 @@ public class TestFullWeightLayer {
 		// cross maps should be swapped
 		assertEquals(params.get(3),iparams.get(4),0.0);
 		assertEquals(params.get(4),iparams.get(3),0.0);
+	}
+	
+	@Test public void testGenerate() {
+		FullWeightLayer wl=new FullWeightLayer(2,2);
+		wl.getSourceWeights(0).setValues(2,2);
 		
+		AVector in=Vector.of(1,0);
+		AVector out=wl.think(in);
+		assertEquals(Vector.of(2,0),out);
 		
-
+		AVector regen=wl.generate(out);
+		assertEquals(Vector.of(4,4),regen);
 	}
 }

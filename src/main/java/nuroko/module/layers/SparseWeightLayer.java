@@ -125,6 +125,16 @@ public final class SparseWeightLayer extends AWeightLayer {
 		}
 	}
 
+	/**
+	 * Generates by using the reverse weights
+	 */
+	@Override
+	public void generate(AVector input, AVector output) {
+		input.fill(0.0);
+		for (int i=0; i<outputLength; i++) {
+			input.addMultiple(weights[i], indexes[i], output.unsafeGet(i));
+		}
+	}
 
 	@Override
 	public AVector getGradient() {

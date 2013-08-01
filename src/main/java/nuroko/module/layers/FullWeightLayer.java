@@ -72,6 +72,17 @@ public final class FullWeightLayer extends AWeightLayer {
 		output.set(this.getOutput());
 	}
 	
+	/**
+	 * Generates by using the reverse weights
+	 */
+	@Override
+	public void generate(AVector input, AVector output) {
+		input.fill(0.0);
+		for (int i=0; i<outputLength; i++) {
+			input.addMultiple(weights[i], output.unsafeGet(i));
+		}
+	}
+	
 	@Override
 	public void thinkInternal() {
 		for (int j=0; j<outputLength; j++) {
