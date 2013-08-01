@@ -98,10 +98,10 @@ public class TestComponents {
 				Vector.of(0,1,2),CrossEntropyLoss.INSTANCE,1.0);
 		assertTrue(!grad.isZeroVector());
 		assertTrue(!ig.isZeroVector());
-		assertTrue(grad.get(0)<0); // should be first bias element => 0
-		assertTrue(grad.get(1)>0); // should be second bias element => 1
-		assertTrue(grad.get(2)>1); // should be last bias element => 2, and (2-y)/y*(1-y) > 1
-		assertTrue(grad.get(11)>0); // should be positive, since output grad positive and input positive
+		assertTrue(grad.get(9)<0); // should be first bias element => 0
+		assertTrue(grad.get(10)>0); // should be second bias element => 1
+		assertTrue(grad.get(11)>1); // should be last bias element => 2, and (2-y)/y*(1-y) > 1
+		assertTrue(grad.get(8)>0); // should be positive, since output grad positive and input positive
 		// System.out.println(grad);
 	}
 	

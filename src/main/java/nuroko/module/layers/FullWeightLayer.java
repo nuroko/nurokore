@@ -9,6 +9,7 @@ import mikera.matrixx.impl.VectorMatrixMN;
 import mikera.vectorz.AVector;
 import mikera.vectorz.Vector;
 import mikera.vectorz.Vectorz;
+import mikera.vectorz.impl.Vector0;
 
 /**
  * Fully connected weight layer
@@ -29,23 +30,25 @@ public final class FullWeightLayer extends AWeightLayer {
 		bias=Vector.createLength(outputLength);
 		weights=new Vector[outputLength];
 		
-		AVector params=bias;
+		AVector params=Vector0.INSTANCE;
 		for (int j=0; j<outputLength; j++) {
 			Vector wts=Vector.createLength(inputLength);
 			weights[j]=wts;			
 			params=params.join(wts);
 		}
+		params=params.join(bias);
 		parameters=params;
 		
 		biasGradient=Vector.createLength(outputLength);
 		weightGradients=new Vector[outputLength];
 		
-		AVector g=biasGradient;
+		AVector g=Vector0.INSTANCE;
 		for (int j=0; j<outputLength; j++) {
 			Vector grd=Vector.createLength(inputLength);
 			weightGradients[j]=grd;
 			g=g.join(grd);
 		}
+		g=g.join(biasGradient);
 		gradient=g;
 		assert(gradient.length()==parameters.length());
 	}

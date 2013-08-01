@@ -39,15 +39,15 @@ public class TestFullWeightLayer {
 		assertEquals(Vector.of(0,0),output);
 		
 		// identity weights
-		params.set(2,1);
-		params.set(5,1);
+		params.set(0,1);
+		params.set(3,1);
 		wl.think(input, output);
 		assertEquals(input,output);
 		
 		// constant weights
 		params.fill(0);
-		params.set(0,0.2);
-		params.set(1,0.3);
+		params.set(4,0.2);
+		params.set(5,0.3);
 		wl.think(input, output);
 		assertEquals(Vector.of(0.2,0.3),output);
 		
@@ -70,12 +70,12 @@ public class TestFullWeightLayer {
 		AVector iparams=inv.getParameters();
 		
 		// diagonal maps should be equal
-		assertEquals(params.get(2),iparams.get(2),0.0);
-		assertEquals(params.get(5),iparams.get(5),0.0);
+		assertEquals(params.get(0),iparams.get(0),0.0);
+		assertEquals(params.get(3),iparams.get(3),0.0);
 		
 		// cross maps should be swapped
-		assertEquals(params.get(3),iparams.get(4),0.0);
-		assertEquals(params.get(4),iparams.get(3),0.0);
+		assertEquals(params.get(1),iparams.get(2),0.0);
+		assertEquals(params.get(2),iparams.get(1),0.0);
 	}
 	
 	@Test public void testGenerate() {

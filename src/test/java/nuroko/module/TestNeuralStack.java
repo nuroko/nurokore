@@ -153,8 +153,8 @@ public class TestNeuralStack {
 
 		// setup a simple situation
 		AVector p=ns.getParameters();
-		p.set(1,0.5);
-		p.set(2,1.0);
+		p.set(5,0.5); // second bias
+		p.set(0,1.0); // first weight
 		ns.think(input, output);
 		assertEquals(op.apply(input.get(0)),output.get(0),0.00001); // identity
 		assertEquals(op.apply(0.5),output.get(1),0.00001); // constant bias 
@@ -177,9 +177,9 @@ public class TestNeuralStack {
 		
 		// check gradient values
 		AVector g=ns.getGradient();
-		assertEquals(2*(1-op.apply(0.5))*op.derivative(0.5),g.get(1),0.000001);
-		assertEquals(2*(1-op.apply(v))*op.derivative(v),g.get(0),0.000001);
-		assertEquals(2*(1-op.apply(v))*v*op.derivative(v),g.get(2),0.000001);
+		assertEquals(2*(1-op.apply(0.5))*op.derivative(0.5),g.get(5),0.000001);
+		assertEquals(2*(1-op.apply(v))*op.derivative(v),g.get(4),0.000001);
+		assertEquals(2*(1-op.apply(v))*v*op.derivative(v),g.get(0),0.000001);
 		
 		// input gradient signal
 		AVector ig=ns.getInputGradient();
