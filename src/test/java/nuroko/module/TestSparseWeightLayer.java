@@ -67,7 +67,7 @@ public class TestSparseWeightLayer {
 	}
 	
 	
-	@Test public void testGenerate() {
+	@Test public void testGenerateDense() {
 		SparseWeightLayer wl=new SparseWeightLayer(2,2,2);
 		wl.getSourceWeights(0).setValues(2,2);
 		
@@ -77,6 +77,20 @@ public class TestSparseWeightLayer {
 		
 		AVector regen=wl.generate(out);
 		assertEquals(Vector.of(4,4),regen);
+	}
+	
+	@Test public void testGenerateSparse() {
+		SparseWeightLayer wl=new SparseWeightLayer(3,3,2);
+		wl.getSourceWeights(1).setValues(2.0,2.0);
+		wl.getSourceIndex(1).set(0, 0);
+		wl.getSourceIndex(1).set(1, 2);
+		
+		AVector in=Vector.of(1,-1,0);
+		AVector out=wl.think(in);
+		assertEquals(Vector.of(0,2,0),out);
+		
+		AVector regen=wl.generate(out);
+		assertEquals(Vector.of(4,0,4),regen);
 	}
 	
 	@Test
