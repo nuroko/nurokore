@@ -193,6 +193,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public AComponent clone() {
 		AComponent c=null;
 		try {

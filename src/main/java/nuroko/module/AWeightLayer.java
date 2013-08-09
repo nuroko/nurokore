@@ -26,6 +26,7 @@ public abstract class AWeightLayer extends AStateComponent {
 		this.outputLength=outputLength;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override 
 	public List<IModule> getModules() {
 		return Collections.EMPTY_LIST;
