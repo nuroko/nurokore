@@ -177,7 +177,7 @@ public class TestNeuralStack {
 		AVector target=Vectorz.newVector(2);
 		target.fill(1.0);
 
-		assertTrue(ns.getOutputGradient().isZeroVector());
+		assertTrue(ns.getOutputGradient().isZero());
 		
 		// do training
 		double v=input.get(0);

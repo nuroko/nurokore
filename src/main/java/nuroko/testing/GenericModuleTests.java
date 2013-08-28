@@ -246,7 +246,7 @@ public class GenericModuleTests {
 		Vectorz.fillGaussian(input);
 		
 		p.think(input,output);
-		assertTrue(grad.isZeroVector());
+		assertTrue(grad.isZero());
 		
 		p.train(input,target);
 		AVector tg=grad.clone();

@@ -18,7 +18,7 @@ public class TestSparsifier {
 		s.train(v, v);
 		
 		assertEquals(v,s.getOutput());
-		assertTrue(s.getOutputGradient().isZeroVector());
+		assertTrue(s.getOutputGradient().isZero());
 		
 		AVector ig=s.getInputGradient();
 		assertTrue(ig.get(0)>0);

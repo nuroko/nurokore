@@ -48,7 +48,7 @@ public class TestTraining {
 		nn.getGradient().fill(0.0);
 		nn.setLearnFactor(0.0);
 		nn.train(input, Vector.of(1,1,1));
-		assertTrue(nn.getGradient().isZeroVector());
+		assertTrue(nn.getGradient().isZero());
 	}
 
 	@Test public void testTrainLoss() {	
@@ -59,7 +59,7 @@ public class TestTraining {
 		Stack c=Components.stack(new IComponent[] {
 			new Operator(op1,LEN),
 			new Operator(op2,LEN),});
-		assertTrue(c.getGradient().isZeroVector());
+		assertTrue(c.getGradient().isZero());
 		
 		AVector input=Vector.of(0,1,2);
 		AVector output=Vectorz.newVector(LEN);

@@ -83,21 +83,21 @@ public class TestComponents {
 		NeuralNet nn=Components.neuralLayer(3, 3, Ops.LOGISTIC);
 		
 		assertEquals(12,nn.getParameterLength());
-		assertTrue(nn.getParameters().isZeroVector());
+		assertTrue(nn.getParameters().isZero());
 		Components.stack(nn).initRandom();
-		assertFalse(nn.getParameters().isZeroVector());
+		assertFalse(nn.getParameters().isZero());
 		
 		Vectorz.fillGaussian(nn.getParameters());
 		GenericModuleTests.test(nn);
 		
 		AVector grad=nn.getGradient();
 		AVector ig=nn.getInputGradient();
-		assertTrue(grad.isZeroVector());
-		assertTrue(ig.isZeroVector());
+		assertTrue(grad.isZero());
+		assertTrue(ig.isZero());
 		nn.train(Vectorz.createUniformRandomVector(3), 
 				Vector.of(0,1,2),CrossEntropyLoss.INSTANCE,1.0);
-		assertTrue(!grad.isZeroVector());
-		assertTrue(!ig.isZeroVector());
+		assertTrue(!grad.isZero());
+		assertTrue(!ig.isZero());
 		assertTrue(grad.get(9)<0); // should be first bias element => 0
 		assertTrue(grad.get(10)>0); // should be second bias element => 1
 		assertTrue(grad.get(11)>1); // should be last bias element => 2, and (2-y)/y*(1-y) > 1
