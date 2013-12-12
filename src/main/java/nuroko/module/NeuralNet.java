@@ -87,7 +87,6 @@ public class NeuralNet extends ALayerStack {
 		return Components.defaultLossFunction(topOp);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override 
 	public List<IComponent> getComponents() {
 		return Collections.EMPTY_LIST;

@@ -64,7 +64,6 @@ public class ChoiceCoder<T> extends AbstractCoder<T> {
 		dest.set(offset+i,1.0);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<T> getChoiceList() {
 		return (List<T>) Arrays.asList(choiceArray);
 	}

@@ -21,7 +21,6 @@ public abstract class AOperationComponent extends AStateComponent {
 		this.length=length;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<IComponent> getComponents() {
 		return Collections.EMPTY_LIST;

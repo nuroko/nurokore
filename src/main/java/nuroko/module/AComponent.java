@@ -193,7 +193,6 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public AComponent clone() {
 		AComponent c=null;
 		try {
@@ -204,7 +203,6 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		}
 		return c;
 	}
-	
 
 	@Override
 	public Iterator<IComponent> iterator() {
