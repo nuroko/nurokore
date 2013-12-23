@@ -26,5 +26,9 @@ public interface IEncoder<T> {
 	 */
 	public int codeLength();
 	
+	/**
+	 * Create a new vector with a length necessary to store the output of this encoder
+	 * @return
+	 */
 	public AVector createOutputVector();
 }
