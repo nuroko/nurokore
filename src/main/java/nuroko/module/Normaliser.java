@@ -56,9 +56,9 @@ public class Normaliser extends AStateComponent {
 
 	@Override
 	public void trainGradientInternal(double factor) {
-		double[] og=outputGradient.data;
-		double[] ig=inputGradient.data;
-		double[] sd=stdev.data;
+		double[] og=outputGradient.getArray();
+		double[] ig=inputGradient.getArray();
+		double[] sd=stdev.getArray();
 		for (int i=0; i<og.length; i++) {
 			if (sd[i]==0) {
 				ig[i]=og[i];
