@@ -20,11 +20,12 @@ public class TestMaybeCoder {
 		assertEquals(4,cc.codeLength());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test 
 	public void testRoundTrip() {
 		AVector v=Vectorz.newVector(cc.codeLength());
 		
-		Collection<Integer> coll=cc.getChoiceList();
+		Collection<Integer> coll=(Collection<Integer>) cc.getChoiceList();
 		
 		for (Integer i : coll) {
 			cc.encode(i, v);

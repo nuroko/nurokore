@@ -62,8 +62,9 @@ abstract class AStateComponent extends AComponent {
 		return inputGradient;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<IComponent> getComponents() {
-		return Collections.EMPTY_LIST;
+		return (List<IComponent>)Collections.EMPTY_LIST;
 	}
 }
