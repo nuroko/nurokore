@@ -80,7 +80,7 @@ public class TestFullWeightLayer {
 	
 	@Test public void testGenerate() {
 		FullWeightLayer wl=new FullWeightLayer(2,2);
-		wl.getSourceWeights(0).setValues(2,2);
+		wl.getSourceWeights(0).setElements(2,2);
 		
 		AVector in=Vector.of(1,0);
 		AVector out=wl.think(in);
