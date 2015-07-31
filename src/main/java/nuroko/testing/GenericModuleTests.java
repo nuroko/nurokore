@@ -78,8 +78,8 @@ public class GenericModuleTests {
 		p2.getParameters().fill(2);
 		p2.getGradient().fill(2);
 		
-		assertEquals(1.0,Vectorz.maxValue(param),0.0);
-		assertEquals(1.0,Vectorz.maxValue(grad),0.0);
+		assertEquals(1.0,param.elementMin(),0.0);
+		assertEquals(1.0,grad.elementMax(),0.0);
 	}
 	
 	private static void testCloneCopyParameters(IParameterised p) {

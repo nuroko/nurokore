@@ -16,7 +16,7 @@ public class SquaredErrorLoss extends LossFunction {
 
 	@Override
 	public double calculateError(AVector output, AVector target) {
-		return Vectorz.averageSquaredDifference(output, target);
+		return output.subCopy(target).elementSquaredSum()/output.length();
 	}
 
 }

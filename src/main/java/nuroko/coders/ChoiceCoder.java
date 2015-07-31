@@ -32,6 +32,7 @@ public class ChoiceCoder<T> extends AbstractCoder<T> {
 		}
 	}
 	
+	@SafeVarargs
 	public ChoiceCoder(T... values) {
 		this(Arrays.asList(values));
 	}
