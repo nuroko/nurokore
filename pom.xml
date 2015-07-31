@@ -37,17 +37,17 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 		</dependency>
 		<dependency>
 			<groupId>net.mikera</groupId>
 			<artifactId>vectorz</artifactId>
-			<version>0.41.0</version>
+			<version>0.47.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.mikera</groupId>
 			<artifactId>mikera</artifactId>
-			<version>1.6.0</version>
+			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.mikera</groupId>
