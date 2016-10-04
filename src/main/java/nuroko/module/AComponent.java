@@ -71,6 +71,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return constraints;
 	}
 	
+	@Override
 	public final AVector generate(AVector output) {
 		Vector input=Vector.createLength(getInputLength());
 		generate(input,output);
@@ -82,22 +83,27 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return SquaredErrorLoss.INSTANCE;
 	}
 
+	@Override
 	public final double getLearnFactor() {
 		return learnFactor;
 	}
 	
+	@Override
 	public final void setLearnFactor(double value) {
 		learnFactor=value;
 	}
 
+	@Override
 	public final void train(AVector input, AVector target) {
 		train(input,target,getDefaultLossFunction(),1.0);
 	}
 	
+	@Override
 	public final void trainSynth(AVector input) {
 		trainSynth(input,1.0);	
 	}
 	
+	@Override
 	public void trainSynth(AVector input, double factor) {
 		setInput(input);
 		thinkInternalTraining();
@@ -105,6 +111,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		trainGradientInternal(factor);	
 	}
 	
+	@Override
 	public final void train(AVector input, AVector target, LossFunction loss, double factor) {
 		setInput(input);
 		thinkInternalTraining();
@@ -120,6 +127,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 	 * Should overwrite inputGradient, and adjust gradient
 	 * for all parameters. Should apply own internal learn rate factor
 	 */
+	@Override
 	public abstract void trainGradientInternal(double factor);
 	
 	@Override
@@ -148,6 +156,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		return getComponents().get(i);
 	}
 	
+	@Override
 	public List<IModule> getModules() {
 		ArrayList<IModule> al=new ArrayList<IModule>();
 		al.addAll(getComponents());
@@ -186,6 +195,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		}
 	}
 	
+	@Override
 	public final void applyConstraints() {
 		applyConstraintsInternal();
 		for (IComponent c: getComponents()) {
@@ -193,6 +203,7 @@ public abstract class AComponent implements IComponent , Iterable<IComponent> {
 		}
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public AComponent clone() {
 		AComponent c=null;

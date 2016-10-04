@@ -12,6 +12,7 @@ public abstract class BaseSupervisedTask extends AbstractTask {
 	}
 	
 	
+	@Override
 	public long getExampleCount() {
 		return Long.MAX_VALUE;
 	}

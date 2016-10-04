@@ -42,10 +42,12 @@ public abstract class ACompoundComponent extends AComponent {
 		return parameters.length();
 	}
 	
+	@Override
 	public IComponent getComponent(int i) {
 		return components.get(i);
 	}
 	
+	@Override
 	public List<IComponent> getComponents() {
 		return components;
 	}

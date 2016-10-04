@@ -42,5 +42,6 @@ public abstract class ALayerStack extends AComponent {
 		return CompoundLayerStack.create(layers);
 	}
 
+	@Override
 	public abstract ALayerStack clone();
 }

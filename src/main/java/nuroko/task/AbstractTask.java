@@ -34,6 +34,7 @@ public abstract class AbstractTask implements ITask {
 		return true;
 	}
 	
+	@Override
 	public AbstractTask clone() {
 		try {
 			return (AbstractTask) super.clone();

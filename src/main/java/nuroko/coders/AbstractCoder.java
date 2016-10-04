@@ -34,6 +34,7 @@ public abstract class AbstractCoder<T> implements ICoder<T> {
 		return decode(v,0);
 	}
 	
+	@Override
 	public AVector createOutputVector() {
 		return Vectorz.newVector(codeLength());
 	}

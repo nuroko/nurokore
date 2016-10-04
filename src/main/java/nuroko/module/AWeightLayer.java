@@ -66,6 +66,7 @@ public abstract class AWeightLayer extends AStateComponent {
 		inputGradient.set(getInputGradient());
 	}
 
+	@Override
 	public abstract void initRandom();
 
 	public abstract AMatrix asMatrix();

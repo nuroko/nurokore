@@ -8,6 +8,7 @@ import nuroko.module.loss.LossFunction;
 
 public interface IComponent extends ITrainable, IInputState, IOutputState, ISynthesiser {
 
+	@Override
 	public IComponent clone();
 
 	public IInputState getInputState();
@@ -21,6 +22,7 @@ public interface IComponent extends ITrainable, IInputState, IOutputState, ISynt
 	 * Thinks within the scope of the component. Update's component's output.
 	 * May be different from regular thinking.
 	 */
+	@Override
 	public void thinkInternalTraining();
 	
 	/**
@@ -37,6 +39,7 @@ public interface IComponent extends ITrainable, IInputState, IOutputState, ISynt
 	
 	public void applyConstraints();
 
+	@Override
 	public void trainSynth(AVector input);
 	
 	public List<IComponent> getComponents();

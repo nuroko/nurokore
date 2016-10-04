@@ -102,6 +102,7 @@ public class NeuralNet extends ALayerStack {
 	}
 	
 	// (re) initialises the network with random weights
+	@Override
 	public void initRandom() {
 		for (AWeightLayer wl: layers) {
 			wl.initRandom();
@@ -170,20 +171,24 @@ public class NeuralNet extends ALayerStack {
 		return gradient;
 	}
 
+	@Override
 	public List<AWeightLayer> getLayers() {
 		return Arrays.asList(layers);
 	}
 	
+	@Override
 	public void applyConstraintsInternal() {
 		for (AWeightLayer c: getLayers()) {
 			c.applyConstraints();
 		}
 	}
 	
+	@Override
 	public AVector getOutput() {
 		return data[layerCount];
 	}
 	
+	@Override
 	public AVector getInput() {
 		return data[0];
 	}
@@ -193,6 +198,7 @@ public class NeuralNet extends ALayerStack {
 		return data[i];
 	}
 	
+	@Override
 	public NeuralNet clone() {
 		AWeightLayer[] newlayers=new AWeightLayer[layerCount];
 		for (int i=0; i<layerCount; i++) {

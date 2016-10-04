@@ -21,6 +21,7 @@ public class Stack extends ACompoundComponent {
 		super(comps);
 	}
 	
+	@Override
 	public IComponent topComponent() {
 		return components.get(componentCount-1);
 	}
@@ -105,6 +106,7 @@ public class Stack extends ACompoundComponent {
 		return components.get(0).getInputState();
 	}
 	
+	@Override
 	public void trainGradientInternal(double factor) {
 		factor*=this.getLearnFactor();
 		int n=this.componentCount;
