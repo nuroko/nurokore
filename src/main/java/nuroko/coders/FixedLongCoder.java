@@ -26,7 +26,7 @@ public class FixedLongCoder extends AbstractCoder<Long> {
 		long hibit=(1<<(bits-1));
 		
 		for (int i=0; i<bits; i++) {
-			dest.set(i, (v&hibit)==0?0.0:1.0);
+			dest.set(i+offset, (v&hibit)==0?0.0:1.0);
 			v<<=1;
 		}
 	}
